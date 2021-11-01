@@ -39,6 +39,7 @@ def load_wiki_files():
 def eval_wiki_data(file):
     soup = BeautifulSoup(file.read(), 'html.parser')
     for article in soup.find_all('article'):
+        article.find('revision').decompose()  # remove revision tag
         article_id: str = article.find('id').string  # get article id
         article_body = article.find('bdy')  # get article body
         # get content of article body or empty string if body does not exist
