@@ -8,6 +8,7 @@ from nltk.stem import PorterStemmer
 import os
 from bs4 import BeautifulSoup
 import time
+import numpy as np
 
 
 # https://dev.to/turbaszek/flat-map-in-python-3g98
@@ -16,13 +17,14 @@ def flat_map(f, xs):
 
 
 inverted_index_table = {}
-documents_table = {}
+article_table = {}  # {article_id: [title, path, offset, token_occurrences: dict, word count]}
+avg_dl = 0  # average document length in words
 
 actual_dir: str = './wiki_files/dataset/articles/'
 test_dir: str = './wiki_files/test/'
 current_dir: str = actual_dir
 
-max_files: int = 1
+max_files: int = 10
 
 # https://www.opinosis-analytics.com/knowledge-base/stop-words-explained/
 stopWords = {}
@@ -39,6 +41,7 @@ def stem(word: str) -> str:
 def load_wiki_files():
     file_entry: str
     files_read = 0
+    last_time = time.time()
     for file_entry in os.listdir(current_dir):
         if max_files == files_read:
             return
@@ -48,7 +51,7 @@ def load_wiki_files():
 
         curr_time = time.time()
         if files_read > 0:
-            print("--- %s seconds for file number %d---" % (curr_time - last_time, files_read))
+            print("--- %s seconds for file number %d---" % (curr_time - last_time, files_read+1))
         last_time = time.time()
         files_read += 1
 
@@ -59,8 +62,14 @@ def insert_index(article_id: str, token: str):
     else:
         inverted_index_table[token] = {article_id}
 
+    if token in token_occurrences:
+        token_occurrences[token] += 1
+    else:
+        token_occurrences[token] = 1
+
 
 def eval_wiki_data(file):
+    global avg_dl
     soup = BeautifulSoup(file.read(), 'html.parser')
     for article in soup.find_all('article'):
         article.find('revision').decompose()  # remove revision tag
@@ -72,8 +81,11 @@ def eval_wiki_data(file):
 
         article_tokens: [str] = [article_id, *body_tokens, *category_tokens]
         # print('\nArticle: {}\nTokens: {}\n'.format(article_id, article_tokens))
-        list(map(lambda token: insert_index(article_id, token), article_tokens))
-        documents_table[article_id] = [article_title, file.name, soup.index(article)]
+        token_occurrences = {}
+        list(map(lambda token: insert_index(article_id, token, token_occurrences), article_tokens))
+        article_table[article_id] = [article_title, file.name, soup.index(article), token_occurrences, len(body_tokens)]
+        avg_dl += len(body_tokens)
+    avg_dl /= len(article_table)
     pass
 
 
@@ -113,13 +125,61 @@ def tokenization(text: str) -> [str]:
     return list(filtered_tokens)
 
 
+def query(query_string: str, eval_type):
+    tokens = text2tokens(query_string)
+    results = {}
+    interesting_article_ids = set()
+    for token in tokens:
+        interesting_article_ids.update(inverted_index_table[token])
+
+    for key in interesting_article_ids:
+        results[key] = bm25(tokens, key, article_table[key])
+
+    sorted_results = sorted(results.items(), key=lambda x: x[1], reverse=True)
+    count = 0
+    for key, value in sorted_results:
+        count += 1
+        print("#{} is article {} with score {} and title {}".format(count, key, value, article_table[key][0]))
+        if count >= 100:
+            return
+
+
+def bm25(query_tokens: [str], article_id, article_stats):
+    score = 0
+    for qi in query_tokens:
+        if qi not in article_stats[3]:
+            continue
+        idf_val = idf(qi)
+        f = article_stats[3][qi]  # qi s frequency in D
+        k = (1.2 + 2) / 2
+        b = 0.75
+        dl = article_stats[4]
+        nominator = f * (k + 1)
+        denominator = f + k * (1 - b + (b * (dl / avg_dl)))
+        score += idf_val * (nominator / denominator)
+    return score
+
+
+def idf(qi):
+    N = len(article_table)
+    n_qi = len(inverted_index_table[qi])
+    nominator = N - n_qi + 0.5
+    denominator = n_qi + 0.5
+    return np.log((nominator / denominator) + 1)
+
+
+def tf_idf():
+    pass
+
+
 if __name__ == '__main__':
     start_time = time.time()
     load_wiki_files()
     print("--- %s seconds ---" % (time.time() - start_time))
-    text2tokens("([house]   {houses}))")
-    text2tokens(
-        'cats houses complementations sadf efw the a is this weasdf. fewfsdf .ssdfsssssssss.\nfdsfew.   fewfds    '
-        '.asdf, fdsdfs. To, By this is a not ')
-    print(inverted_index_table)
-    print(documents_table)
+    # print(inverted_index_table)
+    # print(article_table)
+
+    query_start_time = time.time_ns()
+    query("Freestyle", 0)
+    query_end_time = time.time_ns()
+    print("--- Query took %s milliseconds ---" % ((query_end_time - query_start_time) / 1000000.0))
