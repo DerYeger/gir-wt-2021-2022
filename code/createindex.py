@@ -138,7 +138,6 @@ def text2tokens(text: str) -> [str]:
     :return: a tokenized string with preprocessing (e.g. stemming, stopword removal, ...) applied
     """
     tokens: [str] = tokenization(text)
-    print('tokens:', tokens)
     return tokens
 
 
@@ -233,3 +232,8 @@ if __name__ == '__main__':
     query("Freestyle", 'tf-idf')
     query_end_time = time.time_ns()
     print("--- Query took %s milliseconds ---" % ((query_end_time - query_start_time) / 1000000.0))
+
+# todo tokenize titles
+#   implement evaluation_mode and exploration_mode
+#   index all files
+#   make text content of articles accessible
