@@ -9,12 +9,14 @@ import os
 from bs4 import BeautifulSoup
 import time
 
-inverted_index_table = dict()
-documents_table = dict({1: ['sdf', 234]})
+inverted_index_table = {}
+documents_table = {}
 
 actual_dir: str = './wiki_files/dataset/articles/'
 test_dir: str = './wiki_files/test/'
-current_dir: str = test_dir
+current_dir: str = actual_dir
+
+max_files: int = 1
 
 # https://www.opinosis-analytics.com/knowledge-base/stop-words-explained/
 stopWords = {}
@@ -30,22 +32,34 @@ def stem(word: str) -> str:
 
 def load_wiki_files():
     file_entry: str
+    files_read = 0
     for file_entry in os.listdir(current_dir):
+        if max_files == files_read:
+            return
         print(file_entry)
         with open(current_dir + file_entry, encoding='utf8') as file:
             eval_wiki_data(file)
+
+        curr_time = time.time()
+        if files_read > 0:
+            print("--- %s seconds for file number %d---" % (curr_time - last_time, files_read))
+        last_time = time.time()
+        files_read += 1
 
 
 def eval_wiki_data(file):
     soup = BeautifulSoup(file.read(), 'html.parser')
     for article in soup.find_all('article'):
         article_id: str = article.find('id').string  # get article id
+        article_title: str = article.find('title').string  # get article id
         article_body = article.find('bdy')  # get article body
         # get content of article body or empty string if body does not exist
         article_content: str = '' if article_body is None else article_body.string
-        article_tokens: [str] = [article_id, *tokenization(article_content)]
-        print('\nArticle {}: {} tokens\n'.format(article_id, article_tokens))
-    pass
+        article_tokens: [str] = [*tokenization(article_content)]
+        # print('\nArticle {}: {} tokens\n'.format(article_id, article_tokens))
+        list(map(lambda token: insert_index(article_id, token), article_tokens))
+        documents_table[article_id] = [article_title, file.name, soup.index(article)]
+        pass
 
 
 def text2tokens(text: str) -> [str]:
@@ -81,3 +95,5 @@ if __name__ == '__main__':
     text2tokens(
         'cats houses complementations sadf efw the a is this weasdf. fewfsdf .ssdfsssssssss.\nfdsfew.   fewfds    '
         '.asdf, fdsdfs. To, By this is a not ')
+    print(inverted_index_table)
+    print(documents_table)
