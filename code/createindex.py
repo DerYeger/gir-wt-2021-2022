@@ -56,7 +56,7 @@ def load_wiki_files():
         files_read += 1
 
 
-def insert_index(article_id: str, token: str):
+def insert_index(article_id: str, token: str, token_occurrences: dict):
     if token in inverted_index_table:
         inverted_index_table[token].add(article_id)
     else:
