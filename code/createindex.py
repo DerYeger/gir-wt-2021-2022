@@ -9,12 +9,17 @@ import os
 from bs4 import BeautifulSoup
 import time
 import numpy as np
+import ast
+import codecs
 
 
 # https://dev.to/turbaszek/flat-map-in-python-3g98
 def flat_map(f, xs):
     return [y for ys in xs for y in f(ys)]
 
+
+# Settings
+encoding = 'utf_16'
 
 inverted_index_table = {}
 article_table = {}  # {article_id: [title, path, offset, token_occurrences: dict, word count]}
@@ -24,7 +29,7 @@ actual_dir: str = './wiki_files/dataset/articles/'
 test_dir: str = './wiki_files/test/'
 current_dir: str = actual_dir
 
-max_files: int = 10
+max_files: int = 1
 
 # https://www.opinosis-analytics.com/knowledge-base/stop-words-explained/
 stopWords = {}
@@ -32,6 +37,34 @@ with open('./tool_data/stop_words.txt') as stop_words:
     stop_words = {w for w in stop_words.read().split(',')}
 
 stemmer = PorterStemmer()
+
+
+def save_tables():
+    with codecs.open('./tables/inverted_index_table.txt', 'w+', encoding) as f:
+        f.write(str(inverted_index_table))
+    with codecs.open('./tables/article_table.txt', 'w+', encoding) as f:
+        f.write(str(article_table))
+    with codecs.open('./tables/avg_dl.txt', 'w+', encoding) as f:
+        f.write(str(avg_dl))
+
+
+def load_tables() -> bool:
+    global inverted_index_table, article_table, avg_dl
+
+    if not os.path.exists('./tables/inverted_index_table.txt') or not os.path.exists(
+            './tables/article_table.txt') or not os.path.exists('./tables/avg_dl.txt'):
+        return False
+
+    with codecs.open('./tables/inverted_index_table.txt', 'r', encoding) as f:
+        table = f.read()
+        inverted_index_table = set() if table == str(set()) else ast.literal_eval(table)
+    with codecs.open('./tables/article_table.txt', 'r', encoding) as f:
+        table = f.read()
+        article_table = set() if table == str(set()) else ast.literal_eval(table)
+    with codecs.open('./tables/avg_dl.txt', 'r', encoding) as f:
+        value = f.read()
+        avg_dl = ast.literal_eval(value)
+    return True
 
 
 def stem(word: str) -> str:
@@ -50,8 +83,7 @@ def load_wiki_files():
             eval_wiki_data(file)
 
         curr_time = time.time()
-        if files_read > 0:
-            print("--- %s seconds for file number %d---" % (curr_time - last_time, files_read+1))
+        print("--- %s seconds for file number %d---" % (curr_time - last_time, files_read + 1))
         last_time = time.time()
         files_read += 1
 
@@ -168,16 +200,28 @@ def idf(qi):
     return np.log((nominator / denominator) + 1)
 
 
-def tf_idf():
-    pass
+def tf_idf(query_tokens: [str], article_id, article_stats):
+    score = 0
+    for qi in query_tokens:
+        if qi not in article_stats[3]:
+            continue
+        idf_val = idf(qi)
+        f = article_stats[3][qi]
+        score += idf_val * f
+    return score
 
 
 if __name__ == '__main__':
-    start_time = time.time()
-    load_wiki_files()
-    print("--- %s seconds ---" % (time.time() - start_time))
-    # print(inverted_index_table)
-    # print(article_table)
+    forceReIndex = False
+    if forceReIndex or not load_tables():
+        start_time = time.time()
+        load_wiki_files()
+        print("re-indexing took --- %s seconds ---" % (time.time() - start_time))
+        save_tables()
+    else:
+        print("indexes loaded from memory")
+
+    query("b", 'tf-idf')
 
     query_start_time = time.time_ns()
     query("Freestyle", 0)
