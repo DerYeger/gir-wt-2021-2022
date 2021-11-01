@@ -9,6 +9,12 @@ import os
 from bs4 import BeautifulSoup
 import time
 
+
+# https://dev.to/turbaszek/flat-map-in-python-3g98
+def flat_map(f, xs):
+    return [y for ys in xs for y in f(ys)]
+
+
 inverted_index_table = dict()
 documents_table = dict({1: ['sdf', 234]})
 
@@ -41,12 +47,24 @@ def eval_wiki_data(file):
     for article in soup.find_all('article'):
         article.find('revision').decompose()  # remove revision tag
         article_id: str = article.find('id').string  # get article id
-        article_body = article.find('bdy')  # get article body
-        # get content of article body or empty string if body does not exist
-        article_content: str = '' if article_body is None else article_body.string
-        article_tokens: [str] = [article_id, *tokenization(article_content)]
-        print('\nArticle {}: {} tokens\n'.format(article_id, article_tokens))
+
+        body_tokens = tokenize_body(article)
+        category_tokens = tokenize_categories(article)
+
+        article_tokens: [str] = [article_id, *body_tokens, *category_tokens]
+        print('\nArticle: {}\nTokens: {}\n'.format(article_id, article_tokens))
     pass
+
+
+def tokenize_categories(article) -> [str]:
+    return list(flat_map(lambda category: tokenization(category.string), article.find_all('category')))
+
+
+def tokenize_body(article) -> [str]:
+    article_body = article.find('bdy')
+    if article_body is None:
+        return []
+    return tokenization(article_body.string)
 
 
 def text2tokens(text: str) -> [str]:
