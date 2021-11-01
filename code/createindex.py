@@ -9,6 +9,12 @@ import os
 from bs4 import BeautifulSoup
 import time
 
+
+# https://dev.to/turbaszek/flat-map-in-python-3g98
+def flat_map(f, xs):
+    return [y for ys in xs for y in f(ys)]
+
+
 inverted_index_table = {}
 documents_table = {}
 
@@ -57,17 +63,29 @@ def insert_index(article_id: str, token: str):
 def eval_wiki_data(file):
     soup = BeautifulSoup(file.read(), 'html.parser')
     for article in soup.find_all('article'):
+        article.find('revision').decompose()  # remove revision tag
         article_id: str = article.find('id').string  # get article id
         article_title: str = article.find('title').string  # get article id
-        article_body = article.find('bdy')  # get article body
 
-        # get content of article body or empty string if body does not exist
-        article_content: str = '' if article_body is None else article_body.string
-        article_tokens: [str] = [*tokenization(article_content)]
-        # print('\nArticle {}: {} tokens\n'.format(article_id, article_tokens))
+        body_tokens = tokenize_body(article)
+        category_tokens = tokenize_categories(article)
+
+        article_tokens: [str] = [article_id, *body_tokens, *category_tokens]
+        # print('\nArticle: {}\nTokens: {}\n'.format(article_id, article_tokens))
         list(map(lambda token: insert_index(article_id, token), article_tokens))
         documents_table[article_id] = [article_title, file.name, soup.index(article)]
-        pass
+    pass
+
+
+def tokenize_categories(article) -> [str]:
+    return list(flat_map(lambda category: tokenization(category.string), article.find_all('category')))
+
+
+def tokenize_body(article) -> [str]:
+    article_body = article.find('bdy')
+    if article_body is None:
+        return []
+    return tokenization(article_body.string)
 
 
 def text2tokens(text: str) -> [str]:
