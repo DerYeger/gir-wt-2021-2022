@@ -16,6 +16,17 @@ actual_dir: str = './wiki_files/dataset/articles/'
 test_dir: str = './wiki_files/test/'
 current_dir: str = test_dir
 
+# https://www.opinosis-analytics.com/knowledge-base/stop-words-explained/
+stopWords = {}
+with open('./tool_data/stop_words.txt') as stop_words:
+    stop_words = {w for w in stop_words.read().split(',')}
+
+stemmer = PorterStemmer()
+
+
+def stem(word: str) -> str:
+    return stemmer.stem(word)
+
 
 def load_wiki_files():
     file_entry: str
@@ -28,12 +39,12 @@ def load_wiki_files():
 def eval_wiki_data(file):
     soup = BeautifulSoup(file.read(), 'html.parser')
     for article in soup.find_all('article'):
-        article_id = article.find('id').string  # get article id
+        article_id: str = article.find('id').string  # get article id
         article_body = article.find('bdy')  # get article body
         # get content of article body or empty string if body does not exist
-        article_content = '' if article_body is None else article_body.string
-        article_tokens = tokenization(article_content)
-        print('\nArticle {}: {}\n'.format(article_id, article_tokens))
+        article_content: str = '' if article_body is None else article_body.string
+        article_tokens: [str] = [article_id, *tokenization(article_content)]
+        print('\nArticle {}: {} tokens\n'.format(article_id, article_tokens))
     pass
 
 
@@ -47,60 +58,26 @@ def text2tokens(text: str) -> [str]:
     return tokens
 
 
-# https://www.opinosis-analytics.com/knowledge-base/stop-words-explained/
-stopWords = {}
-with open('./tool_data/stop_words.txt') as stop_words:
-    stop_words = {w for w in stop_words.read().split(',')}
-
-
 def tokenization(text: str) -> [str]:
     """
     :param text: a text string
     :return: a tokenized string with preprocessing (e.g. stemming, stopword removal, ...) applied
     """
-
-    clean_text: str = ''.join(text.strip().split())  # remove double spaces or tabs
-    raw_tokens = re.split('[\s]*[\s.,;:]+[\s]*', clean_text)  # split a punctuations and spaces etc.
-
-    # print(clean_text)
-    # print(raw_tokens)
-
-    tokens: [str] = []
-    for w in raw_tokens:
-        if len(w) <= 0:
-            print('ERROR raw token with length 0 found')
-        w = w.lower().replace('-', '').replace('\'', '')
-        if w in stopWords:
-            continue
-        w = stemming(w)
-        if w in stopWords:
-            continue
-        tokens.append(w)
-    return tokens
-
-
-def stemming(word: str):
-    """
-    :param word: a text string
-    :return: a tokenized string with preprocessing (e.g. stemming, stopword removal, ...) applied
-    """
-    # https://www.datacamp.com/community/tutorials/stemming-lemmatization-python
-
-    # create an object of class PorterStemmer
-    porter = PorterStemmer()
-    word = porter.stem(word)
-
-    # lancaster = LancasterStemmer()
-    # word = lancaster.stem(word)
-
-    return word
+    # remove double spaces, tabs and special chars
+    clean_text: str = ' '.join(re.sub(r'[-(){}\[\]\'"]', '', text).strip().split())
+    # split a punctuations and spaces etc.
+    raw_tokens: [str] = list(filter(None, re.split(r'[\s]*[\s.,;:\n]+[\s]*', clean_text)))
+    lowercase_tokens = map(lambda token: token.lower(), raw_tokens)
+    stemmed_tokens = map(stem, lowercase_tokens)
+    filtered_tokens = filter(lambda token: token not in stop_words, stemmed_tokens)
+    return list(filtered_tokens)
 
 
 if __name__ == '__main__':
     start_time = time.time()
     load_wiki_files()
     print("--- %s seconds ---" % (time.time() - start_time))
-    text2tokens("([hello]   {world}))")
+    text2tokens("([house]   {houses}))")
     text2tokens(
         'cats houses complementations sadf efw the a is this weasdf. fewfsdf .ssdfsssssssss.\nfdsfew.   fewfds    '
         '.asdf, fdsdfs. To, By this is a not ')
