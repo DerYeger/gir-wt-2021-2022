@@ -47,12 +47,20 @@ def load_wiki_files():
         files_read += 1
 
 
+def insert_index(article_id: str, token: str):
+    if token in inverted_index_table:
+        inverted_index_table[token].add(article_id)
+    else:
+        inverted_index_table[token] = {article_id}
+
+
 def eval_wiki_data(file):
     soup = BeautifulSoup(file.read(), 'html.parser')
     for article in soup.find_all('article'):
         article_id: str = article.find('id').string  # get article id
         article_title: str = article.find('title').string  # get article id
         article_body = article.find('bdy')  # get article body
+
         # get content of article body or empty string if body does not exist
         article_content: str = '' if article_body is None else article_body.string
         article_tokens: [str] = [*tokenization(article_content)]
