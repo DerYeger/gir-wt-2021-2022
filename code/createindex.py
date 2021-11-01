@@ -164,16 +164,22 @@ def query(query_string: str, eval_type):
     for token in tokens:
         interesting_article_ids.update(inverted_index_table[token])
 
-    for key in interesting_article_ids:
-        results[key] = bm25(tokens, key, article_table[key])
+        for key in interesting_article_ids:
+            if eval_type == 'bm25':
+                results[key] = bm25(tokens, key, article_table[key])
+            elif eval_type == 'tf-idf':
+                results[key] = tf_idf(tokens, key, article_table[key])
+            else:
+                print('invalid evalaution type, enter "tf-idf" or "bm25"')
+                return
 
-    sorted_results = sorted(results.items(), key=lambda x: x[1], reverse=True)
-    count = 0
-    for key, value in sorted_results:
-        count += 1
-        print("#{} is article {} with score {} and title {}".format(count, key, value, article_table[key][0]))
-        if count >= 100:
-            return
+        sorted_results = sorted(results.items(), key=lambda x: x[1], reverse=True)
+        count = 0
+        for key, value in sorted_results:
+            count += 1
+            print("#{} is article {} with score {} and title {}".format(count, key, value, article_table[key][0]))
+            if count >= 100:
+                return
 
 
 def bm25(query_tokens: [str], article_id, article_stats):
@@ -224,6 +230,6 @@ if __name__ == '__main__':
     query("b", 'tf-idf')
 
     query_start_time = time.time_ns()
-    query("Freestyle", 0)
+    query("Freestyle", 'tf-idf')
     query_end_time = time.time_ns()
     print("--- Query took %s milliseconds ---" % ((query_end_time - query_start_time) / 1000000.0))
