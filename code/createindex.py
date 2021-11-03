@@ -25,7 +25,8 @@ encoding = 'utf_16'
 
 inverted_index = {}
 article_table = {}  # {article_id: [title, path, offset, word_count]}
-avg_dl = 0  # average document length in words
+total_word_count = 0
+avg_word_count = 0  # average document length in words
 
 actual_dir: str = './wiki_files/dataset/articles/'
 test_dir: str = './wiki_files/test/'
@@ -51,7 +52,7 @@ def save_tables():
     with codecs.open('./tables/article_table.txt', 'w+', encoding) as f:
         f.write(str(article_table))
     with codecs.open('./tables/avg_dl.txt', 'w+', encoding) as f:
-        f.write(str(avg_dl))
+        f.write(str(avg_word_count))
 
 
 def load_tables() -> bool:
@@ -101,7 +102,8 @@ def insert_index(article_id: str, token: str, frequency: int):
 
 
 def eval_wiki_data(file):
-    global avg_dl
+    global total_word_count
+    global avg_word_count
     soup = BeautifulSoup(file.read(), 'html.parser')
     for article in soup.find_all('article'):
         article.find('revision').decompose()  # remove revision tag
@@ -122,13 +124,13 @@ def eval_wiki_data(file):
         for token, frequency in token_occurrences.items():
             insert_index(article_id, token, frequency)
 
-        article_table[article_id] = [article_title, file.name, soup.index(article), len(article_content)]
-        avg_dl += len(article_tokens)
-    avg_dl /= len(article_table)
+        article_table[article_id] = [article_title, file.name, soup.index(article), len(article_tokens)]
+        total_word_count += len(article_tokens)
+    avg_word_count = total_word_count / len(article_table)
 
 
 def get_categories(article) -> str:
-    return ' '.join(list(map(lambda category: category.string, article.find_all('category'))))
+    return ' '.join(map(lambda category: category.string, article.find_all('category')))
 
 
 def get_body(article) -> str:
@@ -151,7 +153,7 @@ def tokenize(text: str) -> [str]:
     filtered_tokens = filter(lambda t: t not in stop_words, lowercase_tokens)
     stemmed_tokens = map(stem, filtered_tokens)
     # normalized_tokens = map(replace_special_letters, stemmed_tokens)
-    return list(stemmed_tokens)
+    return stemmed_tokens
 
 
 def replace_special_letters(word: str) -> str:
@@ -192,7 +194,7 @@ def bm25(query_tokens: [str]):
             b = 0.75
             dl = article_table[id_string][3]
             nominator = frequency * (k + 1)
-            denominator = frequency + k * (1 - b + (b * (dl / avg_dl)))
+            denominator = frequency + k * (1 - b + (b * (dl / avg_word_count)))
             article_scores[id_string] += token_idf * (nominator / denominator)
             article_scores[id_string] += token_idf * frequency
     return article_scores
@@ -228,8 +230,15 @@ if __name__ == '__main__':
     else:
         print("indexes loaded from memory")
 
+    print("\n--- tf-idf ---")
     query_start_time = time.time_ns()
     query("Freestyle", 'tf-idf')
+    query_end_time = time.time_ns()
+    print("--- Query took %s milliseconds ---" % ((query_end_time - query_start_time) / 1000000.0))
+
+    print("\n--- bm25 ---")
+    query_start_time = time.time_ns()
+    query("Freestyle", 'bm-25')
     query_end_time = time.time_ns()
     print("--- Query took %s milliseconds ---" % ((query_end_time - query_start_time) / 1000000.0))
 
