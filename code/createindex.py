@@ -39,10 +39,14 @@ with open('./tool_data/stop_words.txt') as stop_words:
 stemmer = PorterStemmer()
 
 
+def map_dict(f, dic: dict) -> dict:
+    return dict(zip(dic, map(f, dic.values())))
+
+
 def save_tables():
     os.makedirs(os.path.dirname('./tables/'), exist_ok=True)
     with codecs.open('./tables/inverted_index_table.txt', 'w+', encoding) as f:
-        f.write(str(inverted_index_table))
+        f.write(str(map_dict(lambda na: na.tolist(), inverted_index_table)))
     with codecs.open('./tables/article_table.txt', 'w+', encoding) as f:
         f.write(str(article_table))
     with codecs.open('./tables/avg_dl.txt', 'w+', encoding) as f:
@@ -58,7 +62,8 @@ def load_tables() -> bool:
 
     with codecs.open('./tables/inverted_index_table.txt', 'r', encoding) as f:
         table = f.read()
-        inverted_index_table = set() if table == str(set()) else ast.literal_eval(table)
+        dic = set() if table == str(set()) else ast.literal_eval(table)
+        inverted_index_table = map_dict(lambda a: np.array(a), dic)
     with codecs.open('./tables/article_table.txt', 'r', encoding) as f:
         table = f.read()
         article_table = set() if table == str(set()) else ast.literal_eval(table)
@@ -91,9 +96,9 @@ def load_wiki_files():
 
 def insert_index(article_id: str, token: str, token_occurrences: dict):
     if token in inverted_index_table:
-        inverted_index_table[token].add(article_id)
+        inverted_index_table[token] = np.append(inverted_index_table[token], int(article_id))
     else:
-        inverted_index_table[token] = {article_id}
+        inverted_index_table[token] = np.array([int(article_id)], dtype=np.uint32)
 
     if token in token_occurrences:
         token_occurrences[token] += 1
@@ -114,7 +119,7 @@ def eval_wiki_data(file):
         category_tokens = tokenize_categories(article)
 
         article_tokens: [str] = [article_id, *title_tokens, *body_tokens, *category_tokens]
-        # print('\nArticle: {}\nTokens: {}\n'.format(article_id, article_tokens))
+
         token_occurrences = {}
         for token in article_tokens:
             insert_index(article_id, token, token_occurrences)
@@ -171,7 +176,7 @@ def query(query_string: str, eval_type: str):
     results = {}
     interesting_article_ids = set()
     for token in tokens:
-        interesting_article_ids.update(inverted_index_table[token])
+        interesting_article_ids.update(set(map(str, inverted_index_table[token].flatten())))
 
         for key in interesting_article_ids:
             if eval_type == 'bm25':
@@ -209,7 +214,7 @@ def bm25(query_tokens: [str], article_id, article_stats):
 
 def idf(qi):
     N = len(article_table)
-    n_qi = len(inverted_index_table[qi])
+    n_qi = inverted_index_table[qi].size
     nominator = N - n_qi + 0.5
     denominator = n_qi + 0.5
     return np.log((nominator / denominator) + 1)
@@ -226,12 +231,18 @@ def tf_idf(query_tokens: [str], article_id, article_stats):
     return score
 
 
+def process_inverted_index():
+    global inverted_index_table
+    inverted_index_table = map_dict(lambda na: np.unique(na), inverted_index_table)
+
+
 if __name__ == '__main__':
     forceReIndex = False
     if forceReIndex or not load_tables():
         start_time = time.time()
         load_wiki_files()
         print("re-indexing took --- %s seconds ---" % (time.time() - start_time))
+        process_inverted_index()
         save_tables()
     else:
         print("indexes loaded from memory")
@@ -243,7 +254,7 @@ if __name__ == '__main__':
     query_end_time = time.time_ns()
     print("--- Query took %s milliseconds ---" % ((query_end_time - query_start_time) / 1000000.0))
 
-# todo tokenize titles
+# todo
 #   implement evaluation_mode and exploration_mode
 #   index all files
 #   make text content of articles accessible
