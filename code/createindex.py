@@ -23,8 +23,8 @@ def flat_map(f, xs):
 # Settings
 encoding = 'utf_16'
 
-inverted_index_table = {}
-article_table = {}  # {article_id: [title, path, offset, token_occurrences: dict, word count]}
+inverted_index = {}
+article_table = {}  # {article_id: [title, path, offset, word_count]}
 avg_dl = 0  # average document length in words
 
 actual_dir: str = './wiki_files/dataset/articles/'
@@ -47,7 +47,7 @@ def map_dict(f, dic: dict) -> dict:
 def save_tables():
     os.makedirs(os.path.dirname('./tables/'), exist_ok=True)
     with codecs.open('./tables/inverted_index_table.txt', 'w+', encoding) as f:
-        f.write(str(map_dict(lambda na: na.tolist(), inverted_index_table)))
+        f.write(str(inverted_index))
     with codecs.open('./tables/article_table.txt', 'w+', encoding) as f:
         f.write(str(article_table))
     with codecs.open('./tables/avg_dl.txt', 'w+', encoding) as f:
@@ -55,7 +55,7 @@ def save_tables():
 
 
 def load_tables() -> bool:
-    global inverted_index_table, article_table, avg_dl
+    global inverted_index, article_table, avg_dl
 
     if not os.path.exists('./tables/inverted_index_table.txt') or not os.path.exists(
             './tables/article_table.txt') or not os.path.exists('./tables/avg_dl.txt'):
@@ -63,8 +63,7 @@ def load_tables() -> bool:
 
     with codecs.open('./tables/inverted_index_table.txt', 'r', encoding) as f:
         table = f.read()
-        dic = set() if table == str(set()) else ast.literal_eval(table)
-        inverted_index_table = map_dict(lambda a: np.array(a), dic)
+        inverted_index = set() if table == str(set()) else ast.literal_eval(table)
     with codecs.open('./tables/article_table.txt', 'r', encoding) as f:
         table = f.read()
         article_table = set() if table == str(set()) else ast.literal_eval(table)
@@ -96,10 +95,9 @@ def load_wiki_files():
 
 
 def insert_index(article_id: str, token: str, frequency: int):
-    if token in inverted_index_table:
-        inverted_index_table[token] = np.append(inverted_index_table[token], int(article_id))
-    else:
-        inverted_index_table[token] = np.array([int(article_id)], dtype=np.uint32)
+    if token not in inverted_index:
+        inverted_index[token] = []
+    inverted_index[token].append((int(article_id), frequency))
 
 
 def eval_wiki_data(file):
@@ -125,10 +123,9 @@ def eval_wiki_data(file):
         for token, frequency in token_occurrences.items():
             insert_index(article_id, token, frequency)
 
-        article_table[article_id] = [article_title, file.name, soup.index(article), token_occurrences, len(body_tokens)]
-        avg_dl += len(body_tokens)
+        article_table[article_id] = [article_title, file.name, soup.index(article), len(body_tokens)]
+        avg_dl += len(article_tokens)
     avg_dl /= len(article_table)
-    pass
 
 
 def tokenize_categories(article) -> [str]:
@@ -175,62 +172,53 @@ def replace_special_letters(word: str) -> str:
 
 def query(query_string: str, eval_type: str):
     tokens = tokenize(query_string)
-    results = {}
-    interesting_article_ids = set()
-    for token in tokens:
-        interesting_article_ids.update(set(map(str, inverted_index_table[token].flatten())))
-
-        for key in interesting_article_ids:
-            if eval_type == 'bm25':
-                results[key] = bm25(tokens, key, article_table[key])
-            elif eval_type == 'tf-idf':
-                results[key] = tf_idf(tokens, key, article_table[key])
-            else:
-                print('invalid evaluation type, enter "tf-idf" or "bm25"')
-                return
-
-        sorted_results = sorted(results.items(), key=lambda x: x[1], reverse=True)
-        count = 0
-        for key, value in sorted_results:
-            count += 1
-            print("#{} is article {} with score {} and title {}".format(count, key, value, article_table[key][0]))
-            if count >= 100:
-                return
+    scores = tf_idf(tokens) if eval_type == 'tf-idf' else bm25(tokens)
+    sorted_results = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+    rank = 0
+    for article_id, article_score in sorted_results:
+        rank += 1
+        article_title = article_table[str(article_id)][0]
+        print("#{} is article {} with score {} and title {}".format(rank, article_id, article_score, article_title))
+        if rank >= 100:
+            return
 
 
-def bm25(query_tokens: [str], article_id, article_stats):
-    score = 0
-    for qi in query_tokens:
-        if qi not in article_stats[3]:
-            continue
-        idf_val = idf(qi)
-        f = article_stats[3][qi]  # qi s frequency in D
-        k = (1.2 + 2) / 2
-        b = 0.75
-        dl = article_stats[4]
-        nominator = f * (k + 1)
-        denominator = f + k * (1 - b + (b * (dl / avg_dl)))
-        score += idf_val * (nominator / denominator)
-    return score
+def bm25(query_tokens: [str]):
+    article_scores = {}
+    for token in query_tokens:
+        token_idf = idf(token)
+        for (article_id, frequency) in inverted_index[token]:
+            id_string = str(article_id)
+            if id_string not in article_scores:
+                article_scores[id_string] = 0
+            k = (1.2 + 2) / 2
+            b = 0.75
+            dl = article_table[id_string][3]
+            nominator = frequency * (k + 1)
+            denominator = frequency + k * (1 - b + (b * (dl / avg_dl)))
+            article_scores[id_string] += token_idf * (nominator / denominator)
+            article_scores[id_string] += token_idf * frequency
+    return article_scores
 
 
-def idf(qi):
+def idf(token):
     N = len(article_table)
-    n_qi = inverted_index_table[qi].size
+    n_qi = len(inverted_index[token])
     nominator = N - n_qi + 0.5
     denominator = n_qi + 0.5
     return np.log((nominator / denominator) + 1)
 
 
-def tf_idf(query_tokens: [str], article_id, article_stats):
-    score = 0
-    for qi in query_tokens:
-        if qi not in article_stats[3]:
-            continue
-        idf_val = idf(qi)
-        f = article_stats[3][qi]
-        score += idf_val * f
-    return score
+def tf_idf(query_tokens: [str]):
+    article_scores = {}
+    for token in query_tokens:
+        token_idf = idf(token)
+        for (article_id, frequency) in inverted_index[token]:
+            id_string = str(article_id)
+            if id_string not in article_scores:
+                article_scores[id_string] = 0
+            article_scores[id_string] += token_idf * frequency
+    return article_scores
 
 
 if __name__ == '__main__':
@@ -242,8 +230,6 @@ if __name__ == '__main__':
         save_tables()
     else:
         print("indexes loaded from memory")
-
-    query("b", 'tf-idf')
 
     query_start_time = time.time_ns()
     query("Freestyle", 'tf-idf')
