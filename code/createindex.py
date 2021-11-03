@@ -141,13 +141,29 @@ def tokenize(text: str) -> [str]:
     :return: a tokenized string with preprocessing (e.g. stemming, stopword removal, ...) applied
     """
     # remove double spaces, tabs and special chars
-    clean_text: str = ' '.join(re.sub(r'[-(){}\[\]\'"]', '', text).strip().split())
+    without_special_chars: str = re.sub(r'[\-\'’]', '', text)
+    without_brackets: str = re.sub(r'[(){}\[\]\"]', ' ', without_special_chars)
+    clean_text: str = ' '.join(without_brackets.strip().split())
     # split a punctuations and spaces etc.
-    raw_tokens: [str] = filter(None, re.split(r'[\s]*[\s.,;:\n]+[\s]*', clean_text))
-    lowercase_tokens = map(lambda token: token.lower(), raw_tokens)
+    raw_tokens: [str] = filter(None, re.split(r'[\s]*[\s.,;:\n/\\?&=!]+[\s]*', clean_text))
+    lowercase_tokens = map(lambda token: token.lower().replace('é', 'e'), raw_tokens)
     stemmed_tokens = map(stem, lowercase_tokens)
     filtered_tokens = filter(lambda token: token not in stop_words, stemmed_tokens)
-    return list(filtered_tokens)
+    normalized_tokens = map(replace_special_letters, filtered_tokens)
+    return list(normalized_tokens)
+
+
+def replace_special_letters(word: str) -> str:
+    return word\
+        .replace('ä', 'a').replace('â', 'a').replace('á', 'a').replace('à', 'a').replace('ã', 'a').replace('ȧ', 'a')\
+        .replace('ç', 'c')\
+        .replace('ë', 'e').replace('ê', 'e').replace('é', 'e').replace('è', 'e')\
+        .replace('ï', 'i').replace('î', 'i').replace('í', 'i').replace('ì', 'i')\
+        .replace('ñ', 'n')\
+        .replace('ö', 'o').replace('ô', 'o').replace('ó', 'o').replace('ò', 'o').replace('õ', 'o')\
+        .replace('ß', 'ss')\
+        .replace('ü', 'u').replace('û', 'u').replace('ú', 'u').replace('ù', 'u')\
+        .replace('ÿ', 'y')
 
 
 def query(query_string: str, eval_type: str):
@@ -163,7 +179,7 @@ def query(query_string: str, eval_type: str):
             elif eval_type == 'tf-idf':
                 results[key] = tf_idf(tokens, key, article_table[key])
             else:
-                print('invalid evalaution type, enter "tf-idf" or "bm25"')
+                print('invalid evaluation type, enter "tf-idf" or "bm25"')
                 return
 
         sorted_results = sorted(results.items(), key=lambda x: x[1], reverse=True)
