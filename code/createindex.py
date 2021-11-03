@@ -56,7 +56,7 @@ def save_tables():
 
 
 def load_tables() -> bool:
-    global inverted_index, article_table, avg_dl
+    global inverted_index, article_table, avg_word_count
 
     if not os.path.exists('./tables/inverted_index_table.txt') or not os.path.exists(
             './tables/article_table.txt') or not os.path.exists('./tables/avg_dl.txt'):
@@ -70,7 +70,7 @@ def load_tables() -> bool:
         article_table = set() if table == str(set()) else ast.literal_eval(table)
     with codecs.open('./tables/avg_dl.txt', 'r', encoding) as f:
         value = f.read()
-        avg_dl = ast.literal_eval(value)
+        avg_word_count = ast.literal_eval(value)
     return True
 
 
