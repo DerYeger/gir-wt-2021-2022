@@ -109,13 +109,15 @@ def eval_wiki_data(file):
         article_id: str = article.find('id').string  # get article id
         article_title: str = article.find('title').string  # get article id
 
+        title_tokens = tokenize(article_title)
         body_tokens = tokenize_body(article)
         category_tokens = tokenize_categories(article)
 
-        article_tokens: [str] = [article_id, *body_tokens, *category_tokens]
+        article_tokens: [str] = [article_id, *title_tokens, *body_tokens, *category_tokens]
         # print('\nArticle: {}\nTokens: {}\n'.format(article_id, article_tokens))
         token_occurrences = {}
-        list(map(lambda token: insert_index(article_id, token, token_occurrences), article_tokens))
+        for token in article_tokens:
+            insert_index(article_id, token, token_occurrences)
         article_table[article_id] = [article_title, file.name, soup.index(article), token_occurrences, len(body_tokens)]
         avg_dl += len(body_tokens)
     avg_dl /= len(article_table)
@@ -123,26 +125,17 @@ def eval_wiki_data(file):
 
 
 def tokenize_categories(article) -> [str]:
-    return list(flat_map(lambda category: tokenization(category.string), article.find_all('category')))
+    return list(flat_map(lambda category: tokenize(category.string), article.find_all('category')))
 
 
 def tokenize_body(article) -> [str]:
     article_body = article.find('bdy')
     if article_body is None:
         return []
-    return tokenization(article_body.string)
+    return tokenize(article_body.string)
 
 
-def text2tokens(text: str) -> [str]:
-    """
-    :param text: a text string
-    :return: a tokenized string with preprocessing (e.g. stemming, stopword removal, ...) applied
-    """
-    tokens: [str] = tokenization(text)
-    return tokens
-
-
-def tokenization(text: str) -> [str]:
+def tokenize(text: str) -> [str]:
     """
     :param text: a text string
     :return: a tokenized string with preprocessing (e.g. stemming, stopword removal, ...) applied
@@ -150,15 +143,15 @@ def tokenization(text: str) -> [str]:
     # remove double spaces, tabs and special chars
     clean_text: str = ' '.join(re.sub(r'[-(){}\[\]\'"]', '', text).strip().split())
     # split a punctuations and spaces etc.
-    raw_tokens: [str] = list(filter(None, re.split(r'[\s]*[\s.,;:\n]+[\s]*', clean_text)))
+    raw_tokens: [str] = filter(None, re.split(r'[\s]*[\s.,;:\n]+[\s]*', clean_text))
     lowercase_tokens = map(lambda token: token.lower(), raw_tokens)
     stemmed_tokens = map(stem, lowercase_tokens)
     filtered_tokens = filter(lambda token: token not in stop_words, stemmed_tokens)
     return list(filtered_tokens)
 
 
-def query(query_string: str, eval_type):
-    tokens = text2tokens(query_string)
+def query(query_string: str, eval_type: str):
+    tokens = tokenize(query_string)
     results = {}
     interesting_article_ids = set()
     for token in tokens:
