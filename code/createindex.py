@@ -145,16 +145,14 @@ def tokenize(text: str) -> [str]:
     :return: a tokenized string with preprocessing (e.g. stemming, stopword removal, ...) applied
     """
     # remove double spaces, tabs and special chars
-    without_special_chars: str = re.sub(r'[\-\'’]', '', text)
-    without_brackets: str = re.sub(r'[(){}\[\]\"]', ' ', without_special_chars)
-    clean_text: str = ' '.join(without_brackets.strip().split())
+    clean_text: str = ' '.join(re.sub(r'[,.;:?/(){}\[\]\-‑|_+=\'’`"”“!@#$%^&*<>]', ' ', text).strip().split())
     # split a punctuations and spaces etc.
-    raw_tokens: [str] = filter(None, re.split(r'[\s]*[\s.,;:\n/\\?&=!]+[\s]*', clean_text))
-    lowercase_tokens = map(lambda token: token.lower().replace('é', 'e'), raw_tokens)
-    stemmed_tokens = map(stem, lowercase_tokens)
-    filtered_tokens = filter(lambda token: token not in stop_words, stemmed_tokens)
-    normalized_tokens = map(replace_special_letters, filtered_tokens)
-    return list(normalized_tokens)
+    raw_tokens: [str] = filter(None, re.split(r'[\s\n]', clean_text))
+    lowercase_tokens = map(lambda t: t.lower(), raw_tokens)
+    filtered_tokens = filter(lambda t: t not in stop_words, lowercase_tokens)
+    stemmed_tokens = map(stem, filtered_tokens)
+    # normalized_tokens = map(replace_special_letters, stemmed_tokens)
+    return list(stemmed_tokens)
 
 
 def replace_special_letters(word: str) -> str:
@@ -171,8 +169,8 @@ def replace_special_letters(word: str) -> str:
 
 
 def query(query_string: str, eval_type: str):
-    tokens = tokenize(query_string)
-    scores = tf_idf(tokens) if eval_type == 'tf-idf' else bm25(tokens)
+    query_tokens = tokenize(query_string)
+    scores = tf_idf(query_tokens) if eval_type == 'tf-idf' else bm25(query_tokens)
     sorted_results = sorted(scores.items(), key=lambda x: x[1], reverse=True)
     rank = 0
     for article_id, article_score in sorted_results:
@@ -222,7 +220,7 @@ def tf_idf(query_tokens: [str]):
 
 
 if __name__ == '__main__':
-    forceReIndex = False
+    forceReIndex = True
     if forceReIndex or not load_tables():
         start_time = time.time()
         load_wiki_files()
