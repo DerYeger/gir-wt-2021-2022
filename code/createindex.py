@@ -108,11 +108,10 @@ def eval_wiki_data(file):
         article_id: str = article.find('id').string  # get article id
         article_title: str = article.find('title').string  # get article id
 
-        title_tokens = tokenize(article_title)
-        body_tokens = tokenize_body(article)
-        category_tokens = tokenize_categories(article)
+        article_content = ' '.join([article_title, get_categories(article), get_body(article)])
+        article_tokens = tokenize(article_content)
 
-        article_tokens: [str] = [article_id, *title_tokens, *body_tokens, *category_tokens]
+        article_tokens: [str] = [article_id, *article_tokens]
 
         token_occurrences = {}
         for token in article_tokens:
@@ -123,20 +122,20 @@ def eval_wiki_data(file):
         for token, frequency in token_occurrences.items():
             insert_index(article_id, token, frequency)
 
-        article_table[article_id] = [article_title, file.name, soup.index(article), len(body_tokens)]
+        article_table[article_id] = [article_title, file.name, soup.index(article), len(article_content)]
         avg_dl += len(article_tokens)
     avg_dl /= len(article_table)
 
 
-def tokenize_categories(article) -> [str]:
-    return list(flat_map(lambda category: tokenize(category.string), article.find_all('category')))
+def get_categories(article) -> str:
+    return ' '.join(list(map(lambda category: category.string, article.find_all('category'))))
 
 
-def tokenize_body(article) -> [str]:
+def get_body(article) -> str:
     article_body = article.find('bdy')
     if article_body is None:
-        return []
-    return tokenize(article_body.string)
+        return ''
+    return article_body.string
 
 
 def tokenize(text: str) -> [str]:
