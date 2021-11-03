@@ -94,16 +94,11 @@ def load_wiki_files():
         files_read += 1
 
 
-def insert_index(article_id: str, token: str, token_occurrences: dict):
+def insert_index(article_id: str, token: str, frequency: int):
     if token in inverted_index_table:
         inverted_index_table[token] = np.append(inverted_index_table[token], int(article_id))
     else:
         inverted_index_table[token] = np.array([int(article_id)], dtype=np.uint32)
-
-    if token in token_occurrences:
-        token_occurrences[token] += 1
-    else:
-        token_occurrences[token] = 1
 
 
 def eval_wiki_data(file):
@@ -122,7 +117,13 @@ def eval_wiki_data(file):
 
         token_occurrences = {}
         for token in article_tokens:
-            insert_index(article_id, token, token_occurrences)
+            if token not in token_occurrences:
+                token_occurrences[token] = 0
+            token_occurrences[token] += 1
+
+        for token, frequency in token_occurrences.items():
+            insert_index(article_id, token, frequency)
+
         article_table[article_id] = [article_title, file.name, soup.index(article), token_occurrences, len(body_tokens)]
         avg_dl += len(body_tokens)
     avg_dl /= len(article_table)
@@ -231,18 +232,12 @@ def tf_idf(query_tokens: [str], article_id, article_stats):
     return score
 
 
-def process_inverted_index():
-    global inverted_index_table
-    inverted_index_table = map_dict(lambda na: np.unique(na), inverted_index_table)
-
-
 if __name__ == '__main__':
     forceReIndex = False
     if forceReIndex or not load_tables():
         start_time = time.time()
         load_wiki_files()
         print("re-indexing took --- %s seconds ---" % (time.time() - start_time))
-        process_inverted_index()
         save_tables()
     else:
         print("indexes loaded from memory")
