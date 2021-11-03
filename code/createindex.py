@@ -40,6 +40,7 @@ stemmer = PorterStemmer()
 
 
 def save_tables():
+    os.makedirs(os.path.dirname('./tables/'), exist_ok=True)
     with codecs.open('./tables/inverted_index_table.txt', 'w+', encoding) as f:
         f.write(str(inverted_index_table))
     with codecs.open('./tables/article_table.txt', 'w+', encoding) as f:
