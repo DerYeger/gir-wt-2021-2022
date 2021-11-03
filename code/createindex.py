@@ -4,7 +4,9 @@ Besides implementing and using the predefined tokenization function (text2tokens
 there are no restrictions in how you organize this file.
 """
 import re
+from nltk import download
 from nltk.stem import PorterStemmer
+from nltk.corpus import stopwords
 import os
 from bs4 import BeautifulSoup
 import time
@@ -32,9 +34,8 @@ current_dir: str = actual_dir
 max_files: int = 1
 
 # https://www.opinosis-analytics.com/knowledge-base/stop-words-explained/
-stopWords = {}
-with open('./tool_data/stop_words.txt') as stop_words:
-    stop_words = {w for w in stop_words.read().split(',')}
+download('stopwords')
+stop_words = stopwords.words('english')
 
 stemmer = PorterStemmer()
 
