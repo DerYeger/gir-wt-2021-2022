@@ -27,6 +27,7 @@ class InvertedIndex:
         if not load_from_disk or not index_exists or not article_table_exists or not average_word_count_exists:
             print(f'Indexing files from {files_path}')
             self.__parse_files(files_path, max_files)
+            self.__save_to_disk()
             return
 
         print(f'Restoring index from {disk_path}')
@@ -43,7 +44,7 @@ class InvertedIndex:
         print(f'Loaded index of {self.get_article_count()} articles with {len(self.index)} tokens')
         self.index_restored = True
 
-    def save_to_disk(self):
+    def __save_to_disk(self):
         os.makedirs(os.path.dirname(self.article_table_path), exist_ok=True)
         with codecs.open(self.index_path, 'w+', encoding) as f:
             f.write(str(self.index))
