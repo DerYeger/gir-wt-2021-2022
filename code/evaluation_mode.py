@@ -27,9 +27,9 @@ def evaluate_topics(topics_file_path: str, result_file_path: str):
         print(f'Loaded {len(topics)} topics')
         index = get_index(load_from_disk=True)
         for topic in topics:
-            print(f'Evaluating {topic.title}')
             evaluate_topic(index, topic, 'bm25', result_file)
             evaluate_topic(index, topic, 'tf-idf', result_file)
+    print(f'Evaluated {len(topics)} topics')
 
 
 if __name__ == '__main__':
