@@ -129,5 +129,6 @@ dmypy.json
 .pyre/
 
 /.idea/*
+/code/evaluation/
 /code/tables/
 /code/wiki_files/
