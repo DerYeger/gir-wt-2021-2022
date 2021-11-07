@@ -1,19 +1,22 @@
 from bs4 import BeautifulSoup
-from tokenizer import tokenize
 
 
 class Topic:
-    def __init__(self, title):
+    def __init__(self, title, phrase_title, description, narrative):
         self.title = title
-
-    def tokenize(self) -> [str]:
-        return list(tokenize(self.title))
+        self.phrase_title = phrase_title
+        self.description = description
+        self.narrative = narrative
+        parts = [self.title, self.phrase_title, self.description, self.narrative]
+        self.query = ' '.join(filter(None, parts))
 
 
 def parse_topic(topic_tag) -> Topic:
     title = topic_tag.find('title').string
-    print(title)
-    return Topic(title)
+    phrase_title = topic_tag.find('phrasetitle').string
+    description = topic_tag.find('description').string
+    narrative = topic_tag.find('narrative').string
+    return Topic(title, phrase_title, description, narrative)
 
 
 def parse_topics_file(file_path) -> [Topic]:
@@ -23,4 +26,4 @@ def parse_topics_file(file_path) -> [Topic]:
 
 
 if __name__ == '__main__':
-    print(parse_topics_file('./wiki_files/dataset/topics.xml'))
+    queries = map(lambda t: t.tokenize(), parse_topics_file('./wiki_files/dataset/topics.xml'))
