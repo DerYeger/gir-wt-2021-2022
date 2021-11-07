@@ -4,6 +4,7 @@ This file contains your code to generate the evaluation files that are input to 
 
 import codecs
 import os
+import subprocess
 from createindex import get_index
 from inverted_index import InvertedIndex
 from query import query
@@ -18,7 +19,7 @@ def evaluate_topic(index: InvertedIndex, topic: Topic, eval_type: str, result_fi
         result_file.write(f'{topic.topic_id} Q0 {result[0]} {rank + 1} {result[1]} {eval_type}\n')
 
 
-def evaluate_topics(topics_file_path: str, result_file_path: str):
+def evaluate_topics(topics_file_path: str, result_file_path: str, qrel_file_path: str):
     os.makedirs(os.path.dirname(result_file_path), exist_ok=True)
     with codecs.open(result_file_path, 'w+', encoding) as result_file:
         result_file.truncate(0)
@@ -30,7 +31,10 @@ def evaluate_topics(topics_file_path: str, result_file_path: str):
             evaluate_topic(index, topic, 'bm25', result_file)
             evaluate_topic(index, topic, 'tf-idf', result_file)
     print(f'Evaluated {len(topics)} topics')
+    command = f'trec_eval -m map -m ndcg_cut.10 -m P.10 -m recall.10 {qrel_file_path} {result_file_path}'
+    result = subprocess.check_output(command.split(' '))
+    print(result)
 
 
 if __name__ == '__main__':
-    evaluate_topics('./wiki_files/dataset/topics.xml', './evaluation/results.txt')
+    evaluate_topics('./wiki_files/dataset/topics.xml', './evaluation/results.txt', './wiki_files/dataset/eval.qrels')
