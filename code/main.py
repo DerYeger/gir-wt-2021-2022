@@ -1,4 +1,5 @@
 import os
+import sys
 
 from createindex import get_index
 from evaluation_mode import run_evaluation_mode
@@ -20,8 +21,10 @@ _questions = [
 
 def main():
     os.system('color')
+    args = sys.argv[1:]
+    load_from_disk = '-c' not in args and '--clean' not in args
     print()
-    index = get_index(load_from_disk=True)
+    index = get_index(load_from_disk)
     print()
     answers = prompt(_questions)
     print()

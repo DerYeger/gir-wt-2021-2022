@@ -70,12 +70,11 @@ class InvertedIndex:
         for file_entry in os.listdir(path):
             if max_files == files_read:
                 return
-            print(f'--- File {path_color(file_entry)} ---')
             with open(path + '/' + file_entry, encoding='utf8') as file:
                 self.__parse_file(file)
 
             curr_time = time.time()
-            print(f'--- {curr_time - last_time} seconds for file #{files_read + 1} ---')
+            print(f'{path_color(file_entry)} took {info(str(round(curr_time - last_time, 2)))} seconds')
             last_time = time.time()
             files_read += 1
             self.__average_word_count = self.__total_word_count / len(self.__article_table)

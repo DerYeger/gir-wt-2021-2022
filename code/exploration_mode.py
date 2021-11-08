@@ -9,16 +9,16 @@ from utils import highlight, info
 
 
 def run_exploration_mode(index: InvertedIndex):
-    run_again = True
-    while run_again:
+    while True:
         answers = prompt(_questions)
         query_string = answers.get('query')
         scoring_mode = answers.get('scoring_mode')
         _run_query(index, query_string, scoring_mode)
         print()
         post_answers = prompt(_post_run_questions)
+        if not post_answers.get('run_again'):
+            return
         print()
-        run_again = post_answers.get('run_again')
 
 
 def _run_query(index: InvertedIndex, query_string: str, scoring_mode: str):
@@ -30,7 +30,7 @@ def _run_query(index: InvertedIndex, query_string: str, scoring_mode: str):
     for rank, (article_id, article_score) in enumerate(results):
         article_title = index.get_article_by_id(str(article_id))[0]
         print(f'{highlight(f"#{rank + 1}")} is article {highlight(article_id)} with score {highlight(article_score)} and title {highlight(article_title)}')
-    print(f'--- Query took {info(str(query_duration))} milliseconds ---')
+    print(f'--- Query took {info(str(round(query_duration, 10)))} milliseconds ---')
 
 
 class QueryValidator(Validator):

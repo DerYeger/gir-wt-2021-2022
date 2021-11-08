@@ -12,7 +12,7 @@ def map_dict(f, dic: dict) -> dict:
 
 
 def get_index(load_from_disk: bool) -> InvertedIndex:
-    return InvertedIndex(_index_dir, _dataset_dir, max_files=1, load_from_disk=load_from_disk)
+    return InvertedIndex(_index_dir, _dataset_dir, max_files=2, load_from_disk=load_from_disk)
 
 
 if __name__ == '__main__':
