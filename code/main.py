@@ -19,15 +19,17 @@ def main():
         max_files = indexing_answers.get('max_files')
         print()
     index = get_index(load_from_disk, max_files)
-    print()
-    answers = prompt(_search_questions)
-    print()
-    search_mode = answers.get('search_mode')
-
-    if search_mode == _evaluation_mode_name:
-        run_evaluation_mode(index)
-    elif search_mode == _exploration_mode_name:
-        run_exploration_mode(index)
+    while True:
+        print()
+        answers = prompt(_search_questions)
+        print()
+        search_mode = answers.get('search_mode')
+        if search_mode == _evaluation_mode_name:
+            run_evaluation_mode(index)
+        elif search_mode == _exploration_mode_name:
+            run_exploration_mode(index)
+        elif search_mode == _exit_mode:
+            exit(0)
 
 
 class NumberValidator(Validator):
@@ -52,13 +54,14 @@ _indexing_questions = [
 
 _evaluation_mode_name = 'evaluation'
 _exploration_mode_name = 'exploration'
+_exit_mode = 'exit'
 
 _search_questions = [
     {
         'type': 'list',
         'name': 'search_mode',
         'message': 'Select search mode',
-        'choices': [_evaluation_mode_name, _exploration_mode_name]
+        'choices': [_evaluation_mode_name, _exploration_mode_name, _exit_mode]
     },
 ]
 

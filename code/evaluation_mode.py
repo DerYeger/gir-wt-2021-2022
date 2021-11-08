@@ -2,7 +2,6 @@ import codecs
 import os
 import subprocess
 
-from createindex import get_index
 from inverted_index import InvertedIndex
 from query import query
 from topic import parse_topics_file, Topic
