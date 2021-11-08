@@ -21,7 +21,7 @@ class NumberValidator(Validator):
             value = int(document.text)
             return value > 0 or value == -1
         except ValueError:
-            raise ValidationError(message="Please enter a valid number larger",
+            raise ValidationError(message='Please enter a valid number larger',
                                   cursor_position=len(document.text))
 
 

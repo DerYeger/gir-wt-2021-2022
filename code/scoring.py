@@ -2,10 +2,22 @@ import numpy as np
 
 from inverted_index import InvertedIndex
 
-scoring_modes = ['bm25', 'tf-idf']
+_bm25_name = 'BM25'
+_tf_idf_name = 'TF-IDF'
+
+scoring_modes = [_bm25_name, _tf_idf_name]
 
 
-def bm25(index: InvertedIndex, query_tokens: [str]):
+def score(index: InvertedIndex, query_tokens: list[str], eval_type: str) -> dict:
+    if eval_type is _bm25_name:
+        return _bm25(index, query_tokens)
+    elif eval_type is _tf_idf_name:
+        return _tf_idf(index, query_tokens)
+    else:
+        return {}
+
+
+def _bm25(index: InvertedIndex, query_tokens: [str]):
     article_scores = {}
     for token in query_tokens:
         token_idf = _idf(index, token)
@@ -23,7 +35,7 @@ def bm25(index: InvertedIndex, query_tokens: [str]):
     return article_scores
 
 
-def tf_idf(index: InvertedIndex, query_tokens: [str]):
+def _tf_idf(index: InvertedIndex, query_tokens: [str]):
     article_scores = {}
     for token in query_tokens:
         token_idf = _idf(index, token)

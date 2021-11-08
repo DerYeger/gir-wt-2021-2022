@@ -18,13 +18,13 @@ def main():
         answers = prompt(_questions)
         print()
         action = answers.get('action')
-        if action == _evaluation_action:
+        if action is _evaluation_action:
             run_evaluation_mode(index)
-        elif action == _exploration_action:
+        elif action is _exploration_action:
             run_exploration_mode(index)
-        elif action == _reset_index_action:
+        elif action is _reset_index_action:
             index = get_index(load_from_disk=False)
-        elif action == _exit_action:
+        elif action is _exit_action:
             exit(0)
 
 

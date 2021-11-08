@@ -22,15 +22,34 @@ def run_exploration_mode(index: InvertedIndex):
 
 
 def _run_query(index: InvertedIndex, query_string: str, scoring_mode: str):
-    print(f'\n--- {info(scoring_mode)} results for "{info(query_string)}" ---')
     query_start_time = time.time_ns()
     results = query(index, query_string, scoring_mode)
     query_end_time = time.time_ns()
     query_duration = (query_end_time - query_start_time) / 1000000.0
+
+    choices = []
     for rank, (article_id, article_score) in enumerate(results):
         article_title = index.get_article_by_id(str(article_id))[0]
-        print(f'{highlight(f"#{rank + 1}")} is article {highlight(article_id)} with score {highlight(article_score)} and title {highlight(article_title)}')
-    print(f'--- Query took {info(str(round(query_duration, 10)))} milliseconds ---')
+        choices.append({
+            'key': article_id,
+            'name': f'{rank + 1}. {article_title} ({round(article_score, 4)}) [{article_id}]'
+        })
+    print(
+        f'\n{info(scoring_mode)} query for "{info(query_string)}" took {info(str(round(query_duration, 10)))} milliseconds\n')
+    questions = [
+        {
+            'type': 'list',
+            'name': 'selection',
+            'message': 'Select result',
+            'choices': choices
+        },
+    ]
+    answers = prompt(questions)
+    print(answers)
+    selected_article = answers.get('selection')
+    selected_id = selected_article[selected_article.rfind('[') + 1: selected_article.rfind(']')]
+    print(f'Selected {selected_id}')
+    # TODO print article text
 
 
 class QueryValidator(Validator):
