@@ -2,6 +2,8 @@ import numpy as np
 
 from inverted_index import InvertedIndex
 
+scoring_modes = ['bm25', 'tf-idf']
+
 
 def bm25(index: InvertedIndex, query_tokens: [str]):
     article_scores = {}
