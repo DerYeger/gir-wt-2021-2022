@@ -1,11 +1,14 @@
 import time
 
+from bs4 import BeautifulSoup
 from inverted_index import InvertedIndex
 from prompt_toolkit.validation import Validator, ValidationError
 from PyInquirer import prompt
 from query import query
 from scoring import scoring_modes
-from utils import highlight, info
+from utils import info
+
+_encoding = 'utf_16'
 
 
 def run_exploration_mode(index: InvertedIndex):
@@ -45,11 +48,21 @@ def _run_query(index: InvertedIndex, query_string: str, scoring_mode: str):
         },
     ]
     answers = prompt(questions)
-    print(answers)
     selected_article = answers.get('selection')
     selected_id = selected_article[selected_article.rfind('[') + 1: selected_article.rfind(']')]
-    print(f'Selected {selected_id}')
-    # TODO print article text
+    get_article_content(index, selected_id)
+
+
+def get_article_content(index: InvertedIndex, article_id: str) -> str:
+    article = index.get_article_by_id(article_id)
+    article_title = article[0]
+    article_path = article[1]
+    with open(article_path, encoding='utf8') as file:
+        soup = BeautifulSoup(file.read(), 'html.parser')
+        article_tag = soup.find('id', text=article_id).parent.parent
+        print(info(f'\n--- {article_title} ---'))
+        print(article_tag.find('bdy').string)
+        print(info('---------'))
 
 
 class QueryValidator(Validator):
