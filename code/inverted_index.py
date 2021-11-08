@@ -63,25 +63,24 @@ class InvertedIndex:
     def __parse_files(self, path, max_files):
         if self.__index_restored:
             return
-        file_entry: str
-        files_read = 0
-        last_time = time.time()
-        for file_entry in os.listdir(path):
-            if max_files == files_read:
-                return
-            with open(path + '/' + file_entry, encoding='utf-8') as file:
-                self.__parse_file(file)
+        start_time = time.time()
+        file_paths = map(lambda entry: path + '/' + entry, os.listdir(path)[:max_files])
+        for file_path in file_paths:
+            self.__parse_file(file_path)
+        self.__average_word_count = self.__total_word_count / len(self.__article_table)
+        end_time = time.time()
+        print(
+            f'Indexed {info(str(self.get_article_count()))} articles in {info(str(round(end_time - start_time, 2)))} seconds'
+        )
 
-            curr_time = time.time()
-            print(f'{path_color(file_entry)} took {info(str(round(curr_time - last_time, 2)))} seconds')
-            last_time = time.time()
-            files_read += 1
-            self.__average_word_count = self.__total_word_count / len(self.__article_table)
-
-    def __parse_file(self, file):
-        soup = BeautifulSoup(file.read(), 'html.parser')
-        for article in soup.find_all('article'):
-            self.__parse_article(article, file.name)
+    def __parse_file(self, file_path):
+        with open(file_path, encoding='utf-8') as file:
+            soup = BeautifulSoup(file.read(), 'html.parser')
+            start_time = time.time()
+            for article in soup.find_all('article'):
+                self.__parse_article(article, file.name)
+            end_time = time.time()
+            print(f'Indexing {path_color(file.name)} took {info(str(round(end_time - start_time, 2)))} seconds')
 
     def __parse_article(self, article, file_name):
         article.find('revision').decompose()  # remove revision tag
