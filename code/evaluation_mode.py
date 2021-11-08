@@ -26,9 +26,10 @@ def _evaluate_topics(topics_file_path: str, results_dir: str):
         for topic in topics:
             _evaluate_topic(index, topic, 'bm25', bm25_results_file)
             _evaluate_topic(index, topic, 'tf-idf', tf_idf_results_file)
-    print(f'Evaluated {len(topics)} topics')
-    _run_trec_eval(bm25_path)
-    _run_trec_eval(tf_idf_path)
+    print(f'Evaluated {len(topics)} topics\n')
+    if _trec_eval_is_available():
+        _run_trec_eval(bm25_path)
+        _run_trec_eval(tf_idf_path)
 
 
 def _prepare_results_files(file_path: str):
@@ -41,6 +42,15 @@ def _evaluate_topic(index: InvertedIndex, topic: Topic, eval_type: str, result_f
     results = query(index, topic.query, eval_type, silent=True)
     for rank, result in enumerate(results):
         result_file.write(f'{topic.topic_id} Q0 {result[0]} {rank + 1} {result[1]} {eval_type}\n')
+
+
+def _trec_eval_is_available() -> bool:
+    try:
+        subprocess.run(['trec_eval'])
+        return True
+    except FileNotFoundError:
+        print('trec_eval not found')
+        return False
 
 
 def _run_trec_eval(result_file_path: str, qrel_file_path: str = './dataset/eval.qrels'):
