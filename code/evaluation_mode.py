@@ -58,5 +58,4 @@ def _run_trec_eval(result_file_path: str, qrel_file_path: str = './dataset/eval.
         result = subprocess.check_output(command.split(' '))
         print(result)
     except subprocess.CalledProcessError as e:
-        print(error('Something went wrong using trec_eval'))
-        print(e)
+        print(error(f'Something went wrong with trec_eval ({repr(e.returncode)})'))
