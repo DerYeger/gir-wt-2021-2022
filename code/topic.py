@@ -12,7 +12,7 @@ class Topic:
         self.query = ' '.join(filter(None, parts))
 
 
-def parse_topic(topic_tag) -> Topic:
+def _parse_topic(topic_tag) -> Topic:
     topic_id = topic_tag.attrs['id']
     title = topic_tag.find('title').string
     phrase_title = topic_tag.find('phrasetitle').string
@@ -24,8 +24,4 @@ def parse_topic(topic_tag) -> Topic:
 def parse_topics_file(file_path) -> [Topic]:
     with open(file_path, encoding='utf8') as file:
         soup = BeautifulSoup(file.read(), 'html.parser')
-        return list(map(parse_topic, soup.find_all('topic')))
-
-
-if __name__ == '__main__':
-    queries = map(lambda t: t.tokenize(), parse_topics_file('./wiki_files/dataset/topics.xml'))
+        return list(map(_parse_topic, soup.find_all('topic')))

@@ -1,7 +1,3 @@
-"""
-This file contains your code to generate the evaluation files that are input to the trec_eval algorithm.
-"""
-
 import codecs
 import os
 import subprocess
@@ -14,7 +10,7 @@ _encoding = 'utf_16'
 
 
 def run_evaluation_mode():
-    _evaluate_topics('./wiki_files/dataset/topics.xml', './retrieval_results')
+    _evaluate_topics('./dataset/topics.xml', './retrieval_results')
 
 
 def _evaluate_topics(topics_file_path: str, results_dir: str):
@@ -22,7 +18,8 @@ def _evaluate_topics(topics_file_path: str, results_dir: str):
     _prepare_results_files(bm25_path)
     tf_idf_path = f'{results_dir}/tf-idf-evaluation.txt'
     _prepare_results_files(tf_idf_path)
-    with codecs.open(bm25_path, 'a+', _encoding) as bm25_results_file, codecs.open(tf_idf_path, 'a+', _encoding) as tf_idf_results_file:
+    with codecs.open(bm25_path, 'a+', _encoding) as bm25_results_file, \
+            codecs.open(tf_idf_path, 'a+', _encoding) as tf_idf_results_file:
         topics = parse_topics_file(topics_file_path)
         print(f'Loaded {len(topics)} topics')
         index = get_index(load_from_disk=True)
@@ -46,8 +43,7 @@ def _evaluate_topic(index: InvertedIndex, topic: Topic, eval_type: str, result_f
         result_file.write(f'{topic.topic_id} Q0 {result[0]} {rank + 1} {result[1]} {eval_type}\n')
 
 
-def _run_trec_eval(result_file_path: str, qrel_file_path: str = './wiki_files/dataset/eval.qrels'):
+def _run_trec_eval(result_file_path: str, qrel_file_path: str = './dataset/eval.qrels'):
     command = f'trec_eval -m map -m ndcg_cut.10 -m P.10 -m recall.10 {qrel_file_path} {result_file_path}'
     result = subprocess.check_output(command.split(' '))
     print(result)
-

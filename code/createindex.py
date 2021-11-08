@@ -1,17 +1,9 @@
-"""
-This file contains your code to create the inverted index.
-Besides implementing and using the predefined tokenization function (text2tokens),
-there are no restrictions in how you organize this file.
-"""
-
 import time
 from inverted_index import InvertedIndex
 from query import query
 
-
-actual_dir: str = './wiki_files/dataset/articles/'
-test_dir: str = './wiki_files/test/'
-current_dir: str = actual_dir
+_index_dir: str = './tables'
+_dataset_dir: str = './dataset/articles'
 
 
 def map_dict(f, dic: dict) -> dict:
@@ -19,7 +11,7 @@ def map_dict(f, dic: dict) -> dict:
 
 
 def get_index(load_from_disk: bool) -> InvertedIndex:
-    return InvertedIndex('./tables', current_dir, max_files=1, load_from_disk=load_from_disk)
+    return InvertedIndex(_index_dir, _dataset_dir, max_files=1, load_from_disk=load_from_disk)
 
 
 if __name__ == '__main__':

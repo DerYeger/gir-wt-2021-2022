@@ -5,7 +5,6 @@ from PyInquirer import prompt
 _evaluation_mode_name = 'evaluation'
 _exploration_mode_name = 'exploration'
 
-
 _questions = [
     {
         'type': 'list',

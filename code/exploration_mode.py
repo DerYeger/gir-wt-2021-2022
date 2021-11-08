@@ -15,13 +15,13 @@ def run_exploration_mode():
         answers = prompt(_questions)
         query_string = answers.get('query')
         scoring_mode = answers.get('scoring_mode')
-        run_query(index, query_string, scoring_mode)
+        _run_query(index, query_string, scoring_mode)
         print()
         post_answers = prompt(_post_run_questions)
         run_again = post_answers.get('run_again')
 
 
-def run_query(index: InvertedIndex, query_string: str, scoring_mode: str):
+def _run_query(index: InvertedIndex, query_string: str, scoring_mode: str):
     print(f'\n--- {scoring_mode} ---')
     query_start_time = time.time_ns()
     query(index, query_string, scoring_mode)
@@ -31,7 +31,6 @@ def run_query(index: InvertedIndex, query_string: str, scoring_mode: str):
 
 
 class QueryValidator(Validator):
-
     def validate(self, document):
         try:
             if not str(document.text):
