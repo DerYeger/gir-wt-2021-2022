@@ -40,7 +40,7 @@ def _prepare_results_files(file_path: str):
 
 
 def _evaluate_topic(index: InvertedIndex, topic: Topic, eval_type: str, result_file):
-    results = query(index, topic.query, eval_type, silent=True)
+    results = query(index, topic.query, eval_type)
     for rank, result in enumerate(results):
         result_file.write(f'{topic.topic_id} Q0 {result[0]} {rank + 1} {result[1]} {eval_type}\n')
 

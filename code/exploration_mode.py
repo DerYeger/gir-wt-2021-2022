@@ -5,7 +5,7 @@ from prompt_toolkit.validation import Validator, ValidationError
 from PyInquirer import prompt
 from query import query
 from scoring import scoring_modes
-from utils import info
+from utils import highlight, info
 
 
 def run_exploration_mode(index: InvertedIndex):
@@ -22,11 +22,14 @@ def run_exploration_mode(index: InvertedIndex):
 
 
 def _run_query(index: InvertedIndex, query_string: str, scoring_mode: str):
-    print(f'\n--- {scoring_mode} ---')
+    print(f'\n--- {info(scoring_mode)} results for "{info(query_string)}" ---')
     query_start_time = time.time_ns()
-    query(index, query_string, scoring_mode)
+    results = query(index, query_string, scoring_mode)
     query_end_time = time.time_ns()
     query_duration = (query_end_time - query_start_time) / 1000000.0
+    for rank, (article_id, article_score) in enumerate(results):
+        article_title = index.get_article_by_id(str(article_id))[0]
+        print(f'{highlight(f"#{rank + 1}")} is article {highlight(article_id)} with score {highlight(article_score)} and title {highlight(article_title)}')
     print(f'--- Query took {info(str(query_duration))} milliseconds ---')
 
 
