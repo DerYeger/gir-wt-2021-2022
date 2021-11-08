@@ -5,10 +5,12 @@ from createindex import get_index
 from evaluation_mode import run_evaluation_mode
 from exploration_mode import run_exploration_mode
 from PyInquirer import prompt
+from utils import clear_console
 
 
 def main():
     os.system('color')
+    clear_console()
     args = sys.argv[1:]
     load_from_disk = '-c' not in args and '--clean' not in args
     print()
@@ -26,6 +28,7 @@ def main():
             index = get_index(load_from_disk=False)
         elif action is _exit_action:
             exit(0)
+        clear_console()
 
 
 _evaluation_action = 'Evaluation'

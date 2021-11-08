@@ -5,9 +5,7 @@ import time
 
 from bs4 import BeautifulSoup
 from tokenizer import tokenize
-from utils import path_color, info
-
-_encoding = 'utf_16'
+from utils import encoding, info, path_color
 
 
 class InvertedIndex:
@@ -32,13 +30,13 @@ class InvertedIndex:
             return
 
         print(f'Restoring index from {path_color(disk_path)}')
-        with codecs.open(self.__index_path, 'r', _encoding) as f:
+        with codecs.open(self.__index_path, 'r', encoding) as f:
             table = f.read()
             self.__index = set() if table == str(set()) else ast.literal_eval(table)
-        with codecs.open(self.__article_table_path, 'r', _encoding) as f:
+        with codecs.open(self.__article_table_path, 'r', encoding) as f:
             table = f.read()
             self.__article_table = set() if table == str(set()) else ast.literal_eval(table)
-        with codecs.open(self.__average_word_count_path, 'r', _encoding) as f:
+        with codecs.open(self.__average_word_count_path, 'r', encoding) as f:
             value = f.read()
             self.__average_word_count = ast.literal_eval(value)
 
@@ -70,7 +68,7 @@ class InvertedIndex:
         for file_entry in os.listdir(path):
             if max_files == files_read:
                 return
-            with open(path + '/' + file_entry, encoding='utf8') as file:
+            with open(path + '/' + file_entry, encoding='utf-8') as file:
                 self.__parse_file(file)
 
             curr_time = time.time()
@@ -110,11 +108,11 @@ class InvertedIndex:
 
     def __save_to_disk(self):
         os.makedirs(os.path.dirname(self.__article_table_path), exist_ok=True)
-        with codecs.open(self.__index_path, 'w+', _encoding) as f:
+        with codecs.open(self.__index_path, 'w+', encoding) as f:
             f.write(str(self.__index))
-        with codecs.open(self.__article_table_path, 'w+', _encoding) as f:
+        with codecs.open(self.__article_table_path, 'w+', encoding) as f:
             f.write(str(self.__article_table))
-        with codecs.open(self.__average_word_count_path, 'w+', _encoding) as f:
+        with codecs.open(self.__average_word_count_path, 'w+', encoding) as f:
             f.write(str(self.__average_word_count))
 
 

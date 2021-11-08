@@ -22,6 +22,6 @@ def _parse_topic(topic_tag) -> Topic:
 
 
 def parse_topics_file(file_path) -> [Topic]:
-    with open(file_path, encoding='utf8') as file:
+    with open(file_path, encoding='utf-8') as file:
         soup = BeautifulSoup(file.read(), 'html.parser')
         return list(map(_parse_topic, soup.find_all('topic')))

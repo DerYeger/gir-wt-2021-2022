@@ -5,9 +5,7 @@ import subprocess
 from inverted_index import InvertedIndex
 from query import query
 from topic import parse_topics_file, Topic
-from utils import error, info
-
-_encoding = 'utf_16'
+from utils import encoding, error, info
 
 
 def run_evaluation_mode(index: InvertedIndex):
@@ -19,8 +17,8 @@ def _evaluate_topics(index: InvertedIndex, topics_file_path: str, results_dir: s
     _prepare_results_files(bm25_path)
     tf_idf_path = f'{results_dir}/tf-idf-evaluation.txt'
     _prepare_results_files(tf_idf_path)
-    with codecs.open(bm25_path, 'a+', _encoding) as bm25_results_file, \
-            codecs.open(tf_idf_path, 'a+', _encoding) as tf_idf_results_file:
+    with codecs.open(bm25_path, 'a+', encoding) as bm25_results_file, \
+            codecs.open(tf_idf_path, 'a+', encoding) as tf_idf_results_file:
         topics = parse_topics_file(topics_file_path)
         print(f'{info(str(len(topics)))} topics loaded')
         for topic in topics:
@@ -34,7 +32,7 @@ def _evaluate_topics(index: InvertedIndex, topics_file_path: str, results_dir: s
 
 def _prepare_results_files(file_path: str):
     os.makedirs(os.path.dirname(file_path), exist_ok=True)
-    with codecs.open(file_path, 'w+', _encoding) as file:
+    with codecs.open(file_path, 'w+', encoding) as file:
         file.truncate(0)
 
 
