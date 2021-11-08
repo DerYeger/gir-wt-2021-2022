@@ -24,11 +24,11 @@ def main():
             run_evaluation_mode(index)
         elif action is _exploration_action:
             run_exploration_mode(index)
+            clear_console()
         elif action is _reset_index_action:
             index = get_index(load_from_disk=False)
         elif action is _exit_action:
             exit(0)
-        clear_console()
 
 
 _evaluation_action = 'Evaluation'

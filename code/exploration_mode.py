@@ -47,6 +47,9 @@ def _run_query(index: InvertedIndex, query_string: str, scoring_mode: str):
             'choices': choices
         },
     ]
+    if len(choices) is 0:
+        print('No results')
+        return
     answers = prompt(questions)
     selected_article = answers.get('selection')
     selected_id = selected_article[selected_article.rfind('[') + 1: selected_article.rfind(']')]

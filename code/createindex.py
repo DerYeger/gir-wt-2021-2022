@@ -7,12 +7,13 @@ _dataset_dir: str = './dataset/articles'
 
 
 def get_index(load_from_disk) -> InvertedIndex:
-    max_files = -1
-    if not load_from_disk:
+    def get_max_file_count():
         indexing_answers = prompt(_indexing_questions)
         max_files = indexing_answers.get('max_files')
         print()
-    return InvertedIndex(_index_dir, _dataset_dir, max_files, load_from_disk=load_from_disk)
+        return max_files
+
+    return InvertedIndex(_index_dir, _dataset_dir, load_from_disk=load_from_disk, get_max_file_count=get_max_file_count)
 
 
 class NumberValidator(Validator):

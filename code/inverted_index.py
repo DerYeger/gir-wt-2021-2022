@@ -9,7 +9,7 @@ from utils import encoding, info, path_color
 
 
 class InvertedIndex:
-    def __init__(self, disk_path, files_path, max_files, load_from_disk):
+    def __init__(self, disk_path, files_path, load_from_disk, get_max_file_count):
         self.__index = {}
         self.__article_table = {}
         self.__average_word_count = 0
@@ -25,7 +25,7 @@ class InvertedIndex:
         average_word_count_exists = os.path.exists(self.__average_word_count_path)
         if not load_from_disk or not index_exists or not article_table_exists or not average_word_count_exists:
             print(f'Indexing files from {path_color(files_path)}')
-            self.__parse_files(files_path, max_files)
+            self.__parse_files(files_path, get_max_file_count())
             self.__save_to_disk()
             return
 
@@ -40,7 +40,9 @@ class InvertedIndex:
             value = f.read()
             self.__average_word_count = ast.literal_eval(value)
 
-        print(f'Loaded index of {info(str(self.get_article_count()))} articles with {info(str(len(self.__index)))} tokens')
+        print(
+            f'Loaded index of {info(str(self.get_article_count()))} articles with {info(str(len(self.__index)))} tokens'
+        )
         self.__index_restored = True
 
     def get_average_word_count(self) -> int:
