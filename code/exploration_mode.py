@@ -29,7 +29,8 @@ def _run_query(index: InvertedIndex, query_string: str, scoring_mode: str):
     query_end_time = time.time_ns()
     query_duration = (query_end_time - query_start_time) / 1000000.0
 
-    choices = []
+    return_choice = '   Return'
+    choices = [return_choice]
     for rank, (article_id, article_score) in enumerate(results):
         article_title = index.get_article_by_id(str(article_id))[0]
         choices.append(f'{rank + 1}. {article_title} ({round(article_score, 4)}) [{article_id}]')
@@ -47,9 +48,11 @@ def _run_query(index: InvertedIndex, query_string: str, scoring_mode: str):
         print('No results')
         return
     answers = prompt(questions)
-    selected_article = answers.get('selection')
-    selected_id = selected_article[selected_article.rfind('[') + 1: selected_article.rfind(']')]
-    print_article_content(index, selected_id)
+    selection = answers.get('selection')
+    if selection is return_choice:
+        return
+    article_id = selection[selection.rfind('[') + 1: selection.rfind(']')]
+    print_article_content(index, article_id)
 
 
 def print_article_content(index: InvertedIndex, article_id: str):
