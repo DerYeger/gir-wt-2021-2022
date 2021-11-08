@@ -2,7 +2,7 @@ import os
 
 from termcolor import colored
 
-encoding = 'utf_16'
+encoding = 'utf_8'
 
 
 def clear_console():

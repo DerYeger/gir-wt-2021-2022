@@ -6,7 +6,7 @@ from inverted_index import InvertedIndex
 from query import query
 from scoring import bm25_name, tf_idf_name
 from topic import parse_topics_file, Topic
-from utils import encoding, error, info
+from utils import encoding, error, info, path_color
 
 
 def run_evaluation_mode(index: InvertedIndex):
@@ -18,8 +18,8 @@ def _evaluate_topics(index: InvertedIndex, topics_file_path: str, results_dir: s
     _prepare_results_files(bm25_path)
     tf_idf_path = f'{results_dir}/tf-idf-evaluation.txt'
     _prepare_results_files(tf_idf_path)
-    with codecs.open(bm25_path, 'a+', encoding) as bm25_results_file, \
-            codecs.open(tf_idf_path, 'a+', encoding) as tf_idf_results_file:
+    with codecs.open(bm25_path, 'a+', 'utf_8') as bm25_results_file, \
+            codecs.open(tf_idf_path, 'a+', 'utf_8') as tf_idf_results_file:
         topics = parse_topics_file(topics_file_path)
         print(f'{info(str(len(topics)))} topics loaded')
         for topic in topics:
@@ -55,7 +55,10 @@ def _trec_eval_is_available() -> bool:
 def _run_trec_eval(result_file_path: str, qrel_file_path: str = './dataset/eval.qrels'):
     try:
         command = f'trec_eval -m map -m ndcg_cut.10 -m P.10 -m recall.10 {qrel_file_path} {result_file_path}'
-        result = subprocess.check_output(command.split(' '))
-        print(result)
+        result = subprocess.run(command.split(' '), capture_output=True, text=True).stdout
+        output_file_path = result_file_path + '.eval.txt'
+        with codecs.open(output_file_path, 'w+', encoding) as output_file:
+            output_file.write(str(result))
+            print(f'trec_eval results saved to {path_color(output_file_path)}')
     except subprocess.CalledProcessError as e:
         print(error(f'Something went wrong with trec_eval ({repr(e.returncode)})'))
