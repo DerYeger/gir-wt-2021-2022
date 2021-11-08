@@ -23,11 +23,11 @@ def _evaluate_topics(index: InvertedIndex, topics_file_path: str, results_dir: s
     with codecs.open(bm25_path, 'a+', _encoding) as bm25_results_file, \
             codecs.open(tf_idf_path, 'a+', _encoding) as tf_idf_results_file:
         topics = parse_topics_file(topics_file_path)
-        print(f'Loaded {info(str(len(topics)))} topics')
+        print(f'{info(str(len(topics)))} topics loaded')
         for topic in topics:
             _evaluate_topic(index, topic, 'bm25', bm25_results_file)
             _evaluate_topic(index, topic, 'tf-idf', tf_idf_results_file)
-    print(f'Evaluated {info(str(len(topics)))} topics\n')
+    print(f'{info(str(len(topics)))} topics evaluated\n')
     if _trec_eval_is_available():
         _run_trec_eval(bm25_path)
         _run_trec_eval(tf_idf_path)
