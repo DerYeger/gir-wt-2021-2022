@@ -14,7 +14,6 @@ class InvertedIndex:
         self.__article_table = {}
         self.__average_word_count = 0
         self.__total_word_count = 0
-        self.__disk_path = disk_path
         self.__index_path = disk_path + '/inverted_index.txt'
         self.__article_table_path = disk_path + '/article_table.txt'
         self.__average_word_count_path = disk_path + '/average_word_count.txt'
