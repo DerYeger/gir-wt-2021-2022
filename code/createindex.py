@@ -19,11 +19,9 @@ def get_index(load_from_disk) -> InvertedIndex:
 class NumberValidator(Validator):
     def validate(self, document):
         try:
-            value = int(document.text)
-            return value > 0 or value == -1
+            int(document.text)
         except ValueError:
-            raise ValidationError(message='Please enter a valid number larger',
-                                  cursor_position=len(document.text))
+            raise ValidationError(message='Please enter a valid number', cursor_position=len(document.text))
 
 
 _indexing_questions = [
