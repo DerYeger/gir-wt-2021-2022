@@ -4,6 +4,7 @@ import subprocess
 
 from inverted_index import InvertedIndex
 from query import query
+from scoring import bm25_name, tf_idf_name
 from topic import parse_topics_file, Topic
 from utils import encoding, error, info
 
@@ -22,8 +23,8 @@ def _evaluate_topics(index: InvertedIndex, topics_file_path: str, results_dir: s
         topics = parse_topics_file(topics_file_path)
         print(f'{info(str(len(topics)))} topics loaded')
         for topic in topics:
-            _evaluate_topic(index, topic, 'bm25', bm25_results_file)
-            _evaluate_topic(index, topic, 'tf-idf', tf_idf_results_file)
+            _evaluate_topic(index, topic, bm25_name, bm25_results_file)
+            _evaluate_topic(index, topic, tf_idf_name, tf_idf_results_file)
     print(f'{info(str(len(topics)))} topics evaluated\n')
     if _trec_eval_is_available():
         _run_trec_eval(bm25_path)
@@ -44,7 +45,7 @@ def _evaluate_topic(index: InvertedIndex, topic: Topic, eval_type: str, result_f
 
 def _trec_eval_is_available() -> bool:
     try:
-        subprocess.run(['trec_eval'])
+        subprocess.run(['trec_eval'], stderr=subprocess.DEVNULL, stdout=subprocess.DEVNULL)
         return True
     except FileNotFoundError:
         print(error('trec_eval not found'))
@@ -52,6 +53,10 @@ def _trec_eval_is_available() -> bool:
 
 
 def _run_trec_eval(result_file_path: str, qrel_file_path: str = './dataset/eval.qrels'):
-    command = f'trec_eval -m map -m ndcg_cut.10 -m P.10 -m recall.10 {qrel_file_path} {result_file_path}'
-    result = subprocess.check_output(command.split(' '))
-    print(result)
+    try:
+        command = f'trec_eval -m map -m ndcg_cut.10 -m P.10 -m recall.10 {qrel_file_path} {result_file_path}'
+        result = subprocess.check_output(command.split(' '))
+        print(result)
+    except subprocess.CalledProcessError as e:
+        print(error('Something went wrong using trec_eval'))
+        print(e)
