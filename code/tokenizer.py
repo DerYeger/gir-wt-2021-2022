@@ -21,13 +21,9 @@ def tokenize(text: str) -> [str]:
     raw_tokens: [str] = filter(None, re.split(r'[\s\n]', clean_text))
     lowercase_tokens = map(lambda t: t.lower(), raw_tokens)
     filtered_tokens = filter(lambda t: t not in _stop_words, lowercase_tokens)
-    stemmed_tokens = map(_stem, filtered_tokens)
+    stemmed_tokens = map(_stemmer.stem, filtered_tokens)
     # normalized_tokens = map(replace_special_letters, stemmed_tokens)
     return stemmed_tokens
-
-
-def _stem(word: str) -> str:
-    return _stemmer.stem(word)
 
 
 def _replace_special_letters(word: str) -> str:

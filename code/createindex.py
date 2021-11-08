@@ -33,3 +33,6 @@ _indexing_questions = [
         'filter': lambda val: int(val)
     }
 ]
+
+if __name__ == '__main__':
+    InvertedIndex(_index_dir, _dataset_dir, load_from_disk=False, get_max_file_count=lambda: 1)
