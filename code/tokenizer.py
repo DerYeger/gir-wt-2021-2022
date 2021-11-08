@@ -1,13 +1,13 @@
 import re
 
 from nltk import download
-from nltk.stem import PorterStemmer
+from nltk.stem import LancasterStemmer
 from nltk.corpus import stopwords
 
 download('stopwords', quiet=True)
 _stop_words = stopwords.words('english')
 
-_stemmer = PorterStemmer()
+_stemmer = LancasterStemmer()
 
 
 def tokenize(text: str) -> [str]:
