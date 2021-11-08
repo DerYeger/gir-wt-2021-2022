@@ -1,4 +1,3 @@
-import os
 import time
 
 from bs4 import BeautifulSoup
@@ -7,7 +6,7 @@ from prompt_toolkit.validation import Validator, ValidationError
 from PyInquirer import prompt
 from query import query
 from scoring import scoring_modes
-from utils import clear_console, encoding, info
+from utils import clear_console, info
 
 
 def run_exploration_mode(index: InvertedIndex):
@@ -33,10 +32,7 @@ def _run_query(index: InvertedIndex, query_string: str, scoring_mode: str):
     choices = []
     for rank, (article_id, article_score) in enumerate(results):
         article_title = index.get_article_by_id(str(article_id))[0]
-        choices.append({
-            'key': article_id,
-            'name': f'{rank + 1}. {article_title} ({round(article_score, 4)}) [{article_id}]'
-        })
+        choices.append(f'{rank + 1}. {article_title} ({round(article_score, 4)}) [{article_id}]')
     print(
         f'\n{info(scoring_mode)} query for "{info(query_string)}" took {info(str(round(query_duration, 10)))} milliseconds\n')
     questions = [
