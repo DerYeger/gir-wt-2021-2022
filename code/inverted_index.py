@@ -82,9 +82,9 @@ class InvertedIndex:
     def __parse_file(self, file):
         soup = BeautifulSoup(file.read(), 'html.parser')
         for article in soup.find_all('article'):
-            self.__parse_article(article, file.name, soup.index(article))
+            self.__parse_article(article, file.name)
 
-    def __parse_article(self, article, file_name, file_index):
+    def __parse_article(self, article, file_name):
         article.find('revision').decompose()  # remove revision tag
         article_id: str = article.find('id').string  # get article id
         article_title: str = article.find('title').string  # get article id
@@ -105,7 +105,7 @@ class InvertedIndex:
                 self.__index[token] = []
             self.__index[token].append((int(article_id), frequency))
 
-        self.__article_table[article_id] = [article_title, file_name, file_index, len(article_tokens)]
+        self.__article_table[article_id] = [article_title, file_name, len(article_tokens)]
         self.__total_word_count += len(article_tokens)
 
     def __save_to_disk(self):

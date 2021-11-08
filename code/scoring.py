@@ -27,7 +27,7 @@ def _bm25(index: InvertedIndex, query_tokens: [str]):
                 article_scores[id_string] = 0
             k = (1.2 + 2) / 2
             b = 0.75
-            word_count = index.get_article_by_id(id_string)[3]
+            word_count = index.get_article_by_id(id_string)[2]
             nominator = frequency * (k + 1)
             denominator = frequency + k * (1 - b + (b * (word_count / index.get_average_word_count())))
             article_scores[id_string] += token_idf * (nominator / denominator)
