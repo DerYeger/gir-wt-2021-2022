@@ -1,4 +1,5 @@
 import numpy as np
+
 from inverted_index import InvertedIndex
 
 scoring_modes = ['bm25', 'tf-idf']

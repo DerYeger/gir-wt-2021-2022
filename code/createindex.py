@@ -1,4 +1,5 @@
 import time
+
 from inverted_index import InvertedIndex
 from query import query
 

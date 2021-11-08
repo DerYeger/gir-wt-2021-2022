@@ -1,23 +1,23 @@
 import time
-from createindex import get_index
+
 from inverted_index import InvertedIndex
 from prompt_toolkit.validation import Validator, ValidationError
 from PyInquirer import prompt
 from query import query
 from scoring import scoring_modes
+from utils import info
 
 
-def run_exploration_mode():
-    index = get_index(load_from_disk=True)
+def run_exploration_mode(index: InvertedIndex):
     run_again = True
     while run_again:
-        print()
         answers = prompt(_questions)
         query_string = answers.get('query')
         scoring_mode = answers.get('scoring_mode')
         _run_query(index, query_string, scoring_mode)
         print()
         post_answers = prompt(_post_run_questions)
+        print()
         run_again = post_answers.get('run_again')
 
 
@@ -27,7 +27,7 @@ def _run_query(index: InvertedIndex, query_string: str, scoring_mode: str):
     query(index, query_string, scoring_mode)
     query_end_time = time.time_ns()
     query_duration = (query_end_time - query_start_time) / 1000000.0
-    print(f'--- Query took {query_duration} milliseconds ---')
+    print(f'--- Query took {info(str(query_duration))} milliseconds ---')
 
 
 class QueryValidator(Validator):

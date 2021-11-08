@@ -1,6 +1,7 @@
 from inverted_index import InvertedIndex
 from scoring import bm25, tf_idf
 from tokenizer import tokenize
+from utils import highlight
 
 
 def query(index: InvertedIndex, query_string: str, eval_type: str, silent=False):
@@ -10,5 +11,5 @@ def query(index: InvertedIndex, query_string: str, eval_type: str, silent=False)
     for rank, (article_id, article_score) in enumerate(sorted_results):
         article_title = index.get_article_by_id(str(article_id))[0]
         if not silent:
-            print(f'#{rank + 1} is article {article_id} with score {article_score} and title {article_title}')
+            print(f'{highlight(f"#{rank + 1}")} is article {highlight(article_id)} with score {highlight(article_score)} and title {highlight(article_title)}')
     return sorted_results

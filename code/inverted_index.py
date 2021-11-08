@@ -5,6 +5,7 @@ import time
 
 from bs4 import BeautifulSoup
 from tokenizer import tokenize
+from utils import path_color, info
 
 _encoding = 'utf_16'
 
@@ -25,12 +26,12 @@ class InvertedIndex:
         article_table_exists = os.path.exists(self.__article_table_path)
         average_word_count_exists = os.path.exists(self.__average_word_count_path)
         if not load_from_disk or not index_exists or not article_table_exists or not average_word_count_exists:
-            print(f'Indexing files from {files_path}')
+            print(f'Indexing files from {path_color(files_path)}')
             self.__parse_files(files_path, max_files)
             self.__save_to_disk()
             return
 
-        print(f'Restoring index from {disk_path}')
+        print(f'Restoring index from {path_color(disk_path)}')
         with codecs.open(self.__index_path, 'r', _encoding) as f:
             table = f.read()
             self.__index = set() if table == str(set()) else ast.literal_eval(table)
@@ -41,7 +42,7 @@ class InvertedIndex:
             value = f.read()
             self.__average_word_count = ast.literal_eval(value)
 
-        print(f'Loaded index of {self.get_article_count()} articles with {len(self.__index)} tokens')
+        print(f'Loaded index of {info(str(self.get_article_count()))} articles with {info(str(len(self.__index)))} tokens')
         self.__index_restored = True
 
     def get_average_word_count(self) -> int:
@@ -69,7 +70,7 @@ class InvertedIndex:
         for file_entry in os.listdir(path):
             if max_files == files_read:
                 return
-            print(f'--- File {file_entry} ---')
+            print(f'--- File {path_color(file_entry)} ---')
             with open(path + '/' + file_entry, encoding='utf8') as file:
                 self.__parse_file(file)
 
