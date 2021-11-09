@@ -15,7 +15,7 @@ class InvertedIndex:
         self.__article_table = {}
         self.__average_word_count = 0
         self.__total_word_count = 0
-        self.__index_path = disk_path + '/inverted_index.txt'
+        self.__index_path = disk_path + '/inverted_index.npy'
         self.__article_table_path = disk_path + '/article_table.txt'
         self.__average_word_count_path = disk_path + '/average_word_count.txt'
         self.__index_restored = False
@@ -30,9 +30,8 @@ class InvertedIndex:
             return
 
         print(f'Restoring index from {path_color(disk_path)}')
-        with codecs.open(self.__index_path, 'r', encoding) as f:
-            table = f.read()
-            self.__index = set() if table == str(set()) else ast.literal_eval(table)
+
+        self.__index = np.load(self.__index_path).item()
         with codecs.open(self.__article_table_path, 'r', encoding) as f:
             table = f.read()
             self.__article_table = set() if table == str(set()) else ast.literal_eval(table)
@@ -104,16 +103,15 @@ class InvertedIndex:
 
         for token, frequency in token_occurrences.items():
             if token not in self.__index:
-                self.__index[token] = []
-            self.__index[token].append(np.array([int(article_id), frequency]))
+                self.__index[token] = np.empty(shape=(0, 2), dtype=np.uint32)
+            self.__index[token] = np.vstack((self.__index[token], [int(article_id), frequency]))
 
         self.__article_table[article_id] = [article_title, file_name, len(article_tokens)]
         self.__total_word_count += len(article_tokens)
 
     def __save_to_disk(self):
         os.makedirs(os.path.dirname(self.__article_table_path), exist_ok=True)
-        with codecs.open(self.__index_path, 'w+', encoding) as f:
-            f.write(str(self.__index))
+        np.savez(self.__index_path, self.__index)
         with codecs.open(self.__article_table_path, 'w+', encoding) as f:
             f.write(str(self.__article_table))
         with codecs.open(self.__average_word_count_path, 'w+', encoding) as f:
