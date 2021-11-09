@@ -1,5 +1,6 @@
 import ast
 import codecs
+import numpy as np
 import os
 import time
 
@@ -67,13 +68,13 @@ class InvertedIndex:
         file_entries = os.listdir(path)
         if max_files >= 0:
             file_entries = file_entries[:max_files]
-        file_paths = map(lambda entry: path + '/' + entry, file_entries)
+        file_paths = list(map(lambda entry: path + '/' + entry, file_entries))
         for file_path in file_paths:
             self.__parse_file(file_path)
         self.__average_word_count = self.__total_word_count / len(self.__article_table)
         end_time = time.time()
         print(
-            f'Indexed {info(str(self.get_article_count()))} articles of {info(str(len(file_paths)))} in {info(str(round(end_time - start_time, 2)))} seconds'
+            f'Indexed {info(str(self.get_article_count()))} articles of {info(str(len(file_paths)))} in {info(str(round(end_time - start_time, 2)))} seconds '
         )
 
     def __parse_file(self, file_path):
@@ -104,7 +105,7 @@ class InvertedIndex:
         for token, frequency in token_occurrences.items():
             if token not in self.__index:
                 self.__index[token] = []
-            self.__index[token].append((int(article_id), frequency))
+            self.__index[token].append(np.array([int(article_id), frequency]))
 
         self.__article_table[article_id] = [article_title, file_name, len(article_tokens)]
         self.__total_word_count += len(article_tokens)
