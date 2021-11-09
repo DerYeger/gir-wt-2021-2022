@@ -31,7 +31,7 @@ class InvertedIndex:
 
         print(f'Restoring index from {path_color(disk_path)}')
 
-        self.__index = np.load(self.__index_path).item()
+        self.__index = np.load(self.__index_path, allow_pickle=True).item()
         with codecs.open(self.__article_table_path, 'r', encoding) as f:
             table = f.read()
             self.__article_table = set() if table == str(set()) else ast.literal_eval(table)
@@ -73,7 +73,7 @@ class InvertedIndex:
         self.__average_word_count = self.__total_word_count / len(self.__article_table)
         end_time = time.time()
         print(
-            f'Indexed {info(str(self.get_article_count()))} articles of {info(str(len(file_paths)))} in {info(str(round(end_time - start_time, 2)))} seconds '
+            f'Indexed {info(str(self.get_article_count()))} article(s) of {info(str(len(file_paths)))} file(s) in {info(str(round(end_time - start_time, 2)))} seconds '
         )
 
     def __parse_file(self, file_path):
@@ -87,8 +87,8 @@ class InvertedIndex:
 
     def __parse_article(self, article, file_name):
         article.find('revision').decompose()  # remove revision tag
-        article_id: str = article.find('id').string  # get article id
-        article_title: str = article.find('title').string  # get article id
+        article_id: str = str(article.find('id').string)  # get article id
+        article_title: str = str(article.find('title').string)  # get article id
 
         article_content = ' '.join([article_title, _get_categories(article), _get_body(article)])
         article_tokens = tokenize(article_content)
@@ -111,7 +111,7 @@ class InvertedIndex:
 
     def __save_to_disk(self):
         os.makedirs(os.path.dirname(self.__article_table_path), exist_ok=True)
-        np.savez(self.__index_path, self.__index)
+        np.save(self.__index_path, self.__index)
         with codecs.open(self.__article_table_path, 'w+', encoding) as f:
             f.write(str(self.__article_table))
         with codecs.open(self.__average_word_count_path, 'w+', encoding) as f:
@@ -119,11 +119,11 @@ class InvertedIndex:
 
 
 def _get_categories(article) -> str:
-    return ' '.join(map(lambda category: category.string, article.find_all('category')))
+    return ' '.join(map(lambda category: str(category.string), article.find_all('category')))
 
 
 def _get_body(article) -> str:
     article_body = article.find('bdy')
     if article_body is None:
         return ''
-    return article_body.string
+    return str(article_body.string)
