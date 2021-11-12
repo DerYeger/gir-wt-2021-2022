@@ -1,5 +1,6 @@
 import ast
 import codecs
+import numpy as np
 import os
 import time
 
@@ -14,7 +15,7 @@ class InvertedIndex:
         self.__article_table = {}
         self.__average_word_count = 0
         self.__total_word_count = 0
-        self.__index_path = disk_path + '/inverted_index.txt'
+        self.__index_path = disk_path + '/inverted_index.npy'
         self.__article_table_path = disk_path + '/article_table.txt'
         self.__average_word_count_path = disk_path + '/average_word_count.txt'
         self.__index_restored = False
@@ -29,9 +30,8 @@ class InvertedIndex:
             return
 
         print(f'Restoring index from {path_color(disk_path)}')
-        with codecs.open(self.__index_path, 'r', encoding) as f:
-            table = f.read()
-            self.__index = set() if table == str(set()) else ast.literal_eval(table)
+
+        self.__index = np.load(self.__index_path, allow_pickle=True).item()
         with codecs.open(self.__article_table_path, 'r', encoding) as f:
             table = f.read()
             self.__article_table = set() if table == str(set()) else ast.literal_eval(table)
@@ -67,13 +67,13 @@ class InvertedIndex:
         file_entries = os.listdir(path)
         if max_files >= 0:
             file_entries = file_entries[:max_files]
-        file_paths = map(lambda entry: path + '/' + entry, file_entries)
+        file_paths = list(map(lambda entry: path + '/' + entry, file_entries))
         for file_path in file_paths:
             self.__parse_file(file_path)
         self.__average_word_count = self.__total_word_count / len(self.__article_table)
         end_time = time.time()
         print(
-            f'Indexed {info(str(self.get_article_count()))} articles of {info(str(len(file_paths)))} in {info(str(round(end_time - start_time, 2)))} seconds'
+            f'Indexed {info(str(self.get_article_count()))} article(s) of {info(str(len(file_paths)))} file(s) in {info(str(round(end_time - start_time, 2)))} seconds '
         )
 
     def __parse_file(self, file_path):
@@ -87,8 +87,8 @@ class InvertedIndex:
 
     def __parse_article(self, article, file_name):
         article.find('revision').decompose()  # remove revision tag
-        article_id: str = article.find('id').string  # get article id
-        article_title: str = article.find('title').string  # get article id
+        article_id: str = str(article.find('id').string)  # get article id
+        article_title: str = str(article.find('title').string)  # get article id
 
         article_content = ' '.join([article_title, _get_categories(article), _get_body(article)])
         article_tokens = tokenize(article_content)
@@ -103,16 +103,15 @@ class InvertedIndex:
 
         for token, frequency in token_occurrences.items():
             if token not in self.__index:
-                self.__index[token] = []
-            self.__index[token].append((int(article_id), frequency))
+                self.__index[token] = np.empty(shape=(0, 2), dtype=np.uint32)
+            self.__index[token] = np.vstack((self.__index[token], [int(article_id), frequency]))
 
         self.__article_table[article_id] = [article_title, file_name, len(article_tokens)]
         self.__total_word_count += len(article_tokens)
 
     def __save_to_disk(self):
         os.makedirs(os.path.dirname(self.__article_table_path), exist_ok=True)
-        with codecs.open(self.__index_path, 'w+', encoding) as f:
-            f.write(str(self.__index))
+        np.save(self.__index_path, self.__index)
         with codecs.open(self.__article_table_path, 'w+', encoding) as f:
             f.write(str(self.__article_table))
         with codecs.open(self.__average_word_count_path, 'w+', encoding) as f:
@@ -120,11 +119,11 @@ class InvertedIndex:
 
 
 def _get_categories(article) -> str:
-    return ' '.join(map(lambda category: category.string, article.find_all('category')))
+    return ' '.join(map(lambda category: str(category.string), article.find_all('category')))
 
 
 def _get_body(article) -> str:
     article_body = article.find('bdy')
     if article_body is None:
         return ''
-    return article_body.string
+    return str(article_body.string)

@@ -49,7 +49,7 @@ def _run_query(index: InvertedIndex, query_string: str, scoring_mode: str):
         return
     answers = prompt(questions)
     selection = answers.get('selection')
-    if selection is return_choice:
+    if selection is return_choice or selection is None:
         return
     article_id = selection[selection.rfind('[') + 1: selection.rfind(']')]
     print_article_content(index, article_id)
