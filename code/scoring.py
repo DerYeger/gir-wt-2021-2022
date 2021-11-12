@@ -19,14 +19,14 @@ def score(index: InvertedIndex, query_tokens: [str], eval_type: str) -> dict:
 
 def _bm25(index: InvertedIndex, query_tokens: [str]):
     article_scores = {}
+    k = (1.2 + 2) / 2
+    b = 0.75
     for token in query_tokens:
         token_idf = _idf(index, token)
         for (article_id, frequency) in index.get_entries_for_token(token):
             id_string = str(article_id)
             if id_string not in article_scores:
                 article_scores[id_string] = 0
-            k = (1.2 + 2) / 2
-            b = 0.75
             word_count = index.get_article_by_id(id_string)[2]
             nominator = frequency * (k + 1)
             denominator = frequency + k * (1 - b + (b * (word_count / index.get_average_word_count())))
