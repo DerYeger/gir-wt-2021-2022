@@ -8,7 +8,7 @@ class Topic:
         self.phrase_title = phrase_title
         self.description = description
         self.narrative = narrative
-        parts = [self.title, self.phrase_title, self.description, self.narrative]
+        parts = [self.title]  # , self.phrase_title, self.description, self.narrative]
         self.query = ' '.join(filter(None, parts))
 
 
