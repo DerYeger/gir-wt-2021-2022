@@ -13,13 +13,10 @@ _stemmer = LancasterStemmer()
 def tokenize(text: str) -> [str]:
     """
     :param text: a text string
-    :return: a tokenized string with preprocessing (e.g. stemming, stopword removal, ...) applied
+    :return: an array of tokens with preprocessing (e.g. stemming, stopword removal, ...) applied
     """
-    # remove double spaces, tabs and special chars
-    clean_text: str = ' '.join(re.sub(r'[,.;:?/(){}\[\]\-‑|_+=\'’`"”“!@#$%^&*<>]', ' ', text).strip().split())
-    lowercase_text = clean_text.lower()
-    # split a punctuations and spaces etc.
-    raw_tokens: [str] = filter(None, re.split(r'[\s\n]', lowercase_text))
+    # replace non-word chars with spaces and split at spaces
+    raw_tokens: [str] = re.sub(r'[\Wˆ_]+', ' ', text).strip().lower().split()
     filtered_tokens = filter(lambda t: t not in _stop_words, raw_tokens)
     stemmed_tokens = map(_stemmer.stem, filtered_tokens)
     # normalized_tokens = map(replace_special_letters, stemmed_tokens)

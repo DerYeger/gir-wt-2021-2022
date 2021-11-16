@@ -1,6 +1,7 @@
 from inverted_index import InvertedIndex
 from prompt_toolkit.validation import Validator, ValidationError
 from PyInquirer import prompt
+from tokenizer import tokenize
 
 _index_dir: str = './tables'
 _dataset_dir: str = './dataset/articles'
@@ -33,6 +34,11 @@ _indexing_questions = [
         'filter': lambda val: int(val)
     }
 ]
+
+
+def text2token(text: str) -> [str]:
+    return list(tokenize(text))
+
 
 if __name__ == '__main__':
     InvertedIndex(_index_dir, _dataset_dir, load_from_disk=False, get_max_file_count=lambda: 3)
