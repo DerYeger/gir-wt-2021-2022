@@ -17,10 +17,10 @@ def tokenize(text: str) -> [str]:
     """
     # remove double spaces, tabs and special chars
     clean_text: str = ' '.join(re.sub(r'[,.;:?/(){}\[\]\-‑|_+=\'’`"”“!@#$%^&*<>]', ' ', text).strip().split())
+    lowercase_text = clean_text.lower()
     # split a punctuations and spaces etc.
-    raw_tokens: [str] = filter(None, re.split(r'[\s\n]', clean_text))
-    lowercase_tokens = map(lambda t: t.lower(), raw_tokens)
-    filtered_tokens = filter(lambda t: t not in _stop_words, lowercase_tokens)
+    raw_tokens: [str] = filter(None, re.split(r'[\s\n]', lowercase_text))
+    filtered_tokens = filter(lambda t: t not in _stop_words, raw_tokens)
     stemmed_tokens = map(_stemmer.stem, filtered_tokens)
     # normalized_tokens = map(replace_special_letters, stemmed_tokens)
     return stemmed_tokens
