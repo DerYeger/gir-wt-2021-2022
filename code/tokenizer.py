@@ -1,14 +1,15 @@
 import re
 
 from nltk import download
-from nltk.stem import LancasterStemmer, StemmerI
+from nltk.stem import SnowballStemmer, StemmerI
 from nltk.corpus import stopwords
-from typing import List
+from typing import Dict, List
 
 download('stopwords', quiet=True)
 _stop_words: List[str] = stopwords.words('english')
 
-_stemmer: StemmerI = LancasterStemmer()
+_stemmer: StemmerI = SnowballStemmer('english')
+_stemmer_cache: Dict[str, str] = {}
 
 
 def tokenize(text: str) -> List[str]:
@@ -19,9 +20,15 @@ def tokenize(text: str) -> List[str]:
     # replace non-word chars with spaces and split at spaces
     raw_tokens: List[str] = re.sub(r'[\Wˆ_]+', ' ', text).strip().lower().split()
     filtered_tokens: filter = filter(lambda t: t not in _stop_words, raw_tokens)
-    stemmed_tokens: map = map(_stemmer.stem, filtered_tokens)
+    stemmed_tokens: map = map(_stem, filtered_tokens)
     # normalized_tokens = map(replace_special_letters, stemmed_tokens)
     return list(stemmed_tokens)
+
+
+def _stem(word: str) -> str:
+    if word not in _stemmer_cache:
+        _stemmer_cache[word] = _stemmer.stem(word)
+    return _stemmer_cache[word]
 
 
 def _replace_special_letters(word: str) -> str:
