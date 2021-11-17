@@ -6,16 +6,16 @@ import time
 
 from bs4 import BeautifulSoup
 from tokenizer import tokenize
-from typing import Callable
+from typing import Callable, Union, Tuple
 from utils import encoding, info, path_color
 
 
 class InvertedIndex:
-    __index: dict[str, any]
+    __index: dict[str, [(int, int)]]
 
     def __init__(self, disk_path: str, files_path: str, load_from_disk: bool, get_max_file_count: Callable[[], int]):
         self.__index = {}
-        self.__article_table: dict[int, any] = {}
+        self.__article_table: dict[int, Tuple[str, str, int]] = {}
         self.__average_word_count: float = 0
         self.__total_word_count: int = 0
         self.__index_path: str = disk_path + '/inverted_index.npy'
@@ -55,7 +55,7 @@ class InvertedIndex:
             return self.__index[token]
         return np.empty(shape=(0, 2), dtype=np.uint32)
 
-    def get_article_by_id(self, article_id: str):
+    def get_article_by_id(self, article_id: str) -> Union[Tuple[str, str, int], None]:
         if article_id in self.__article_table:
             return self.__article_table[article_id]
         return None
@@ -107,7 +107,7 @@ class InvertedIndex:
                 self.__index[token] = np.empty(shape=(0, 2), dtype=np.uint32)
             self.__index[token] = np.vstack((self.__index[token], [article_id, frequency]))
 
-        self.__article_table[article_id] = [article_title, file_name, len(article_tokens)]
+        self.__article_table[article_id] = (article_title, file_name, len(article_tokens))
         self.__total_word_count += len(article_tokens)
 
     def __save_to_disk(self):

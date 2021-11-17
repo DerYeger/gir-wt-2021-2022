@@ -26,7 +26,7 @@ def _bm25(index: InvertedIndex, query_tokens: list[str]) -> dict[int, float]:
         for (article_id, frequency) in index.get_entries_for_token(token):
             if article_id not in article_scores:
                 article_scores[article_id] = 0
-            word_count: int = index.get_article_by_id(article_id)[2]
+            word_count = index.get_article_by_id(article_id)[2]
             nominator: float = frequency * (k + 1)
             denominator: float = frequency + k * (1 - b + (b * (word_count / index.get_average_word_count())))
             article_scores[article_id] += token_idf * (nominator / denominator)
