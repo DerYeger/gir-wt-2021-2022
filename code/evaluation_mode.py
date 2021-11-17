@@ -7,7 +7,7 @@ from inverted_index import InvertedIndex
 from query import query
 from scoring import bm25_name, tf_idf_name
 from topic import parse_topics_file, Topic
-from typing import List
+from typing import List, Tuple
 from utils import encoding, error, info, path_color
 
 
@@ -44,9 +44,9 @@ def _prepare_results_files(file_path: str):
 
 
 def _evaluate_topic(index: InvertedIndex, topic: Topic, eval_type: str, result_file):
-    results: List[(str, float)] = query(index, topic.query, eval_type)
-    for rank, result in enumerate(results):
-        result_file.write(f'{topic.topic_id} Q0 {result[0]} {rank + 1} {result[1]} {eval_type}\n')
+    results: List[Tuple[int, float]] = query(index, topic.query, eval_type)
+    for rank, (article_id, score) in enumerate(results):
+        result_file.write(f'{topic.topic_id} Q0 {article_id} {rank + 1} {score} {eval_type}\n')
 
 
 def _trec_eval_is_available() -> bool:

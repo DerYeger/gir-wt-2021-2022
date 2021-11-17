@@ -55,7 +55,7 @@ class InvertedIndex:
             return self.__index[token]
         return np.empty(shape=(0, 2), dtype=np.uint32)
 
-    def get_article_by_id(self, article_id: str) -> Union[Tuple[str, str, int], None]:
+    def get_article_by_id(self, article_id: int) -> Union[Tuple[str, str, int], None]:
         if article_id in self.__article_table:
             return self.__article_table[article_id]
         return None
