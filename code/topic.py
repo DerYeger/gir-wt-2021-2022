@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+from typing import List
 
 
 class Topic:
@@ -8,7 +9,7 @@ class Topic:
         self.phrase_title = phrase_title
         self.description = description
         self.narrative = narrative
-        parts: list[str] = [self.title]  # , self.phrase_title, self.description, self.narrative]
+        parts: List[str] = [self.title]  # , self.phrase_title, self.description, self.narrative]
         self.query = ' '.join(filter(None, parts))
 
 
@@ -21,7 +22,7 @@ def _parse_topic(topic_tag) -> Topic:
     return Topic(topic_id, title, phrase_title, description, narrative)
 
 
-def parse_topics_file(file_path) -> list[Topic]:
+def parse_topics_file(file_path) -> List[Topic]:
     with open(file_path, encoding='utf-8') as file:
         soup: BeautifulSoup = BeautifulSoup(file.read(), 'html.parser')
         return list(map(_parse_topic, soup.find_all('topic')))

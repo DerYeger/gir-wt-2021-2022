@@ -3,20 +3,21 @@ import re
 from nltk import download
 from nltk.stem import LancasterStemmer, StemmerI
 from nltk.corpus import stopwords
+from typing import List
 
 download('stopwords', quiet=True)
-_stop_words: list[str] = stopwords.words('english')
+_stop_words: List[str] = stopwords.words('english')
 
 _stemmer: StemmerI = LancasterStemmer()
 
 
-def tokenize(text: str) -> list[str]:
+def tokenize(text: str) -> List[str]:
     """
     :param text: a text string
     :return: an array of tokens with preprocessing (e.g. stemming, stopword removal, ...) applied
     """
     # replace non-word chars with spaces and split at spaces
-    raw_tokens: list[str] = re.sub(r'[\Wˆ_]+', ' ', text).strip().lower().split()
+    raw_tokens: List[str] = re.sub(r'[\Wˆ_]+', ' ', text).strip().lower().split()
     filtered_tokens: filter = filter(lambda t: t not in _stop_words, raw_tokens)
     stemmed_tokens: map = map(_stemmer.stem, filtered_tokens)
     # normalized_tokens = map(replace_special_letters, stemmed_tokens)

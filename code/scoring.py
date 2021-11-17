@@ -1,14 +1,15 @@
 import numpy as np
 
 from inverted_index import InvertedIndex
+from typing import Dict, List
 
 bm25_name = 'BM25'
 tf_idf_name = 'TF-IDF'
 
-scoring_modes: list[str] = [bm25_name, tf_idf_name]
+scoring_modes: List[str] = [bm25_name, tf_idf_name]
 
 
-def score(index: InvertedIndex, query_tokens: list[str], eval_type: str) -> dict[int, float]:
+def score(index: InvertedIndex, query_tokens: List[str], eval_type: str) -> Dict[int, float]:
     if eval_type is bm25_name:
         return _bm25(index, query_tokens)
     elif eval_type is tf_idf_name:
@@ -17,8 +18,8 @@ def score(index: InvertedIndex, query_tokens: list[str], eval_type: str) -> dict
         return {}
 
 
-def _bm25(index: InvertedIndex, query_tokens: list[str]) -> dict[int, float]:
-    article_scores: dict[int, float] = {}
+def _bm25(index: InvertedIndex, query_tokens: List[str]) -> Dict[int, float]:
+    article_scores: Dict[int, float] = {}
     k = (1.2 + 2) / 2
     b = 0.75
     for token in query_tokens:
@@ -33,8 +34,8 @@ def _bm25(index: InvertedIndex, query_tokens: list[str]) -> dict[int, float]:
     return article_scores
 
 
-def _tf_idf(index: InvertedIndex, query_tokens: list[str]) -> dict[int, float]:
-    article_scores: dict[int, float] = {}
+def _tf_idf(index: InvertedIndex, query_tokens: List[str]) -> Dict[int, float]:
+    article_scores: Dict[int, float] = {}
     for token in query_tokens:
         token_idf: float = _idf(index, token)
         for (article_id, frequency) in index.get_entries_for_token(token):

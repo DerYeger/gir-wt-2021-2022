@@ -7,6 +7,7 @@ from inverted_index import InvertedIndex
 from query import query
 from scoring import bm25_name, tf_idf_name
 from topic import parse_topics_file, Topic
+from typing import List
 from utils import encoding, error, info, path_color
 
 
@@ -21,14 +22,14 @@ def _evaluate_topics(index: InvertedIndex, topics_file_path: str, results_dir: s
     _prepare_results_files(tf_idf_path)
     with codecs.open(bm25_path, 'a+', 'utf_8') as bm25_results_file, \
             codecs.open(tf_idf_path, 'a+', 'utf_8') as tf_idf_results_file:
-        topics: list[Topic] = parse_topics_file(topics_file_path)
+        topics: List[Topic] = parse_topics_file(topics_file_path)
         print(f'{info(str(len(topics)))} topics loaded')
         start: float = time.time_ns()
         for topic in topics:
             _evaluate_topic(index, topic, bm25_name, bm25_results_file)
             _evaluate_topic(index, topic, tf_idf_name, tf_idf_results_file)
         end: float = time.time_ns()
-        print(f'{info(str(len(topics)))} topics evaluated in {info(str(round((end - start) /  1000000.0, 2)))}ms\n')
+        print(f'{info(str(len(topics)))} topics evaluated in {info(str(round((end - start) / 1000000.0, 2)))}ms\n')
         if _trec_eval_is_available():
             _run_trec_eval(bm25_path)
             _run_trec_eval(tf_idf_path)
@@ -41,7 +42,7 @@ def _prepare_results_files(file_path: str):
 
 
 def _evaluate_topic(index: InvertedIndex, topic: Topic, eval_type: str, result_file):
-    results: list[(str, float)] = query(index, topic.query, eval_type)
+    results: List[(str, float)] = query(index, topic.query, eval_type)
     for rank, result in enumerate(results):
         result_file.write(f'{topic.topic_id} Q0 {result[0]} {rank + 1} {result[1]} {eval_type}\n')
 

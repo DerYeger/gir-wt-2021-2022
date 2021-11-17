@@ -12,17 +12,17 @@ def clear_console():
     os.system(command)
 
 
-def error(text) -> str:
-    return colored(text, 'red')
+def error(text: any) -> str:
+    return colored(str(text), 'red')
 
 
-def highlight(text) -> str:
+def highlight(text: any) -> str:
     return colored(str(text), 'cyan')
 
 
-def info(text: str) -> str:
-    return colored(text, 'green')
+def info(text: any) -> str:
+    return colored(str(text), 'green')
 
 
-def path_color(text: str) -> str:
-    return colored(text, 'blue')
+def path_color(text: any) -> str:
+    return colored(str(text), 'blue')

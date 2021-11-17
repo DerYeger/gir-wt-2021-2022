@@ -2,6 +2,7 @@ from inverted_index import InvertedIndex
 from prompt_toolkit.validation import Validator, ValidationError
 from PyInquirer import prompt
 from tokenizer import tokenize
+from typing import List
 
 _index_dir: str = './tables'
 _dataset_dir: str = './dataset/articles'
@@ -36,7 +37,7 @@ _indexing_questions = [
 ]
 
 
-def text2token(text: str) -> list[str]:
+def text2token(text: str) -> List[str]:
     return tokenize(text)
 
 

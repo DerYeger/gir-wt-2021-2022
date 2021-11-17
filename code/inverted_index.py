@@ -6,16 +6,16 @@ import time
 
 from bs4 import BeautifulSoup
 from tokenizer import tokenize
-from typing import Callable, Union, Tuple
+from typing import Callable, Dict, List, Tuple, Union
 from utils import encoding, info, path_color
 
 
 class InvertedIndex:
-    __index: dict[str, [(int, int)]]
+    __index: Dict[str, np.ndarray]
 
     def __init__(self, disk_path: str, files_path: str, load_from_disk: bool, get_max_file_count: Callable[[], int]):
         self.__index = {}
-        self.__article_table: dict[int, Tuple[str, str, int]] = {}
+        self.__article_table: Dict[int, Tuple[str, str, int]] = {}
         self.__average_word_count: float = 0
         self.__total_word_count: int = 0
         self.__index_path: str = disk_path + '/inverted_index.npy'
@@ -50,7 +50,7 @@ class InvertedIndex:
     def get_average_word_count(self) -> int:
         return self.__average_word_count
 
-    def get_entries_for_token(self, token: str) -> [(int, int)]:
+    def get_entries_for_token(self, token: str) -> np.ndarray:
         if token in self.__index:
             return self.__index[token]
         return np.empty(shape=(0, 2), dtype=np.uint32)
@@ -67,10 +67,10 @@ class InvertedIndex:
         if self.__index_restored:
             return
         start_time: float = time.time()
-        file_entries: list[str] = os.listdir(path)
+        file_entries: List[str] = os.listdir(path)
         if max_files >= 0:
             file_entries = file_entries[:max_files]
-        file_paths: list[str] = list(map(lambda entry: path + '/' + entry, file_entries))
+        file_paths: List[str] = list(map(lambda entry: path + '/' + entry, file_entries))
         for file_path in file_paths:
             self.__parse_file(file_path)
         self.__average_word_count = self.__total_word_count / len(self.__article_table)
@@ -94,9 +94,9 @@ class InvertedIndex:
         article_title: str = str(article.find('title').string)  # get article id
 
         article_content: str = ' '.join([article_title, _get_categories(article), _get_body(article)])
-        article_tokens: list[str] = tokenize(article_content)
+        article_tokens: List[str] = tokenize(article_content)
 
-        token_occurrences: dict[str, int] = {}
+        token_occurrences: Dict[str, int] = {}
         for token in article_tokens:
             if token not in token_occurrences:
                 token_occurrences[token] = 0

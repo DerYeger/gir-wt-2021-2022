@@ -6,13 +6,14 @@ from evaluation_mode import run_evaluation_mode
 from exploration_mode import run_exploration_mode
 from inverted_index import InvertedIndex
 from PyInquirer import prompt
+from typing import List
 from utils import clear_console
 
 
 def main():
     os.system('color')
     clear_console()
-    args: list[str] = sys.argv[1:]
+    args: List[str] = sys.argv[1:]
     load_from_disk = '-c' not in args and '--clean' not in args
     print()
     index: InvertedIndex = get_index(load_from_disk)
