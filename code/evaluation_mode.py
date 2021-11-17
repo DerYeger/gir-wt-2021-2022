@@ -23,14 +23,14 @@ def _evaluate_topics(index: InvertedIndex, topics_file_path: str, results_dir: s
     with codecs.open(bm25_path, 'a+', 'utf_8') as bm25_results_file, \
             codecs.open(tf_idf_path, 'a+', 'utf_8') as tf_idf_results_file:
         topics: List[Topic] = parse_topics_file(topics_file_path)
-        print(f'{info(str(len(topics)))} topics parsed')
+        print(f'{info(len(topics))} topics parsed')
         start: float = time.time_ns()
         for topic in topics:
             _evaluate_topic(index, topic, bm25_name, bm25_results_file)
             _evaluate_topic(index, topic, tf_idf_name, tf_idf_results_file)
         end: float = time.time_ns()
         print(
-            f'{info(str(len(topics)))} topics evaluated in {info(str(round((end - start) / 1000000.0, 2)))} milliseconds\n'
+            f'{info(len(topics))} topics evaluated in {info(round((end - start) / 1000000.0, 2))} milliseconds\n'
         )
         if _trec_eval_is_available():
             _run_trec_eval(bm25_path)

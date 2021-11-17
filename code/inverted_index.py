@@ -43,7 +43,7 @@ class InvertedIndex:
             self.__average_word_count = ast.literal_eval(value)
 
         print(
-            f'Loaded index of {info(str(self.get_article_count()))} articles with {info(str(len(self.__index)))} tokens'
+            f'Loaded index of {info(self.get_article_count())} articles with {info(len(self.__index))} tokens'
         )
         self.__index_restored = True
 
@@ -71,22 +71,23 @@ class InvertedIndex:
         if max_files >= 0:
             file_entries = file_entries[:max_files]
         file_paths: List[str] = list(map(lambda entry: path + '/' + entry, file_entries))
-        for file_path in file_paths:
-            self.__parse_file(file_path)
+        file_count: int = len(file_paths)
+        for index, file_path in enumerate(file_paths):
+            self.__parse_file(file_path, index, file_count)
         self.__average_word_count = self.__total_word_count / len(self.__article_table)
         end_time: float = time.time()
         print(
-            f'Indexed {info(str(self.get_article_count()))} article(s) of {info(str(len(file_paths)))} file(s) in {info(str(round(end_time - start_time, 2)))} seconds '
+            f'Indexed {info(self.get_article_count())} article(s) of {info(file_count)} file(s) in {info(round(end_time - start_time, 2))} seconds '
         )
 
-    def __parse_file(self, file_path: str):
+    def __parse_file(self, file_path: str, current: int, total: int):
         with open(file_path, encoding='utf-8') as file:
             soup: BeautifulSoup = BeautifulSoup(file.read(), 'html.parser')
             start_time: float = time.time()
             for article in soup.find_all('article'):
                 self.__parse_article(article, file.name)
             end_time: float = time.time()
-            print(f'Indexing {path_color(file.name)} took {info(str(round(end_time - start_time, 2)))} seconds')
+            print(f'{path_color(current)}/{path_color(total)}: Indexing {path_color(file.name)} took {info(round(end_time - start_time, 2))} seconds')
 
     def __parse_article(self, article, file_name: str):
         article.find('revision').decompose()  # remove revision tag

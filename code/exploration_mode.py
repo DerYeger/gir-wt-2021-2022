@@ -36,7 +36,7 @@ def _run_query(index: InvertedIndex, query_string: str, scoring_mode: str):
         article_title = index.get_article_by_id(article_id)[0]
         choices.append(f'{rank + 1}. {article_title} ({round(article_score, 4)}) [{article_id}]')
     print(
-        f'\n{info(scoring_mode)} query for "{info(query_string)}" took {info(str(round(query_duration, 2)))} milliseconds\n')
+        f'\n{info(scoring_mode)} query for "{info(query_string)}" took {info(round(query_duration, 2))} milliseconds\n')
     questions = [
         {
             'type': 'list',
