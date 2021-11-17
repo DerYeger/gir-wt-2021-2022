@@ -87,7 +87,7 @@ class InvertedIndex:
             for article in soup.find_all('article'):
                 self.__parse_article(article, file.name)
             end_time: float = time.time()
-            print(f'{path_color(current)}/{path_color(total)}: Indexing {path_color(file.name)} took {info(round(end_time - start_time, 2))} seconds')
+            print(f'{path_color(current + 1)}/{path_color(total)}: Indexing {path_color(file.name)} took {info(round(end_time - start_time, 2))} seconds')
 
     def __parse_article(self, article, file_name: str):
         article.find('revision').decompose()  # remove revision tag
