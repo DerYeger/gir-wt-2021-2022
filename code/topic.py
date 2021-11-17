@@ -2,7 +2,7 @@ from bs4 import BeautifulSoup
 
 
 class Topic:
-    def __init__(self, topic_id: str, title: str, phrase_title: str, description: str, narrative: str):
+    def __init__(self, topic_id: int, title: str, phrase_title: str, description: str, narrative: str):
         self.topic_id = topic_id
         self.title = title
         self.phrase_title = phrase_title
@@ -13,7 +13,7 @@ class Topic:
 
 
 def _parse_topic(topic_tag) -> Topic:
-    topic_id = str(topic_tag.attrs['id'])
+    topic_id = int(topic_tag.attrs['id'])
     title = str(topic_tag.find('title').string)
     phrase_title = str(topic_tag.find('phrasetitle').string)
     description = str(topic_tag.find('description').string)

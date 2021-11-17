@@ -15,7 +15,7 @@ class InvertedIndex:
 
     def __init__(self, disk_path: str, files_path: str, load_from_disk: bool, get_max_file_count: Callable[[], int]):
         self.__index = {}
-        self.__article_table: dict[str, any] = {}
+        self.__article_table: dict[int, any] = {}
         self.__average_word_count: float = 0
         self.__total_word_count: int = 0
         self.__index_path: str = disk_path + '/inverted_index.npy'
@@ -90,7 +90,7 @@ class InvertedIndex:
 
     def __parse_article(self, article, file_name: str):
         article.find('revision').decompose()  # remove revision tag
-        article_id: str = str(article.find('id').string)  # get article id
+        article_id: int = int(article.find('id').string)  # get article id
         article_title: str = str(article.find('title').string)  # get article id
 
         article_content: str = ' '.join([article_title, _get_categories(article), _get_body(article)])
@@ -105,7 +105,7 @@ class InvertedIndex:
         for token, frequency in token_occurrences.items():
             if token not in self.__index:
                 self.__index[token] = np.empty(shape=(0, 2), dtype=np.uint32)
-            self.__index[token] = np.vstack((self.__index[token], [int(article_id), frequency]))
+            self.__index[token] = np.vstack((self.__index[token], [article_id, frequency]))
 
         self.__article_table[article_id] = [article_title, file_name, len(article_tokens)]
         self.__total_word_count += len(article_tokens)

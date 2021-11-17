@@ -2,6 +2,7 @@ from inverted_index import InvertedIndex
 from prompt_toolkit.validation import Validator, ValidationError
 from PyInquirer import prompt
 from tokenizer import tokenize
+import query
 
 _index_dir: str = './tables'
 _dataset_dir: str = './dataset/articles'
