@@ -5,22 +5,22 @@ from nltk.stem import LancasterStemmer
 from nltk.corpus import stopwords
 
 download('stopwords', quiet=True)
-_stop_words = stopwords.words('english')
+_stop_words: list[str] = stopwords.words('english')
 
-_stemmer = LancasterStemmer()
+_stemmer: LancasterStemmer = LancasterStemmer()
 
 
-def tokenize(text: str) -> [str]:
+def tokenize(text: str) -> list[str]:
     """
     :param text: a text string
     :return: an array of tokens with preprocessing (e.g. stemming, stopword removal, ...) applied
     """
     # replace non-word chars with spaces and split at spaces
-    raw_tokens: [str] = re.sub(r'[\Wˆ_]+', ' ', text).strip().lower().split()
-    filtered_tokens = filter(lambda t: t not in _stop_words, raw_tokens)
-    stemmed_tokens = map(_stemmer.stem, filtered_tokens)
+    raw_tokens: list[str] = re.sub(r'[\Wˆ_]+', ' ', text).strip().lower().split()
+    filtered_tokens: filter = filter(lambda t: t not in _stop_words, raw_tokens)
+    stemmed_tokens: map = map(_stemmer.stem, filtered_tokens)
     # normalized_tokens = map(replace_special_letters, stemmed_tokens)
-    return stemmed_tokens
+    return list(stemmed_tokens)
 
 
 def _replace_special_letters(word: str) -> str:

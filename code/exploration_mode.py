@@ -12,8 +12,8 @@ from utils import clear_console, info
 def run_exploration_mode(index: InvertedIndex):
     while True:
         answers = prompt(_questions)
-        query_string = answers.get('query')
-        scoring_mode = answers.get('scoring_mode')
+        query_string: str = answers.get('query')
+        scoring_mode: str = answers.get('scoring_mode')
         _run_query(index, query_string, scoring_mode)
         print()
         post_answers = prompt(_post_run_questions)
@@ -24,9 +24,9 @@ def run_exploration_mode(index: InvertedIndex):
 
 
 def _run_query(index: InvertedIndex, query_string: str, scoring_mode: str):
-    query_start_time = time.time_ns()
-    results = query(index, query_string, scoring_mode)
-    query_end_time = time.time_ns()
+    query_start_time: float = time.time_ns()
+    results: list[(str, float)] = query(index, query_string, scoring_mode)
+    query_end_time: float = time.time_ns()
     query_duration = (query_end_time - query_start_time) / 1000000.0
 
     return_choice = '   Return'
@@ -57,10 +57,10 @@ def _run_query(index: InvertedIndex, query_string: str, scoring_mode: str):
 
 def print_article_content(index: InvertedIndex, article_id: str):
     article = index.get_article_by_id(article_id)
-    article_title = article[0]
-    article_path = article[1]
+    article_title: str = article[0]
+    article_path: str = article[1]
     with open(article_path, encoding='utf-8') as file:
-        soup = BeautifulSoup(file.read(), 'html.parser')
+        soup: BeautifulSoup = BeautifulSoup(file.read(), 'html.parser')
         article_tag = soup.find('id', text=article_id).parent.parent
         print(info(f'\n--- {article_title} ---'))
         print(article_tag.find('bdy').string)

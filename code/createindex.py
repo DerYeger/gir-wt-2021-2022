@@ -8,9 +8,9 @@ _dataset_dir: str = './dataset/articles'
 
 
 def get_index(load_from_disk) -> InvertedIndex:
-    def get_max_file_count():
+    def get_max_file_count() -> int:
         indexing_answers = prompt(_indexing_questions)
-        max_files = indexing_answers.get('max_files')
+        max_files: int = indexing_answers.get('max_files')
         print()
         return max_files
 
@@ -36,9 +36,9 @@ _indexing_questions = [
 ]
 
 
-def text2token(text: str) -> [str]:
-    return list(tokenize(text))
+def text2token(text: str) -> list[str]:
+    return tokenize(text)
 
 
 if __name__ == '__main__':
-    InvertedIndex(_index_dir, _dataset_dir, load_from_disk=False, get_max_file_count=lambda: 3)
+    InvertedIndex(_index_dir, _dataset_dir, load_from_disk=False, get_max_file_count=lambda: 1)

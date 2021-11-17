@@ -6,23 +6,26 @@ import time
 
 from bs4 import BeautifulSoup
 from tokenizer import tokenize
+from typing import Callable
 from utils import encoding, info, path_color
 
 
 class InvertedIndex:
-    def __init__(self, disk_path, files_path, load_from_disk, get_max_file_count):
-        self.__index = {}
-        self.__article_table = {}
-        self.__average_word_count = 0
-        self.__total_word_count = 0
-        self.__index_path = disk_path + '/inverted_index.npy'
-        self.__article_table_path = disk_path + '/article_table.txt'
-        self.__average_word_count_path = disk_path + '/average_word_count.txt'
-        self.__index_restored = False
+    __index: dict[str, any]
 
-        index_exists = os.path.exists(self.__index_path)
-        article_table_exists = os.path.exists(self.__article_table_path)
-        average_word_count_exists = os.path.exists(self.__average_word_count_path)
+    def __init__(self, disk_path: str, files_path: str, load_from_disk: bool, get_max_file_count: Callable[[], int]):
+        self.__index = {}
+        self.__article_table: dict[str, any] = {}
+        self.__average_word_count: float = 0
+        self.__total_word_count: int = 0
+        self.__index_path: str = disk_path + '/inverted_index.npy'
+        self.__article_table_path: str = disk_path + '/article_table.txt'
+        self.__average_word_count_path: str = disk_path + '/average_word_count.txt'
+        self.__index_restored: bool = False
+
+        index_exists: bool = os.path.exists(self.__index_path)
+        article_table_exists: bool = os.path.exists(self.__article_table_path)
+        average_word_count_exists: bool = os.path.exists(self.__average_word_count_path)
         if not load_from_disk or not index_exists or not article_table_exists or not average_word_count_exists:
             print(f'Indexing files from {path_color(files_path)}')
             self.__parse_files(files_path, get_max_file_count())
@@ -50,52 +53,50 @@ class InvertedIndex:
     def get_entries_for_token(self, token: str) -> [(int, int)]:
         if token in self.__index:
             return self.__index[token]
-        return []
+        return np.empty(shape=(0, 2), dtype=np.uint32)
 
     def get_article_by_id(self, article_id: str):
         if article_id in self.__article_table:
             return self.__article_table[article_id]
         return None
 
-    def get_article_count(self):
+    def get_article_count(self) -> int:
         return len(self.__article_table)
 
-    def __parse_files(self, path, max_files):
+    def __parse_files(self, path: str, max_files: int):
         if self.__index_restored:
             return
-        start_time = time.time()
-        file_entries = os.listdir(path)
+        start_time: float = time.time()
+        file_entries: list[str] = os.listdir(path)
         if max_files >= 0:
             file_entries = file_entries[:max_files]
-        file_paths = list(map(lambda entry: path + '/' + entry, file_entries))
+        file_paths: list[str] = list(map(lambda entry: path + '/' + entry, file_entries))
         for file_path in file_paths:
             self.__parse_file(file_path)
         self.__average_word_count = self.__total_word_count / len(self.__article_table)
-        end_time = time.time()
+        end_time: float = time.time()
         print(
             f'Indexed {info(str(self.get_article_count()))} article(s) of {info(str(len(file_paths)))} file(s) in {info(str(round(end_time - start_time, 2)))} seconds '
         )
 
-    def __parse_file(self, file_path):
+    def __parse_file(self, file_path: str):
         with open(file_path, encoding='utf-8') as file:
-            soup = BeautifulSoup(file.read(), 'html.parser')
-            start_time = time.time()
+            soup: BeautifulSoup = BeautifulSoup(file.read(), 'html.parser')
+            start_time: float = time.time()
             for article in soup.find_all('article'):
                 self.__parse_article(article, file.name)
-            end_time = time.time()
+            end_time: float = time.time()
             print(f'Indexing {path_color(file.name)} took {info(str(round(end_time - start_time, 2)))} seconds')
 
-    def __parse_article(self, article, file_name):
+    def __parse_article(self, article, file_name: str):
         article.find('revision').decompose()  # remove revision tag
         article_id: str = str(article.find('id').string)  # get article id
         article_title: str = str(article.find('title').string)  # get article id
 
-        article_content = ' '.join([article_title, _get_categories(article), _get_body(article)])
-        article_tokens = tokenize(article_content)
+        article_content: str = ' '.join([article_title, _get_categories(article), _get_body(article)])
+        article_tokens: list[str] = tokenize(article_content)
 
-        article_tokens: [str] = [article_id, *article_tokens]
-
-        token_occurrences = {}
+        token_occurrences: dict[str, int] = {}
         for token in article_tokens:
             if token not in token_occurrences:
                 token_occurrences[token] = 0

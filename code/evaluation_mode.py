@@ -14,13 +14,13 @@ def run_evaluation_mode(index: InvertedIndex):
 
 
 def _evaluate_topics(index: InvertedIndex, topics_file_path: str, results_dir: str):
-    bm25_path = f'{results_dir}/bm25-evaluation.txt'
+    bm25_path: str = f'{results_dir}/bm25-evaluation.txt'
     _prepare_results_files(bm25_path)
-    tf_idf_path = f'{results_dir}/tf-idf-evaluation.txt'
+    tf_idf_path: str = f'{results_dir}/tf-idf-evaluation.txt'
     _prepare_results_files(tf_idf_path)
     with codecs.open(bm25_path, 'a+', 'utf_8') as bm25_results_file, \
             codecs.open(tf_idf_path, 'a+', 'utf_8') as tf_idf_results_file:
-        topics = parse_topics_file(topics_file_path)
+        topics: list[Topic] = parse_topics_file(topics_file_path)
         print(f'{info(str(len(topics)))} topics loaded')
         for topic in topics:
             _evaluate_topic(index, topic, bm25_name, bm25_results_file)
@@ -38,7 +38,7 @@ def _prepare_results_files(file_path: str):
 
 
 def _evaluate_topic(index: InvertedIndex, topic: Topic, eval_type: str, result_file):
-    results = query(index, topic.query, eval_type)
+    results: list[(str, float)] = query(index, topic.query, eval_type)
     for rank, result in enumerate(results):
         result_file.write(f'{topic.topic_id} Q0 {result[0]} {rank + 1} {result[1]} {eval_type}\n')
 

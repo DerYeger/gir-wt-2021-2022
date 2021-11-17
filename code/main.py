@@ -4,6 +4,7 @@ import sys
 from createindex import get_index
 from evaluation_mode import run_evaluation_mode
 from exploration_mode import run_exploration_mode
+from inverted_index import InvertedIndex
 from PyInquirer import prompt
 from utils import clear_console
 
@@ -11,15 +12,15 @@ from utils import clear_console
 def main():
     os.system('color')
     clear_console()
-    args = sys.argv[1:]
+    args: list[str] = sys.argv[1:]
     load_from_disk = '-c' not in args and '--clean' not in args
     print()
-    index = get_index(load_from_disk)
+    index: InvertedIndex = get_index(load_from_disk)
     while True:
         print()
         answers = prompt(_questions)
         print()
-        action = answers.get('action')
+        action: str = answers.get('action')
         if action is _evaluation_action:
             run_evaluation_mode(index)
         elif action is _exploration_action:
