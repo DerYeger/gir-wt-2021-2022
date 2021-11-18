@@ -45,17 +45,4 @@ def _stem(word: str) -> str:
 
 
 def _token_filter(token: str) -> bool:
-    return token not in _stop_words and (len(token) > 2 or token.isnumeric())
-
-
-def _replace_special_letters(word: str) -> str:
-    return word \
-        .replace('ä', 'a').replace('â', 'a').replace('á', 'a').replace('à', 'a').replace('ã', 'a').replace('ȧ', 'a') \
-        .replace('ç', 'c') \
-        .replace('ë', 'e').replace('ê', 'e').replace('é', 'e').replace('è', 'e') \
-        .replace('ï', 'i').replace('î', 'i').replace('í', 'i').replace('ì', 'i') \
-        .replace('ñ', 'n') \
-        .replace('ö', 'o').replace('ô', 'o').replace('ó', 'o').replace('ò', 'o').replace('õ', 'o') \
-        .replace('ß', 'ss') \
-        .replace('ü', 'u').replace('û', 'u').replace('ú', 'u').replace('ù', 'u') \
-        .replace('ÿ', 'y')
+    return token not in _stop_words and (len(token) > 1 or token.isnumeric())
