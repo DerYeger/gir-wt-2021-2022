@@ -5,7 +5,7 @@ from tokenizer import tokenize
 from typing import List
 
 _index_dir: str = './tables'
-_dataset_dir: str = './dataset/articles'
+_dataset_dir: str = './dataset/wikipedia articles'
 
 
 def get_index(load_from_disk) -> InvertedIndex:
