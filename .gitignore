@@ -129,7 +129,8 @@ dmypy.json
 .pyre/
 
 /.idea/*
-/code/dataset/
+/code/dataset/*
+!/code/dataset/.gitkeep
 /code/retrieval_results/
 /code/tables/
 
