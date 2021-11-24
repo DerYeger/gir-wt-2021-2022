@@ -1,21 +1,39 @@
 \section{Evaluation Results}
 \label{sec:results}
 
-% TODO Evaluation: Describe method, run time for indexing, querying, number of indexed documents.
+The following results were obtained on a 2020 M1 MacBook Pro using Python 3.8.9 and trec\_eval 9.0.8 installed via Homebrew.
+
+\medskip
+
+Using the provided dataset, our program indexed 281782 articles of 553 files in 2300 seconds.
+% TODO Add accurate measurement
+
+\medskip
+
+In evaluation mode, our program parses the 107 topics of the provided dataset, once again using BeautifulSoup.
+For each parsed topic, it then queries the inverted index using the topics's title twice.
+Once using TFIDF scoring and a second time using BM25.
+For querying, only the title of a topic is used.
+The results of each query are stored in a file \verb|SCORING_evaluation.txt| in the \verb|code/retrieval_results| directory, where \verb|SCORING| is either \verb|tf-idf| or \verb|bm25|.
+
+Afterward, the program checks if the command \verb|trec_eval| is available on the path.
+If it is, the trec\_eval utility will be executed for each file mentioned above.
+Its output will be written to \verb|SCORING_evaluation.txt.eval.txt| in the same directory.
+Our evaluation results are pictured in \cref{table:results}.
+
+Using Python's built-in \verb|time| package, we measured an evaluation time of 44359.93 milliseconds \footnote{Excluding the execution of trec\_eval.}.
 
 \begin{table}[]
 \center
 \begin{tabular}{|l|l|l|l|l|}
-\hline
-      & mAP & NDCG@10 & P@10 & R@10 \\
-\hline
-TFIDF &     &         &      &      \\
-\hline
-BM25  &     &         &      &      \\
-\hline
+	\hline
+	      & mAP    & NDCG@10 & P@10   & R@10   \\
+	\hline
+	TFIDF & 0.1477 & 0.4967  & 0.45   & 0.0971 \\
+	\hline
+	BM25  & 0.2637 & 0.6006  & 0.5596 & 0.15   \\
+	\hline
 \end{tabular}
 \caption{Evaluation Results}
 \label{table:results}
 \end{table}
-
-% TODO Evaluation: Enter results
