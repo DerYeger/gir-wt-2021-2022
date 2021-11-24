@@ -1,4 +1,48 @@
 \section{How to run your Prototype}
 \label{sec:guide}
 
-% TODO Describe how to run the program, including evaluation and exploration mode.
+\subsection{Installation}
+
+To run the program, Python 3.8+ and the following libraries are required.
+
+\begin{itemize}
+  \item \href{https://numpy.org}{NumPy}
+  \item \href{https://github.com/CITGuru/PyInquirer}{PyInquirer}
+  \item \href{https://github.com/prompt-toolkit/python-prompt-toolkit}{prompt\_toolkit}
+  \item \href{https://www.crummy.com/software/BeautifulSoup/bs4/doc/}{BeautifulSoup}
+  \item \href{https://www.nltk.org}{NLTK}
+  \item \href{https://pypi.org/project/termcolor/}{termcolor}
+\end{itemize}
+
+Downloading the provided dataset and extracting its contents into the \verb|code/dataset| folder is neccessary.
+
+\subsection{Usage}
+
+Run \verb|python main.py| to start the program.
+If no save data is found in the \verb|code/tables| directory, the program will index the dataset.
+Otherwise, it will load the save data from the respective files.
+Alternatively, running \verb|python main.py -c| or \verb|python main.py --clean| will always create a fresh index.
+When a fresh index is being created, the program will ask how many files it is supposed to index.
+To index all files, \verb|-1| must be entered.
+
+\subsubsection{Evaluation mode}
+
+Select \textit{Evaluation} in the menu to run the evaluation mode.
+First, the program will parse the topics file \verb|code/dataset/topics.xml| and query the index for every topic twice using both *BM25* and *TFIDF* scoring methods.
+Afterward, it will attempt to run trec\_eval for the evaluation results and save the scores in separate files.
+
+% TODO Resolve duplication with previous description of evaluation mode.
+
+\subsubsection{Exploration mode}
+
+Selecting "Exploration" in the menu starts the exploration for exploration of the indexed documents with custom queries.
+After choosing a scoring method and entering a query, the program will present a list of results in descending order.
+Selecting an entry will print its contents.
+Alternatively, choosing "Return" will exit the results-view.
+
+\subsubsection{Other}
+
+
+Selecting "Reset index\" will trigger the creation of a new index without restarting the program.
+
+Selecting "Exit" will terminate the program.
