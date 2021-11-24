@@ -11,7 +11,7 @@ _stop_words: List[str] = stopwords.words('english')
 _stemmer: StemmerI = SnowballStemmer('english')
 _stemmer_cache: Dict[str, str] = {}
 
-_punctuation_pattern = re.compile(r'[.,():;\n\t\s \\|/?]')
+_punctuation_pattern = re.compile(r'[.,()\[\]{}:;\n\t\s \\|/?!]')
 _non_word_pattern = re.compile(r'[\Wˆ_]')
 
 
