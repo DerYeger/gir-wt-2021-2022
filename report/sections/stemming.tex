@@ -1,7 +1,7 @@
 \section{Stemming}
 \label{sec:stemming}
 
-The program is using \verb|nltk|'s \textit{SnowballStemmer}, configured for the English language.
+The program is using NLTK's \textit{SnowballStemmer}, configured for the English language.
 Using PyCharm's built-in Python profiler we noticed that stemming made up the majority of our execution time at about 60 to 65 percent \footnote{Exact percentage depends on the hardware of the executing machine.}.
 
 To improve our indexing and query time adopted a caching mechanism using a Python dictionary.

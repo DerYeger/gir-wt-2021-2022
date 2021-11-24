@@ -3,10 +3,10 @@
 
 \subsection{Data structure}
 
-Our inverted index is a Python dictionary using tokens as keys and numpy arrays as values.
-The numpy arrays are two dimensional, with each sub-array containing two elements, the id of an article and the number of occurrences of the given token in that article.
+The inverted index is a Python dictionary using tokens as keys and NumPy arrays as values.
+The NumPy arrays are two dimensional, with each sub-array containing two elements, the id of an article and the number of occurrences of the given token in that article.
 While we initially used plain Python lists with tuples, the memory usage was exceeding 16GB, which rendered the program unusable on the test machine.
-Using numpy arrays with the \verb|dtype| \verb|numpy.uint32| reduced the memory usage of the index to less than 3.6GB.
+Using NumPy arrays with the \verb|dtype| \verb|numpy.uint32| reduced the memory usage of the index to less than 3.6GB.
 As a tradeoff, inserting new entries is considerably slower than appending to Python lists.
 
 \subsection{Parsing}
@@ -22,7 +22,7 @@ While the filename enables targeted retrieval of an article, the word count is u
 
 \subsection{Saving and loading}
 
-To make re-indexing after program restarts optional, saving and loading of the inverted index and article metadata was implemented.
-The inverted index itself is being saved and loaded using numpy's \verb|save| and \verb|load| methods.
+To render re-indexing after program restarts optional, saving and loading of the inverted index and article metadata was implemented.
+The inverted index itself is being saved and loaded using NumPy's \verb|save| and \verb|load| methods.
 The resulting file \verb|inverted_index.npy| is about 2.02 GB big.
 Article metadata and average word count of all articles are saved alongside it in the \verb|code/tables| directory.

@@ -1,19 +1,20 @@
 \section{Tokenization}
 \label{sec:tokenization}
 
-Our tokenization approach consists of the following steps in the order they are listed.
+Tokenization is implemented as multiu-step-process.
+The individual steps are described in the following subsections.
 
-\paragraph{Normalization}
-Initially, we convert all characters to lowercase and strip leading or trailing whitespace.
+\subsection{Normalization}
+Initially, all characters are converted to lowercase and leading or trailing whitespace is removed from the input.
 This ensures that the tokenization is case-insensitive.
 
-\paragraph{Word extraction}
-The regular expression \verb=[.,()\[\]{}:;\n\t\s |/?!]= is used to split the normalized word at punctuation characters.
+\subsection{Word extraction}
+The regular expression \verb=[.,()\[\]{}:;\n\t\s |/?!]= is used to split the normalized input at punctuation characters.
 This approach leaves hyphenated words intact.
 For example, the input \verb|non-numeric word| results in the output \verb|non-numeric| and \verb|word|.
 
-\paragraph{Word processing}
-For each word created during the previous step, we perform the following actions.
+\subsection{Word processing}
+Each word created during the previous step is processed by performing the following actions.
 
 \begin{enumerate}
   \item Split the word at the hyphen character \verb|-|.
@@ -21,20 +22,16 @@ For each word created during the previous step, we perform the following actions
   \item For each item in the list, remove all non-word-characters using the regular expression \verb|[\Wˆ_]|.
 \end{enumerate}
 
-This method of handling hyphenation means that an input \verb|non-numeric| results in the output \verb|non|, \verb|numeric| and \verb|nonnumeric|.
-In contrast to a simple removal of hyphens in hyphenated words, this approach can also handle input that substitutes hyphens with whitespace.
+This method of handling hyphenation means that a hyphenated word results in multiple tokens.
+For example, \verb|non-numeric| results in the output \verb|non|, \verb|numeric| and \verb|nonnumeric|.
+In contrast to removal of hyphens in hyphenated words, this approach can handle input that substitutes hyphens with whitespace.
 
-\paragraph{Word filtering}
-We then continue by filtering the flattened list of lists obtained by executing the previous step.
+\subsection{World filtering}
+The list of processed words is then flattened and filtered.
 This filtering step removes all words that are either stopwords or non-numeric words with a length of less than 2.
 A list of stopwords is obtained using the library \verb|nltk|.
 Non-numeric words with a length of less than 2 are either stopwords ("I" or "a") or left-over artefacts from the word processing step.
 
-\paragraph{Stemming}
-Lastly, we stem the remaining words as described in \cref{sec:stemming}.
+\subsection{Stemming}
+Lastly, the remaining words are stemmed as described in \cref{sec:stemming}.
 The list of stemmed words is returned as the final tokens of an input string.
-
-
-
-
-% TODO Tokenization: Describe method
