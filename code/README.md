@@ -20,12 +20,6 @@ code
 │       │   1.xml
 │       │   2.xml
 │       │   ...
-│
-└───retrieval_results
-│   │   bm25-evaluation.txt
-│   │   bm25-evaluation.txt.eval.txt
-│   │   tf-idf-evaluation.txt
-│   └   tf-idf-evaluation.txt.eval.txt
 │   
 └───tables
     │   article_table.txt

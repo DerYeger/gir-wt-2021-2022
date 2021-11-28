@@ -12,7 +12,7 @@ from utils import encoding, error, info, path_color
 
 
 def run_evaluation_mode(index: InvertedIndex):
-    _evaluate_topics(index, './dataset/topics.xml', './retrieval_results')
+    _evaluate_topics(index, './dataset/topics.xml', '../retrieval_results')
 
 
 def _evaluate_topics(index: InvertedIndex, topics_file_path: str, results_dir: str):
