@@ -5,8 +5,7 @@ The following results were obtained on a 2020 M1 MacBook Pro with 16GB of RAM us
 
 \medskip
 
-Using the provided dataset, our program indexed 281782 articles of 553 files in 2300 seconds.
-% TODO Add accurate measurement
+Using the provided dataset, our program indexed 281782 articles of 553 files in 2294.86 seconds.
 
 \medskip
 
@@ -14,14 +13,15 @@ In evaluation mode, our program parses the 107 topics of the provided dataset, o
 For each parsed topic, it then queries the inverted index using the topics's title twice.
 Once using TFIDF scoring and a second time using BM25.
 For querying, only the title of a topic is used.
-The results of each query are stored in a file \verb|SCORING_evaluation.txt| in the \verb|code/retrieval_results| directory, where \verb|SCORING| is either \verb|tf-idf| or \verb|bm25|.
+The results of each query are stored in a file \verb|SCORING_evaluation.txt| in the \verb|retrieval_results| directory, where \verb|SCORING| is either \verb|tf-idf| or \verb|bm25|.
 
 Afterward, the program checks if the command \verb|trec_eval| is available on the path.
 If it is, the trec\_eval utility will be executed for each file mentioned above.
 Its output will be written to \verb|SCORING_evaluation.txt.eval.txt| in the same directory.
 Our evaluation results are pictured in \cref{table:results}.
 
-Using Python's built-in \verb|time| package, we measured an evaluation time of 44359.93 milliseconds \footnote{Excluding the execution of trec\_eval.}.
+Using Python's built-in \verb|time| package, we measured an evaluation time of 43122.22 milliseconds \footnote{Excluding the execution of trec\_eval.}.
+Since two queries are executed for each of the 107 topics, a query took about 201.51 milliseconds on average.
 
 \begin{table}[]
 \center
@@ -29,9 +29,9 @@ Using Python's built-in \verb|time| package, we measured an evaluation time of 4
 	\hline
 	      & mAP    & NDCG@10 & P@10   & R@10   \\
 	\hline
-	TFIDF & 0.1477 & 0.4967  & 0.45   & 0.0971 \\
+	TFIDF & 0.1477 & 0.4967  & 0.4500 & 0.0971 \\
 	\hline
-	BM25  & 0.2637 & 0.6006  & 0.5596 & 0.15   \\
+	BM25  & 0.2637 & 0.6006  & 0.5596 & 0.1500 \\
 	\hline
 \end{tabular}
 \caption{Evaluation Results}
