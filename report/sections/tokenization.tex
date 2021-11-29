@@ -1,7 +1,7 @@
 \section{Tokenization}
 \label{sec:tokenization}
 
-Tokenization is implemented as multiu-step-process.
+Tokenization is implemented as multi-step-process.
 The individual steps are described in the following subsections.
 
 \subsection{Normalization}
@@ -28,9 +28,9 @@ In contrast to removal of hyphens in hyphenated words, this approach can handle 
 
 \subsection{World filtering}
 The list of processed words is then flattened and filtered.
-This filtering step removes all words that are either stopwords or non-numeric words with a length of less than 2.
-A list of stopwords is obtained using the library \verb|nltk|.
-Non-numeric words with a length of less than 2 are either stopwords (\enquote{I} or \enquote{a}) or left-over artefacts from the word processing step.
+This filtering step removes all words that are either stop words or non-numeric words with a length of less than 2.
+A list of stop words is obtained using the library NLTK.
+Non-numeric words with a length of less than 2 are either stop words (\enquote{I} or \enquote{a}) or left-over artifacts from the word processing step.
 
 \subsection{Stemming}
 Lastly, the remaining words are stemmed as described in \cref{sec:stemming}.
