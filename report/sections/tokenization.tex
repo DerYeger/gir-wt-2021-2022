@@ -1,11 +1,11 @@
 \section{Tokenization}
 \label{sec:tokenization}
 
-Tokenization is implemented as multi-step-process.
+Tokenization is implemented as a multi-step process.
 The individual steps are described in the following subsections.
 
 \subsection{Normalization}
-Initially, all characters are converted to lowercase and leading or trailing whitespace is removed from the input.
+Initially, all characters are converted to lowercase, and leading or trailing whitespace is removed from the input.
 This ensures that the tokenization is case-insensitive.
 
 \subsection{Word extraction}
@@ -24,7 +24,7 @@ Each word created during the previous step is processed by performing the follow
 
 This method of handling hyphenation means that a hyphenated word results in multiple tokens.
 For example, \verb|non-numeric| results in the output \verb|non|, \verb|numeric| and \verb|nonnumeric|.
-In contrast to removal of hyphens in hyphenated words, this approach can handle input that substitutes hyphens with whitespace.
+In contrast to the removal of hyphens in hyphenated words, this approach can handle input that substitutes hyphens with whitespace.
 
 \subsection{World filtering}
 The list of processed words is then flattened and filtered.

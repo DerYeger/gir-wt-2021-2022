@@ -10,7 +10,7 @@ Using the provided dataset, our program indexed 281782 articles of 553 files in 
 \medskip
 
 In evaluation mode, our program parses the 107 topics of the provided dataset, once again using BeautifulSoup.
-For each parsed topic, it then queries the inverted index using the topics's title twice.
+For each parsed topic, it then queries the inverted index using the topic's title twice.
 Once using TFIDF scoring and a second time using BM25.
 For querying, only the title of a topic is used.
 The results of each query are stored in a file \verb|SCORING_evaluation.txt| in the \verb|retrieval_results| directory, where \verb|SCORING| is either \verb|tf-idf| or \verb|bm25|.
