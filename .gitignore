@@ -136,3 +136,8 @@ dmypy.json
 
 
 .DS_Store
+
+report/root.pdf
+
+/retrieval_results/*
+!/retrieval_results/.gitkeep

@@ -1,0 +1,48 @@
+\section{How to run your Prototype}
+\label{sec:guide}
+
+\subsection{Installation}
+
+To run the program, Python 3.8+ and the following libraries are required.
+
+\begin{itemize}
+  \item \href{https://numpy.org}{NumPy}
+  \item \href{https://github.com/CITGuru/PyInquirer}{PyInquirer}
+  \item \href{https://github.com/prompt-toolkit/python-prompt-toolkit}{prompt\_toolkit}
+  \item \href{https://www.crummy.com/software/BeautifulSoup/bs4/doc/}{BeautifulSoup}
+  \item \href{https://www.nltk.org}{NLTK}
+  \item \href{https://pypi.org/project/termcolor/}{termcolor}
+\end{itemize}
+
+Downloading the provided dataset and extracting its contents into the \verb|code/dataset| directory is necessary.
+
+\subsection{Usage}
+
+Running \verb|python main.py| will start the program.
+If no save data is found in the \verb|code/tables| directory, the program will create a new index for the dataset.
+Otherwise, it will load the saved data from the respective files.
+
+Alternatively, running \verb|python main.py -c| or \verb|python main.py --clean| will always create a fresh index.
+When a fresh index is being created, the program will ask how many files it is supposed to index.
+Entering \verb|-1| will result in all files being indexed.
+
+The menus of the CLI can be navigated using arrow keys.
+Selections can be confirmed with the enter key.
+
+\subsubsection{Evaluation mode}
+
+Select \enquote{Evaluation} in the menu to start the evaluation mode.
+The program will then run the evaluation mode fully automated, as described in \autoref{sec:results}.
+
+\subsubsection{Exploration mode}
+
+Selecting \enquote{Exploration} in the menu will launch the exploration mode for querying the indexed documents with custom search terms.
+After choosing a scoring method and entering a query, the program will present a list of results in descending order.
+Selecting an entry will print its contents.
+Alternatively, choosing \enquote{Return} will exit the results-view.
+
+\subsubsection{Other}
+
+Selecting \enquote{Reset index} will trigger the creation of a new index without restarting the program.
+
+Selecting \enquote{Exit} will terminate the program.

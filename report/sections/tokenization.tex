@@ -1,0 +1,37 @@
+\section{Tokenization}
+\label{sec:tokenization}
+
+Tokenization is implemented as a multi-step process.
+The individual steps are described in the following subsections.
+
+\subsection{Normalization}
+Initially, all characters are converted to lowercase, and leading or trailing whitespace is removed from the input.
+This ensures that the tokenization is case-insensitive.
+
+\subsection{Word extraction}
+The regular expression \verb=[.,()\[\]{}:;\n\t\s |/?!]= is used to split the normalized input at punctuation characters.
+This approach leaves hyphenated words intact.
+For example, the input \verb|non-numeric word| results in the output \verb|non-numeric| and \verb|word|.
+
+\subsection{Word processing}
+Each word created during the previous step is processed by performing the following actions.
+
+\begin{enumerate}
+  \item Split the word at the hyphen character \verb|-|.
+  \item Create a list including each part created by splitting at hyphenation, as well as the initial word.
+  \item For each item in the list, remove all non-word-characters using the regular expression \verb|[\Wˆ_]|.
+\end{enumerate}
+
+This method of handling hyphenation means that a hyphenated word results in multiple tokens.
+For example, \verb|non-numeric| results in the output \verb|non|, \verb|numeric| and \verb|nonnumeric|.
+In contrast to the removal of hyphens in hyphenated words, this approach can handle input that substitutes hyphens with whitespace.
+
+\subsection{World filtering}
+The list of processed words is then flattened and filtered.
+This filtering step removes all words that are either stop words or non-numeric words with a length of less than 2.
+A list of stop words is obtained using the library NLTK.
+Non-numeric words with a length of less than 2 are either stop words (\enquote{I} or \enquote{a}) or left-over artifacts from the word processing step.
+
+\subsection{Stemming}
+Lastly, the remaining words are stemmed as described in \cref{sec:stemming}.
+The list of stemmed words is returned as the final tokens of an input string.

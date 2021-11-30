@@ -1,0 +1,17 @@
+\section{Discussion of Results}
+\label{sec:discussion}
+
+The higher values of BM25 show that it is performing better than TFIDF across the four evaluated metrics.
+
+The difference in recall (R) indicates, that BM25 includes more relevant documents in the top 10 ranks.
+While the recall of both methods implies that there are, on average, between 85 and 90.29 percent of the top 10 relevant documents missing respectively, BM25's recall is about 54.64 percent better than TFIDF.
+
+In contrast, the precision (P) is much higher at 45 and 55.96 percent respectively.
+While the retrieved top 10 documents are not necessarily part of the top 10 relevant documents, this implies that, on average, at least four (five for BM25) of them are relevant regardless.
+
+The mean average precision (mAP), which sits much lower at 14.77 and 26.37 percent respectively, involves precision per rank.
+Its lower values compared to plain precision suggest that the implementation ranks some non-relevant documents higher than relevant documents.
+
+The normalized discounted cumulative gain (NDCG) also considers how relevant a document is, rather than treating relevancy in a boolean manner.
+This is the highest metric for both scoring methods at 49.67 and 60.06 percent respectively.
+Together with the previous observations, this suggests that the implementation is better at retrieving some highly relevant documents early on, rather than ranking relevant documents exclusively higher than non-relevant documents.

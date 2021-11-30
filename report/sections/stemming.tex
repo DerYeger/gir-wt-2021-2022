@@ -1,0 +1,9 @@
+\section{Stemming}
+\label{sec:stemming}
+
+The program is using NLTK's \textit{SnowballStemmer}, configured for the English language.
+Using PyCharm's built-in Python profiler we noticed that stemming made up the majority of our execution time at about 60 to 65 percent\footnote{Exact percentage depends on the hardware of the executing machine.}.
+
+To improve our indexing and query time adopted a caching mechanism using a Python dictionary.
+With words being used as keys and their stemmed version being the associated value, we were able to reduce the indexing time of a single document by up to 50 percent.
+While the dictionary does require additional memory, it is substantially smaller than the inverted index itself.
