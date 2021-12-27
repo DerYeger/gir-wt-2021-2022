@@ -238,3 +238,5 @@ cython_debug/
 
 /model/*
 !/model/.gitkeep
+
+/code/german/model.vec
