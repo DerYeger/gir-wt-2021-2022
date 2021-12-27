@@ -36,7 +36,15 @@ def get_texts_from_dataset() -> List[str]:
                 if 'text' in tweet:
                     texts.append(tweet['text'])
     print(f'Dataset loaded in {round(time.time() - start_time, 2)} seconds\n')
+    print_size_of_texts(texts)
     return texts
+
+
+def print_size_of_texts(texts: List[str]):
+    size = 0
+    for text in texts:
+        size += len(text.encode('utf-8'))
+    print(f'Dataset size: {round(size / (1024 * 1024 * 1024), 2)}GB')
 
 
 def train_model(texts: List[str]) -> Word2Vec:
