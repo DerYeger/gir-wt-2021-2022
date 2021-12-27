@@ -1,5 +1,6 @@
 import gensim
 import json
+import multiprocessing
 import os
 import time
 
@@ -35,7 +36,7 @@ def get_texts_from_dataset() -> List[str]:
             for tweet in tweets:
                 if 'text' in tweet:
                     texts.append(tweet['text'])
-    print(f'Dataset loaded in {round(time.time() - start_time, 2)} seconds\n')
+    print(f'Dataset loaded in {round(time.time() - start_time, 2)} seconds')
     print_size_of_texts(texts)
     return texts
 
@@ -44,18 +45,21 @@ def print_size_of_texts(texts: List[str]):
     size = 0
     for text in texts:
         size += len(text.encode('utf-8'))
-    print(f'Dataset size: {round(size / (1024 * 1024 * 1024), 2)}GB')
+    print(f'Dataset size: {round(size / (1024 * 1024 * 1024), 2)}GB\n')
 
 
 def train_model(texts: List[str]) -> Word2Vec:
     print('Training model')
+    num_threads = multiprocessing.cpu_count()
+    num_workers = 1 if num_threads <= 1 else num_threads - 1
+    print(f'{multiprocessing.cpu_count()} threads available. Using {num_workers}.')
     start_time = time.time()
     filters = [strip_tags, strip_punctuation, strip_multiple_whitespaces, strip_numeric, strip_short]
     texts_tokenized = [preprocess_string(text.lower(), filters) for text in texts]
 
     epochs = 10
-    german_model = gensim.models.Word2Vec(sentences=texts_tokenized, vector_size=100, window=5, min_count=1, epochs=epochs,
-                                          workers=12, callbacks=[ProgressLogger(epochs)])
+    german_model = gensim.models.Word2Vec(sentences=texts_tokenized, vector_size=100, window=5, min_count=1,
+                                          epochs=epochs, workers=num_workers, callbacks=[ProgressLogger(epochs)])
     print(f'Model trained in {round(time.time() - start_time, 2)} seconds\n')
     return german_model
 
