@@ -7,3 +7,5 @@
 ## Part 3
 
 Dataset from https://www.kaggle.com/rtatman/3-million-german-sentences/version/1?select=deu_news_2015_3M-sentences.txt.
+
+Actual results can vary because of random weight initialization of the training algorithm.
