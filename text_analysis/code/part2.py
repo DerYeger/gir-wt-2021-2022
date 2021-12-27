@@ -34,7 +34,7 @@ def prepare_text(text: str, include_stop_words: bool) -> List[str]:
 
 def vector_space_predictions(dataset: List[Tuple[float, List[str], List[str]]]) -> List[float]:
     results = []
-    for index, (ground_truth, text1, text2) in enumerate(dataset):
+    for (ground_truth, text1, text2) in dataset:
         vectors = TfidfVectorizer().fit_transform([' '.join(text1), ' '.join(text2)])
         prediction = cosine_similarity(vectors[0], vectors[1])[0][0]
         results.append(prediction)
@@ -43,11 +43,17 @@ def vector_space_predictions(dataset: List[Tuple[float, List[str], List[str]]]) 
 
 def mean_short_text_vector_predictions(dataset: List[Tuple[float, List[str], List[str]]]) -> List[float]:
     results = []
+    for (ground_truth, text1, text2) in dataset:
+        # TODO
+        results.append(ground_truth)
     return results
 
 
 def idf_short_text_vector_predictions(dataset: List[Tuple[float, List[str], List[str]]]) -> List[float]:
     results = []
+    for (ground_truth, text1, text2) in dataset:
+        # TODO
+        results.append(ground_truth)
     return results
 
 
@@ -60,10 +66,8 @@ def evaluate(name: str, dataset: List[Tuple[float, List[str], List[str]]], predi
 def evaluate_processing(include_stop_words: bool):
     dataset = load_dataset(include_stop_words)
     evaluate('Vector space', dataset, vector_space_predictions(dataset))
-    # TODO
-    # evaluate('Short text vector with mean average', dataset, mean_short_text_vector_predictions(dataset))
-    # TODO
-    # evaluate('Short text vector with weighted average using IDF', dataset, idf_short_text_vector_predictions(dataset))
+    evaluate('Short text vector with mean average', dataset, mean_short_text_vector_predictions(dataset))
+    evaluate('Short text vector with weighted average using IDF', dataset, idf_short_text_vector_predictions(dataset))
 
 
 def main():
