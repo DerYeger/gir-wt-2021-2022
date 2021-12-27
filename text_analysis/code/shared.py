@@ -2,7 +2,10 @@ import gensim
 import time
 
 from gensim.models import KeyedVectors
-from typing import Tuple
+from gensim.parsing.preprocessing import *
+from nltk import download
+from nltk.corpus import stopwords
+from typing import List, Tuple
 
 _english_model_path = '../model/wiki-news-300d-1M-subword.vec'
 _english_model = None
@@ -33,3 +36,22 @@ def get_three_most_similar(word: str, model: KeyedVectors):
 def get_cosine_similarity(pair: Tuple[str, str], model: KeyedVectors):
     result = model.similarity(pair[0], pair[1])
     print(f'cos_sim({pair[0]}, {pair[1]}) = {result}\n')
+
+
+_filters = [strip_tags, strip_punctuation, strip_multiple_whitespaces, strip_numeric, strip_short]
+
+
+def process_texts(texts: List[str]) -> List[List[str]]:
+    return [process_text(text) for text in texts]
+
+
+def process_text(text: str) -> [str]:
+    return preprocess_string(text.lower(), _filters)
+
+
+download('stopwords', quiet=True)
+_stop_words: List[str] = stopwords.words('english')
+
+
+def remove_stop_words(words: List[str]) -> List[str]:
+    return list(filter(lambda x: x not in _stop_words, words))

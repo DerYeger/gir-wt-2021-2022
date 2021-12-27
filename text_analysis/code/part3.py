@@ -3,10 +3,9 @@ import multiprocessing
 import os
 import time
 
-from gensim.models import KeyedVectors, Word2Vec
+from gensim.models import KeyedVectors
 from gensim.models.callbacks import CallbackAny2Vec
-from gensim.parsing.preprocessing import *
-from shared import get_three_most_similar
+from shared import get_three_most_similar, process_texts
 from typing import List
 
 _dataset_dir = './german/dataset'
@@ -87,11 +86,6 @@ def get_model() -> KeyedVectors:
         model = train_model(texts)
         save_model(model)
         return model
-
-
-def process_texts(texts: List[str]) -> List[str]:
-    filters = [strip_tags, strip_punctuation, strip_multiple_whitespaces, strip_numeric, strip_short]
-    return [preprocess_string(text.lower(), filters) for text in texts]
 
 
 def main():
