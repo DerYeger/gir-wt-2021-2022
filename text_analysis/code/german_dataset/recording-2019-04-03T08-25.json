@@ -1,0 +1,1290 @@
+[
+  {
+    "type": "retweet",
+    "id": "1113326632104812544",
+    "user": "982291181664075776",
+    "created_at": "2019-04-03T06:25:28+00:00",
+    "recorded_at": "2019-04-03T06:25:33.503715+00:00",
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [],
+    "urls": [],
+    "mentions": [
+      "BjoernHoecke"
+    ],
+    "mentioned_ids": [
+      "2784480231"
+    ],
+    "refers_to": "1113040760558026752"
+  },
+  {
+    "type": "retweet",
+    "id": "1113326639847489537",
+    "user": "550520724",
+    "created_at": "2019-04-03T06:25:30+00:00",
+    "recorded_at": "2019-04-03T06:25:35.335816+00:00",
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [
+      "CVPLenzburg",
+      "Klima",
+      "Energiestadt"
+    ],
+    "urls": [],
+    "mentions": [
+      "ChristinaBRoth"
+    ],
+    "mentioned_ids": [
+      "554934169"
+    ],
+    "refers_to": "1113147217114787841"
+  },
+  {
+    "type": "retweet",
+    "id": "1113326646369640448",
+    "user": "1149286345",
+    "created_at": "2019-04-03T06:25:31+00:00",
+    "recorded_at": "2019-04-03T06:25:36.897635+00:00",
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [
+      "OTD",
+      "WW2",
+      "HISTORY"
+    ],
+    "urls": [],
+    "mentions": [
+      "rgpoulussen"
+    ],
+    "mentioned_ids": [
+      "2785036354"
+    ],
+    "refers_to": "1113324965749768192"
+  },
+  {
+    "type": "retweet",
+    "id": "1113326649125285888",
+    "user": "469701779",
+    "created_at": "2019-04-03T06:25:32+00:00",
+    "recorded_at": "2019-04-03T06:25:37.562805+00:00",
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [
+      "Wetter",
+      "Eifel"
+    ],
+    "urls": [],
+    "mentions": [
+      "Kachelmannwettr"
+    ],
+    "mentioned_ids": [
+      "3131413991"
+    ],
+    "refers_to": "1113323076698157056"
+  },
+  {
+    "type": "retweet",
+    "id": "1113326650547212288",
+    "user": "73084245",
+    "created_at": "2019-04-03T06:25:32+00:00",
+    "recorded_at": "2019-04-03T06:25:37.884386+00:00",
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [],
+    "urls": [],
+    "mentions": [
+      "BettinaDanzl",
+      "Keepthatsmile",
+      "Nasobem_lyricum"
+    ],
+    "mentioned_ids": [
+      "2968274788",
+      "253421508",
+      "872844412954476545"
+    ],
+    "refers_to": "1111933871287926784"
+  },
+  {
+    "type": "retweet",
+    "id": "1113326657916604423",
+    "user": "967337414904688642",
+    "created_at": "2019-04-03T06:25:34+00:00",
+    "recorded_at": "2019-04-03T06:25:39.651516+00:00",
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [],
+    "urls": [],
+    "mentions": [
+      "krippmarie"
+    ],
+    "mentioned_ids": [
+      "1485176083"
+    ],
+    "refers_to": "1113110958422024193"
+  },
+  {
+    "type": "retweet",
+    "id": "1113326657962762245",
+    "user": "1065269542887280643",
+    "created_at": "2019-04-03T06:25:34+00:00",
+    "recorded_at": "2019-04-03T06:25:39.668511+00:00",
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [],
+    "urls": [
+      "https://t.co/qRjutz8KGv"
+    ],
+    "mentions": [
+      "BTSTurkey"
+    ],
+    "mentioned_ids": [
+      "1373932604"
+    ],
+    "refers_to": "1113322504448352256"
+  },
+  {
+    "type": "retweet",
+    "id": "1113326670403067904",
+    "user": "922198559742726144",
+    "created_at": "2019-04-03T06:25:37+00:00",
+    "recorded_at": "2019-04-03T06:25:42.659240+00:00",
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [
+      "BTS"
+    ],
+    "urls": [],
+    "mentions": [
+      "bangtan_germany"
+    ],
+    "mentioned_ids": [
+      "858996259218219008"
+    ],
+    "refers_to": "1113322458076127232"
+  },
+  {
+    "type": "user",
+    "id": "982291181664075776",
+    "screen_name": "torsten_luer",
+    "created_at": "2018-04-06T16:17:22+00:00",
+    "recorded_at": "2019-04-03T06:25:33.504164+00:00",
+    "location": "Deutschland",
+    "description": "Deutscher,Maler ,1Sohn +1Tochter ,1Enkeltochter, Beatles Fan , Konservativ Deutsch Denkend, Artikel 20,Abs.4 ist in Kraft getreten f\u00fcr mich, Ich werde Zensiert!",
+    "url": null,
+    "verified": false,
+    "lang": "de",
+    "followers": 1452,
+    "friends": 2645,
+    "listed": 5,
+    "favourites": 50020,
+    "statuses": 89294
+  },
+  {
+    "type": "user",
+    "id": "2784480231",
+    "screen_name": "BjoernHoecke",
+    "created_at": "2014-09-25T22:16:30+00:00",
+    "recorded_at": "2019-04-03T06:25:33.504572+00:00",
+    "location": "Erfurt, Deutschland",
+    "description": "Landessprecher und Fraktionsvorsitzender der AfD Th\u00fcringen",
+    "url": "http://www.facebook.com/Bjoern.Hoecke.AfD/",
+    "verified": true,
+    "lang": "de",
+    "followers": 22250,
+    "friends": 159,
+    "listed": 194,
+    "favourites": 167,
+    "statuses": 709
+  },
+  {
+    "type": "user",
+    "id": "838373444",
+    "screen_name": "Goennjamin",
+    "created_at": "2012-09-21T18:49:14+00:00",
+    "recorded_at": "2019-04-03T06:25:34.180140+00:00",
+    "location": "M\u00fcnchen/Giesing",
+    "description": "Der Einzig wahre G\u00f6nnjamin / Work @ Film & Fernsehen / Travel the World",
+    "url": null,
+    "verified": false,
+    "lang": "de",
+    "followers": 655,
+    "friends": 359,
+    "listed": 9,
+    "favourites": 23773,
+    "statuses": 18435
+  },
+  {
+    "type": "user",
+    "id": "550520724",
+    "screen_name": "ee_keller",
+    "created_at": "2012-04-10T20:54:23+00:00",
+    "recorded_at": "2019-04-03T06:25:35.336166+00:00",
+    "location": "Schweiz",
+    "description": null,
+    "url": null,
+    "verified": false,
+    "lang": "de",
+    "followers": 577,
+    "friends": 1014,
+    "listed": 45,
+    "favourites": 6400,
+    "statuses": 3471
+  },
+  {
+    "type": "user",
+    "id": "554934169",
+    "screen_name": "ChristinaBRoth",
+    "created_at": "2012-04-16T07:16:52+00:00",
+    "recorded_at": "2019-04-03T06:25:35.336571+00:00",
+    "location": "Lenzburg, Schweiz",
+    "description": "Unternehmerin im K\u00e4sehandel, Mutter von 3 T\u00f6chtern, \u00d6konomin und f\u00fcr einmal kein K\u00e4se: Nationalratskandidatin CVP, Kanton Aargau",
+    "url": "http://bachmann-roth.ch",
+    "verified": false,
+    "lang": "de",
+    "followers": 80,
+    "friends": 296,
+    "listed": 0,
+    "favourites": 49,
+    "statuses": 24
+  },
+  {
+    "type": "user",
+    "id": "113901884",
+    "screen_name": "atlas_haze",
+    "created_at": "2010-02-13T12:03:01+00:00",
+    "recorded_at": "2019-04-03T06:25:35.994792+00:00",
+    "location": null,
+    "description": "music blogger @whitetapes, food snapper http://instagram.com/adventureexe/, tweets in English and German",
+    "url": "https://www.instagram.com/atlashaze",
+    "verified": false,
+    "lang": "en",
+    "followers": 339,
+    "friends": 308,
+    "listed": 9,
+    "favourites": 4321,
+    "statuses": 24051
+  },
+  {
+    "type": "user",
+    "id": "720651555918213120",
+    "screen_name": "kingaaron48",
+    "created_at": "2016-04-14T16:34:54+00:00",
+    "recorded_at": "2019-04-03T06:25:36.080987+00:00",
+    "location": "Leverkusen, NRW",
+    "description": "\ud83c\uddea\ud83c\uddea \ud83c\udde6\ud83c\uddfa \ud83c\udde6\ud83c\uddf9 \ud83c\udde9\ud83c\uddea | 20yo big bad boi | instagram: https://t.co/90MfA9cmMF | twitch: https://t.co/IMKprq4Zlu | avi by @decapiteight | #oversizedhoodiegangforlife | \ud83d\udc46",
+    "url": "http://twitch.tv/kingaaron48",
+    "verified": false,
+    "lang": "de",
+    "followers": 87,
+    "friends": 341,
+    "listed": 0,
+    "favourites": 21897,
+    "statuses": 3958
+  },
+  {
+    "type": "user",
+    "id": "358952420",
+    "screen_name": "Kanal46com",
+    "created_at": "2011-08-20T19:44:17+00:00",
+    "recorded_at": "2019-04-03T06:25:36.305481+00:00",
+    "location": "Kahramanmara\u015f",
+    "description": "Kahramanmara\u015f Do\u011fru G\u00fcvenilir Y\u00fcrekli Haber Sitesi",
+    "url": "http://www.kanal46.com",
+    "verified": false,
+    "lang": "tr",
+    "followers": 4284,
+    "friends": 1440,
+    "listed": 6,
+    "favourites": 10,
+    "statuses": 27430
+  },
+  {
+    "type": "user",
+    "id": "944805086940794880",
+    "screen_name": "BSC_Hastedt",
+    "created_at": "2017-12-24T05:41:01+00:00",
+    "recorded_at": "2019-04-03T06:25:36.634410+00:00",
+    "location": "Bremen, Deutschland",
+    "description": "Offizielles Gezwitscher des Fu\u00dfballklubs BSC Hastedt. Zuhause in #Bremen, seit 2017/18 in der f\u00fcnftklassigen @StarkBremenLiga. Teilnehmer am @DFB_Pokal 2018/19.",
+    "url": "https://www.bsc-hastedt.de",
+    "verified": false,
+    "lang": "de",
+    "followers": 1088,
+    "friends": 94,
+    "listed": 8,
+    "favourites": 1017,
+    "statuses": 1650
+  },
+  {
+    "type": "user",
+    "id": "1149286345",
+    "screen_name": "huberchef",
+    "created_at": "2013-02-04T22:51:03+00:00",
+    "recorded_at": "2019-04-03T06:25:36.897979+00:00",
+    "location": "M4A3E8",
+    "description": null,
+    "url": null,
+    "verified": false,
+    "lang": "de",
+    "followers": 91,
+    "friends": 133,
+    "listed": 5,
+    "favourites": 49,
+    "statuses": 5240
+  },
+  {
+    "type": "user",
+    "id": "2785036354",
+    "screen_name": "rgpoulussen",
+    "created_at": "2014-09-26T05:58:07+00:00",
+    "recorded_at": "2019-04-03T06:25:36.898368+00:00",
+    "location": null,
+    "description": "\ud83c\uddf3\ud83c\uddf1 Documented Market Garden, chronologically, all events and all units, in detail. (DM, to order a copy.) \u2764\ufe0f IWM picture archive. https://t.co/0mHvkKk2Lj",
+    "url": null,
+    "verified": false,
+    "lang": "nl",
+    "followers": 4271,
+    "friends": 22,
+    "listed": 64,
+    "favourites": 38884,
+    "statuses": 28438
+  },
+  {
+    "type": "user",
+    "id": "469701779",
+    "screen_name": "AlexandraStrau",
+    "created_at": "2012-01-20T22:00:39+00:00",
+    "recorded_at": "2019-04-03T06:25:37.563169+00:00",
+    "location": "Deutschland",
+    "description": "Snooker-Verr\u00fcckte, #teamSelby  #teamMurphy  u.v.a.\nNatur-Tiere-Pflanzen, Katzen-auch wenn ich gerade keine mehr habe ( Zeitmangel )",
+    "url": null,
+    "verified": false,
+    "lang": "de",
+    "followers": 165,
+    "friends": 363,
+    "listed": 5,
+    "favourites": 45033,
+    "statuses": 26112
+  },
+  {
+    "type": "user",
+    "id": "3131413991",
+    "screen_name": "Kachelmannwettr",
+    "created_at": "2015-04-02T20:53:47+00:00",
+    "recorded_at": "2019-04-03T06:25:37.563582+00:00",
+    "location": "Sattel, Schwyz",
+    "description": "Ihr Wetter in HD twittern f\u00fcr Sie @Kachelmann, @frankwettert /FA, @clemens_grohs /CG, @pethinteregger /PH, @Fabian_Ruhnau /FR, @tornadoliste /TS",
+    "url": "http://www.kachelmannwetter.com",
+    "verified": false,
+    "lang": "de",
+    "followers": 80605,
+    "friends": 70,
+    "listed": 513,
+    "favourites": 56307,
+    "statuses": 75085
+  },
+  {
+    "type": "user",
+    "id": "73084245",
+    "screen_name": "beladinon",
+    "created_at": "2009-09-10T09:54:06+00:00",
+    "recorded_at": "2019-04-03T06:25:37.884731+00:00",
+    "location": "N\u00e4he Essen",
+    "description": "Aus die Herz von dat Ruhrpott. Herzmensch. Single. Cosplay - 3D Druck - Fotografiert. Chaotisch.",
+    "url": "http://favstar.fm/users/beladinon",
+    "verified": false,
+    "lang": "de",
+    "followers": 1165,
+    "friends": 1847,
+    "listed": 46,
+    "favourites": 20940,
+    "statuses": 21257
+  },
+  {
+    "type": "user",
+    "id": "2968274788",
+    "screen_name": "BettinaDanzl",
+    "created_at": "2015-01-08T18:04:55+00:00",
+    "recorded_at": "2019-04-03T06:25:37.885124+00:00",
+    "location": null,
+    "description": null,
+    "url": null,
+    "verified": false,
+    "lang": "de",
+    "followers": 155,
+    "friends": 284,
+    "listed": 1,
+    "favourites": 12030,
+    "statuses": 2033
+  },
+  {
+    "type": "user",
+    "id": "2459721182",
+    "screen_name": "Alfred996",
+    "created_at": "2014-04-23T13:15:52+00:00",
+    "recorded_at": "2019-04-03T06:25:38.449831+00:00",
+    "location": "Europe \u2022 Earth \u2022 MilkyWay ",
+    "description": "#DASNetzwerk #KategorischerImperativ #refugeesWelcome #fckAfD #NazisRaus",
+    "url": null,
+    "verified": false,
+    "lang": "de",
+    "followers": 1773,
+    "friends": 3872,
+    "listed": 171,
+    "favourites": 237451,
+    "statuses": 179650
+  },
+  {
+    "type": "user",
+    "id": "967337414904688642",
+    "screen_name": "AnoliWassel",
+    "created_at": "2018-02-24T09:56:26+00:00",
+    "recorded_at": "2019-04-03T06:25:39.651859+00:00",
+    "location": "Ruhrpott",
+    "description": "Wer mit Menschen spielt,sollte sie nicht untersch\u00e4tzen,den wer den Teufel in ihnen weckt,sollte das Feuer beherrschen!",
+    "url": null,
+    "verified": false,
+    "lang": "de",
+    "followers": 837,
+    "friends": 457,
+    "listed": 8,
+    "favourites": 86663,
+    "statuses": 43232
+  },
+  {
+    "type": "user",
+    "id": "1485176083",
+    "screen_name": "krippmarie",
+    "created_at": "2013-06-05T14:24:45+00:00",
+    "recorded_at": "2019-04-03T06:25:39.652250+00:00",
+    "location": "Dresden",
+    "description": "Ich bin sehr interessiert an Geschichte und Politik- Vor allem lese und lache ich sehr gerne! Ich geh\u00f6re zu denen, die schon l\u00e4nger hier leben.",
+    "url": null,
+    "verified": false,
+    "lang": "de",
+    "followers": 11954,
+    "friends": 4344,
+    "listed": 218,
+    "favourites": 215637,
+    "statuses": 215400
+  },
+  {
+    "type": "user",
+    "id": "1065269542887280643",
+    "screen_name": "btspersonabts",
+    "created_at": "2018-11-21T15:43:45+00:00",
+    "recorded_at": "2019-04-03T06:25:39.668852+00:00",
+    "location": "\u0130stanbul, T\u00fcrkiye",
+    "description": "BTS",
+    "url": null,
+    "verified": false,
+    "lang": "tr",
+    "followers": 109,
+    "friends": 75,
+    "listed": 0,
+    "favourites": 21388,
+    "statuses": 9557
+  },
+  {
+    "type": "user",
+    "id": "1373932604",
+    "screen_name": "BTSTurkey",
+    "created_at": "2013-04-23T05:59:48+00:00",
+    "recorded_at": "2019-04-03T06:25:39.669252+00:00",
+    "location": "Turkey",
+    "description": "BTS'in \u0130LK T\u00fcrk Hayran Kul\u00fcb\u00fcd\u00fcr. @BTS_twt T\u00fcrk\u00e7e altyaz\u0131l\u0131 videolar i\u00e7in: http://youtube.com/user/BTSTurkey btsbangtanturkey@gmail.com",
+    "url": "http://facebook.com/btsturkey",
+    "verified": false,
+    "lang": "tr",
+    "followers": 96324,
+    "friends": 116,
+    "listed": 140,
+    "favourites": 3691,
+    "statuses": 43014
+  },
+  {
+    "type": "user",
+    "id": "905793543746224131",
+    "screen_name": "kjh_mov",
+    "created_at": "2017-09-07T14:03:04+00:00",
+    "recorded_at": "2019-04-03T06:25:41.357316+00:00",
+    "location": "Deutschland",
+    "description": "\"Das Multiorganversagen in der Kinder- und Jugendhilfe sowie der Justiz\"\n\n \ud83d\udc68\u200d\ud83d\udc69\u200d\ud83d\udc67\u200d\ud83d\udc66Themen:\n\n- Justiz\n- Jugendamt\n- Heim/Pflegestellen\n- Gutachter\n- Einzelf\u00e4lle",
+    "url": "https://www.kjh-move.de",
+    "verified": false,
+    "lang": "de",
+    "followers": 333,
+    "friends": 751,
+    "listed": 3,
+    "favourites": 19726,
+    "statuses": 10694
+  },
+  {
+    "type": "user",
+    "id": "110499014",
+    "screen_name": "Doublemeter",
+    "created_at": "2010-02-01T19:26:31+00:00",
+    "recorded_at": "2019-04-03T06:25:42.485577+00:00",
+    "location": null,
+    "description": null,
+    "url": null,
+    "verified": false,
+    "lang": "en",
+    "followers": 1,
+    "friends": 0,
+    "listed": 0,
+    "favourites": 0,
+    "statuses": 982
+  },
+  {
+    "type": "user",
+    "id": "852581197893029888",
+    "screen_name": "Gluex_Keks",
+    "created_at": "2017-04-13T17:56:12+00:00",
+    "recorded_at": "2019-04-03T06:25:42.529721+00:00",
+    "location": null,
+    "description": "...ich bin gerne hier..wegen euch\u2b50\ufe0f\u2b50\ufe0ftotaler Familienmensch\u2b50\ufe0f\u2b50\ufe0fvon Geschwafel halt ich nichts..deshalb twitter ich in Echtzeit oder Bildern\u2b50\ufe0f\u2b50\ufe0f",
+    "url": null,
+    "verified": false,
+    "lang": "de",
+    "followers": 2267,
+    "friends": 976,
+    "listed": 27,
+    "favourites": 87933,
+    "statuses": 10914
+  },
+  {
+    "type": "user",
+    "id": "19064305",
+    "screen_name": "fliggerit",
+    "created_at": "2009-01-16T12:32:47+00:00",
+    "recorded_at": "2019-04-03T06:25:42.576979+00:00",
+    "location": "D",
+    "description": "die mit dem Chaos.",
+    "url": null,
+    "verified": false,
+    "lang": "de",
+    "followers": 2620,
+    "friends": 1386,
+    "listed": 62,
+    "favourites": 84095,
+    "statuses": 171608
+  },
+  {
+    "type": "user",
+    "id": "4591901057",
+    "screen_name": "Lina09bvb",
+    "created_at": "2015-12-24T18:35:13+00:00",
+    "recorded_at": "2019-04-03T06:25:42.645472+00:00",
+    "location": "Dresden ",
+    "description": "BVB \ud83d\udc9b // 18 // Wer Haus des Geldes beleidigt, beleidigt auch mich \ud83d\ude45\u200d\u2640\ufe0f\n                                                   \ud83d\udcf8Instagram \u27a1 _liinaa00",
+    "url": null,
+    "verified": false,
+    "lang": "de",
+    "followers": 1123,
+    "friends": 242,
+    "listed": 9,
+    "favourites": 82971,
+    "statuses": 20063
+  },
+  {
+    "type": "user",
+    "id": "922198559742726144",
+    "screen_name": "Lina_8119",
+    "created_at": "2017-10-22T20:30:45+00:00",
+    "recorded_at": "2019-04-03T06:25:42.659607+00:00",
+    "location": "Deutschland",
+    "description": null,
+    "url": null,
+    "verified": false,
+    "lang": "de",
+    "followers": 825,
+    "friends": 102,
+    "listed": 0,
+    "favourites": 251843,
+    "statuses": 257087
+  },
+  {
+    "type": "user",
+    "id": "858996259218219008",
+    "screen_name": "bangtan_germany",
+    "created_at": "2017-05-01T10:47:22+00:00",
+    "recorded_at": "2019-04-03T06:25:42.660196+00:00",
+    "location": "Deutschland",
+    "description": "German Fanbase of @BTS_twt! Rund um die Uhr News, Fakten, Spa\u00df und Entertainment f\u00fcr die deutsche Army Community.  \ud83d\udce9btsnetworkgermany@gmail.com",
+    "url": "http://www.bangtan.de/",
+    "verified": false,
+    "lang": "de",
+    "followers": 23230,
+    "friends": 185,
+    "listed": 71,
+    "favourites": 358,
+    "statuses": 19429
+  },
+  {
+    "type": "user",
+    "id": "168683422",
+    "screen_name": "BigHitEnt",
+    "created_at": "2010-07-20T14:40:33+00:00",
+    "recorded_at": "2019-04-03T06:25:42.660872+00:00",
+    "location": "Seoul, Korea",
+    "description": "\uc548\ub155\ud558\uc138\uc694 \ube45\ud788\ud2b8 \uc5d4\ud130\ud14c\uc778\uba3c\ud2b8 \uc785\ub2c8\ub2e4. Facebook : http://facebook.com/ibighit",
+    "url": "http://www.bighitcorp.com",
+    "verified": true,
+    "lang": "ko",
+    "followers": 9689282,
+    "friends": 23,
+    "listed": 11652,
+    "favourites": 6,
+    "statuses": 5242
+  },
+  {
+    "type": "user",
+    "id": "968050947187462144",
+    "screen_name": "HwThomasVMGrim1",
+    "created_at": "2018-02-26T09:11:46+00:00",
+    "recorded_at": "2019-04-03T06:25:42.868530+00:00",
+    "location": null,
+    "description": null,
+    "url": null,
+    "verified": false,
+    "lang": "en",
+    "followers": 4,
+    "friends": 5,
+    "listed": 1,
+    "favourites": 27,
+    "statuses": 380
+  },
+  {
+    "type": "user",
+    "id": "1300664731",
+    "screen_name": "ThomasRautenstr",
+    "created_at": "2013-03-25T18:48:32+00:00",
+    "recorded_at": "2019-04-03T06:25:43.036316+00:00",
+    "location": "Zurich/Switzerland",
+    "description": "Professor and Head Department of Business Analytics & Technology @fhhwz, keynote speaker, active researcher and passionate author",
+    "url": "http://about.me/trautenstrauch",
+    "verified": false,
+    "lang": "de",
+    "followers": 104,
+    "friends": 116,
+    "listed": 8,
+    "favourites": 356,
+    "statuses": 630
+  },
+  {
+    "type": "user",
+    "id": "3454130417",
+    "screen_name": "zpoblog",
+    "created_at": "2015-08-27T04:39:42+00:00",
+    "recorded_at": "2019-04-03T06:25:43.567853+00:00",
+    "location": "Neuland",
+    "description": "Aktuelles aus der Welt des Zivilprozessrechts",
+    "url": "http://www.zpoblog.de",
+    "verified": false,
+    "lang": "de",
+    "followers": 2142,
+    "friends": 78,
+    "listed": 25,
+    "favourites": 3496,
+    "statuses": 2645
+  },
+  {
+    "type": "user",
+    "id": "153766242",
+    "screen_name": "JoachimJahn",
+    "created_at": "2010-06-09T11:45:50+00:00",
+    "recorded_at": "2019-04-03T06:25:43.568250+00:00",
+    "location": null,
+    "description": "Interessen: Jura, Journalismus, Politik -- und die ganze Welt.\n(Hier privat. Retweets are Retweets, Likes are Likes.)",
+    "url": "http://www.jura.uni-mannheim.de/dozenten",
+    "verified": false,
+    "lang": "de",
+    "followers": 2324,
+    "friends": 305,
+    "listed": 80,
+    "favourites": 11621,
+    "statuses": 20523
+  },
+  {
+    "type": "user",
+    "id": "862745161138409473",
+    "screen_name": "spieleblog_",
+    "created_at": "2017-05-11T19:04:10+00:00",
+    "recorded_at": "2019-04-03T06:25:43.578613+00:00",
+    "location": "B\u00fchl, Deutschland",
+    "description": "YouTube Kanal SpieleBlog",
+    "url": "http://www.youtube.com/spieleblog",
+    "verified": false,
+    "lang": "de",
+    "followers": 365,
+    "friends": 474,
+    "listed": 8,
+    "favourites": 2623,
+    "statuses": 2875
+  },
+  {
+    "type": "status",
+    "id": "1113040760558026752",
+    "user": "2784480231",
+    "created_at": "2019-04-02T11:29:31+00:00",
+    "recorded_at": "2019-04-03T06:25:33.504265+00:00",
+    "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+    "retweets": 252,
+    "favourites": 785,
+    "lang": "de",
+    "hashtags": [],
+    "urls": [
+      "https://t.co/nBN62S7MqO"
+    ],
+    "mentions": [],
+    "mentioned_ids": [],
+    "text": "Das war 1984 noch eine konsensf\u00e4hige Meinung. Heute w\u00e4re der Aufschrei in den Medien gro\u00df, wenn ein Regierungsvertreter erkl\u00e4rte, es m\u00fcsse in der Politik in erster Linie darum gehen, die Zahl der hier lebenden Ausl\u00e4nder zu verringern.\nhttps://t.co/nBN62S7MqO https://t.co/6EdOY32xnu"
+  },
+  {
+    "type": "status",
+    "id": "1113147217114787841",
+    "user": "554934169",
+    "created_at": "2019-04-02T18:32:32+00:00",
+    "recorded_at": "2019-04-03T06:25:35.336258+00:00",
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "retweets": 2,
+    "favourites": 6,
+    "lang": "de",
+    "hashtags": [
+      "CVPLenzburg",
+      "Klima",
+      "Energiestadt"
+    ],
+    "urls": [],
+    "mentions": [
+      "CVPAargau"
+    ],
+    "mentioned_ids": [
+      "171113422"
+    ],
+    "text": "Heute Abend an der ersten Polit-Debatte der #CVPLenzburg zum Thema #Klima und #Energiestadt. Als Mitinitiatorin freue ich mich an der grossen Beteiligung. @CVPAargau. N\u00e4chste Debatte: 11. Juni, 20.00 Uhr, Thema \"Familienstadt\" https://t.co/ZnSH6yWPmj"
+  },
+  {
+    "type": "status",
+    "id": "1113326642934493184",
+    "user": "358952420",
+    "created_at": "2019-04-03T06:25:30+00:00",
+    "recorded_at": "2019-04-03T06:25:36.305251+00:00",
+    "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [
+      "Twittart\u0131rA\u00e7\u0131ld\u0131",
+      "\u00d6yleBirSistemOlsunKi",
+      "\u00c7ar\u015famba",
+      "DahaG\u00fczelYar\u0131nlar\u0130\u00e7in",
+      "\u0130stanbulOyununpe\u015finde",
+      "Benzin7",
+      "FatihTezcan",
+      "RussellWestbrook",
+      "\u0130lSe\u00e7imKurulu",
+      "3nisan"
+    ],
+    "urls": [
+      "https://t.co/tDFb7ohksc"
+    ],
+    "mentions": [],
+    "mentioned_ids": [],
+    "text": "#Twittart\u0131rA\u00e7\u0131ld\u0131\n#\u00d6yleBirSistemOlsunKi\n#\u00c7ar\u015famba\n#DahaG\u00fczelYar\u0131nlar\u0130\u00e7in\n#\u0130stanbulOyununpe\u015finde\n#Benzin7\n#FatihTezcan \n#RussellWestbrook\n#\u0130lSe\u00e7imKurulu\n#3nisan\n\nHaber detay:https://t.co/tDFb7ohksc https://t.co/oVAZfABGl8"
+  },
+  {
+    "type": "status",
+    "id": "1113326645182640128",
+    "user": "944805086940794880",
+    "created_at": "2019-04-03T06:25:31+00:00",
+    "recorded_at": "2019-04-03T06:25:36.634182+00:00",
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [
+      "Bremen"
+    ],
+    "urls": [],
+    "mentions": [
+      "DFB_Pokal",
+      "werderbremen"
+    ],
+    "mentioned_ids": [
+      "1907311920",
+      "14843692"
+    ],
+    "text": "Unser gro\u00dfer gr\u00fcn-wei\u00dfer Nachbar ist ja bekannt daf\u00fcr dass er uns kleinere Klubs gerne unterst\u00fctzt und, wenn m\u00f6glich, W\u00fcnsche erf\u00fcllt.\n\nIm Moment w\u00fcnschen wir uns dass #Bremen im @DFB_Pokal-Halbfinale vertreten sein wird.\n\nGeht da was, @WerderBremen? Wir sind leider verhindert."
+  },
+  {
+    "type": "status",
+    "id": "1113324965749768192",
+    "user": "2785036354",
+    "created_at": "2019-04-03T06:18:51+00:00",
+    "recorded_at": "2019-04-03T06:25:36.898072+00:00",
+    "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+    "retweets": 1,
+    "favourites": 3,
+    "lang": "de",
+    "hashtags": [
+      "OTD",
+      "WW2",
+      "HISTORY"
+    ],
+    "urls": [],
+    "mentions": [],
+    "mentioned_ids": [],
+    "text": "#OTD in 1945, M\u00fcnster, Germany. A British soldier dwarfed by a German railway locomotive. #WW2 #HISTORY https://t.co/nsSUgHlUKt"
+  },
+  {
+    "type": "status",
+    "id": "1113323076698157056",
+    "user": "3131413991",
+    "created_at": "2019-04-03T06:11:20+00:00",
+    "recorded_at": "2019-04-03T06:25:37.563263+00:00",
+    "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+    "retweets": 4,
+    "favourites": 3,
+    "lang": "de",
+    "hashtags": [
+      "Wetter",
+      "Eifel",
+      "Berlin",
+      "Dresden",
+      "wetter"
+    ],
+    "urls": [
+      "https://t.co/1LsiirDoAD"
+    ],
+    "mentions": [],
+    "mentioned_ids": [],
+    "text": "Gro\u00dfe #Wetter- und vor allem Temperatur-Unterschiede im Land. In der #Eifel heute gerade mal 5 bis 6 Grad als H\u00f6chstwerte, in #Berlin und #Dresden hingegen bis zu 20 Grad: https://t.co/1LsiirDoAD (zum Ablesen in die L\u00e4nder, Kreise oder St\u00e4dte). #wetter /PH"
+  },
+  {
+    "type": "status",
+    "id": "1113110958422024193",
+    "user": "1485176083",
+    "created_at": "2019-04-02T16:08:27+00:00",
+    "recorded_at": "2019-04-03T06:25:39.651951+00:00",
+    "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+    "retweets": 113,
+    "favourites": 139,
+    "lang": "de",
+    "hashtags": [],
+    "urls": [
+      "https://t.co/iipkLYER5W"
+    ],
+    "mentions": [],
+    "mentioned_ids": [],
+    "text": "\u203c\ufe0fDer prominente Kardinal Robert Sarah,ein Afrikaner, gilt als Kritiker des derzeitigen Papstes. In der Vergangenheit sprach er sich oft gegen die derzeitige Migrationspolitik aus uwarnte vor einer Islamisierung Europas u des Westens. Jetzt legte er nach https://t.co/iipkLYER5W"
+  },
+  {
+    "type": "status",
+    "id": "1113322504448352256",
+    "user": "1373932604",
+    "created_at": "2019-04-03T06:09:04+00:00",
+    "recorded_at": "2019-04-03T06:25:39.668954+00:00",
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "retweets": 3,
+    "favourites": 61,
+    "lang": "de",
+    "hashtags": [],
+    "urls": [
+      "https://t.co/qRjutz8KGv"
+    ],
+    "mentions": [],
+    "mentioned_ids": [],
+    "text": "[03.04.2019] bighit_exhibition \u0130nstagram G\u00fcncellemesi\n\n\ud83d\udc49https://t.co/qRjutz8KGv https://t.co/qcgLeMJoHQ"
+  },
+  {
+    "type": "status",
+    "id": "1113326669773848576",
+    "user": "110499014",
+    "created_at": "2019-04-03T06:25:37+00:00",
+    "recorded_at": "2019-04-03T06:25:42.485344+00:00",
+    "source": "<a href=\"http://www.facebook.com/twitter\" rel=\"nofollow\">Facebook</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [],
+    "urls": [
+      "https://t.co/g18Bc6Cujh"
+    ],
+    "mentions": [],
+    "mentioned_ids": [],
+    "text": "Nochmal zur Erinnerung\ud83e\uddd0\nWar sch\u00f6n bei euch \ud83e\udd29\n\ud83c\udfa9Kulturfestival\ud83c\udfa9\nDanke\ud83d\ude4f\ud83c\udffb https://t.co/g18Bc6Cujh"
+  },
+  {
+    "type": "status",
+    "id": "1113326670193266690",
+    "user": "19064305",
+    "created_at": "2019-04-03T06:25:37+00:00",
+    "recorded_at": "2019-04-03T06:25:42.576628+00:00",
+    "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [],
+    "urls": [],
+    "mentions": [],
+    "mentioned_ids": [],
+    "text": "Diese gem\u00fctlichen kleinen Polsterecken in den neuen S-Bahnen sehen ja nett aus, aber mir scheint, die Planer haben vergessen, dass Menschen auch Knie und F\u00fc\u00dfe haben, meistens?"
+  },
+  {
+    "type": "status",
+    "id": "1113244212965781504",
+    "user": "168683422",
+    "created_at": "2019-04-03T00:57:58+00:00",
+    "recorded_at": "2019-04-03T06:25:42.660474+00:00",
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "retweets": 43910,
+    "favourites": 158317,
+    "lang": "ko",
+    "hashtags": [
+      "\ubc29\ud0c4\uc18c\ub144\ub2e8"
+    ],
+    "urls": [
+      "https://t.co/qPQ6BnoE7v"
+    ],
+    "mentions": [],
+    "mentioned_ids": [],
+    "text": "[\uae30\uc0ac] #\ubc29\ud0c4\uc18c\ub144\ub2e8, \ucef4\ubc31 \uc55e\ub450\uace0 \u7f8e \ube4c\ubcf4\ub4dc \uba54\uc778\ucc28\ud2b8 31\uc8fc\uc9f8 \ub7ad\ud06c \u2018\uc9c4\uae30\ub85d\u2019\nhttps://t.co/qPQ6BnoE7v"
+  },
+  {
+    "type": "status",
+    "id": "1113326671350857728",
+    "user": "968050947187462144",
+    "created_at": "2019-04-03T06:25:37+00:00",
+    "recorded_at": "2019-04-03T06:25:42.868300+00:00",
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [],
+    "urls": [],
+    "mentions": [],
+    "mentioned_ids": [],
+    "text": "Gelobt sei Jesus Christus! Einen frohen und gesegneten FastenJosephMittwoch nach dem Sonntag des 4. FastenzeitSonntag \"Laudate - Erhebe dich, Jerusalem\" Hochfest I. Klasse, Stationskirche: Vom hl. Kreuz von Jerusalem ERL\u00d6SERMonat! Maria mit dem Kinde lieb :-) B\u00e4utigam Joseph mi"
+  },
+  {
+    "type": "status",
+    "id": "1113324464073256962",
+    "user": "153766242",
+    "created_at": "2019-04-03T06:16:51+00:00",
+    "recorded_at": "2019-04-03T06:25:43.567947+00:00",
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "retweets": 0,
+    "favourites": 1,
+    "lang": "de",
+    "hashtags": [
+      "SchertzBergmann",
+      "fliegenderGerichtsstand"
+    ],
+    "urls": [
+      "https://t.co/mL468tgv4a"
+    ],
+    "mentions": [],
+    "mentioned_ids": [],
+    "text": "Football Leaks: Anwaltskanzlei von Cristiano Ronaldo unterliegt gegen den SPIEGEL\n\u00a0 \n#SchertzBergmann \n\n#fliegenderGerichtsstand \n https://t.co/mL468tgv4a"
+  },
+  {
+    "type": "status",
+    "id": "1113326674328862720",
+    "user": "862745161138409473",
+    "created_at": "2019-04-03T06:25:38+00:00",
+    "recorded_at": "2019-04-03T06:25:43.578383+00:00",
+    "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [
+      "werbung"
+    ],
+    "urls": [
+      "https://t.co/Gwha91CpkB"
+    ],
+    "mentions": [],
+    "mentioned_ids": [],
+    "text": "3D Drucker und gro\u00dfe Bauwerke (u.a. Corvus Game Terrain / Imperial Terrain) #werbung https://t.co/Gwha91CpkB"
+  },
+  {
+    "type": "reply",
+    "id": "1113326634910851073",
+    "user": "838373444",
+    "created_at": "2019-04-03T06:25:29+00:00",
+    "recorded_at": "2019-04-03T06:25:34.179908+00:00",
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [],
+    "urls": [],
+    "mentions": [
+      "maulendemiri"
+    ],
+    "mentioned_ids": [
+      "3362920121"
+    ],
+    "text": "@maulendemiri Ahh wie sch\u00f6n \ud83e\udd17",
+    "refers_to": "1113325702546374656"
+  },
+  {
+    "type": "reply",
+    "id": "1113326642448011265",
+    "user": "113901884",
+    "created_at": "2019-04-03T06:25:30+00:00",
+    "recorded_at": "2019-04-03T06:25:35.994559+00:00",
+    "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [],
+    "urls": [],
+    "mentions": [
+      "FrauProper"
+    ],
+    "mentioned_ids": [
+      "1049786207364927492"
+    ],
+    "text": "@FrauProper ach du schei\u00dfe :( hab meine mum mit 4 damit konfrontiert. dass mein erzeuger verstorben war, als ich 2 war,wusste ich. ich wusste auch,dass wir vorher alleine den wohnort gewechselt hatten. sie hat mir 2-3 jahre sp\u00e4ter erkl\u00e4rt,dass er gesoffen&amp;gepr\u00fcgelt hat&amp;sie angst um uns hatte",
+    "refers_to": "1113061399473745921"
+  },
+  {
+    "type": "reply",
+    "id": "1113326642955456517",
+    "user": "720651555918213120",
+    "created_at": "2019-04-03T06:25:30+00:00",
+    "recorded_at": "2019-04-03T06:25:36.080755+00:00",
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [],
+    "urls": [],
+    "mentions": [
+      "DollarsignSam"
+    ],
+    "mentioned_ids": [
+      "836752069717540865"
+    ],
+    "text": "@DollarsignSam i hei\u00dfe jens\ni habs friends\ni kann net dichten\nmercedes benz",
+    "refers_to": "1113042497058586625"
+  },
+  {
+    "type": "reply",
+    "id": "1111933871287926784",
+    "user": "2968274788",
+    "created_at": "2019-03-30T10:11:08+00:00",
+    "recorded_at": "2019-04-03T06:25:37.884824+00:00",
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "retweets": 19,
+    "favourites": 325,
+    "lang": "de",
+    "hashtags": [],
+    "urls": [],
+    "mentions": [
+      "Keepthatsmile",
+      "Nasobem_lyricum"
+    ],
+    "mentioned_ids": [
+      "253421508",
+      "872844412954476545"
+    ],
+    "text": "@Keepthatsmile @Nasobem_lyricum Lang her but true, lt. Urlaubsbekanntschaft:\n\n\"Ich hei\u00dfe J\u00f6rn!\n\"Wie?\"\n\"Wie J\u00f6rg, nur mit N.\"\n\"Ach, N\u00f6rg!\"",
+    "refers_to": "1111707301017251840"
+  },
+  {
+    "type": "reply",
+    "id": "1113326652690452480",
+    "user": "2459721182",
+    "created_at": "2019-04-03T06:25:33+00:00",
+    "recorded_at": "2019-04-03T06:25:38.449595+00:00",
+    "source": "<a href=\"http://twitter.com/#!/download/ipad\" rel=\"nofollow\">Twitter for iPad</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [
+      "Religionsfreiheit",
+      "Grundgesetz"
+    ],
+    "urls": [],
+    "mentions": [
+      "A_Hildering",
+      "Rockypsr"
+    ],
+    "mentioned_ids": [
+      "830850546227621888",
+      "146978122"
+    ],
+    "text": "@A_Hildering @Rockypsr N\u00f6, das sind einfach unsere Mitb\u00fcrger*innen, die Autos bauen, bei 02 arbeiten, als MTA ect.\nKein DOITSCHES Auto l\u00e4uft vom Band, ohne das ein MUSLIM \ud83d\ude31 Hand daran gelegt hat. \ud83d\ude02\nUnd kriegt bei BMW noch 7000\u20ac Bonus/Jahr. \nDu nicht, gell. \ud83d\ude02\ud83d\ude02\ud83d\ude02\n\n#Religionsfreiheit\n#Grundgesetz \ud83d\ude02",
+    "refers_to": "1113120777820364800"
+  },
+  {
+    "type": "reply",
+    "id": "1113326663968931840",
+    "user": "905793543746224131",
+    "created_at": "2019-04-03T06:25:35+00:00",
+    "recorded_at": "2019-04-03T06:25:41.356980+00:00",
+    "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [],
+    "urls": [],
+    "mentions": [
+      "Mama_arbeitet",
+      "kinderbetreuun2",
+      "TexSassRanger",
+      "Aludnew",
+      "MichaelBaleanu",
+      "PapaPicknick",
+      "_MIAeV_",
+      "katarinabarley",
+      "BMFSFJ",
+      "vamv_hessen",
+      "MarcusWeinberg",
+      "hubertus_heil",
+      "Mamastreikt"
+    ],
+    "mentioned_ids": [
+      "64766208",
+      "1095338466156507137",
+      "1104457651696607232",
+      "541766750",
+      "782858348899266560",
+      "45051832",
+      "981456754901946368",
+      "4097559143",
+      "467321087",
+      "931927560673546241",
+      "884382990",
+      "15943222",
+      "752568676143038464"
+    ],
+    "text": "@Mama_arbeitet @kinderbetreuun2 @TexSassRanger @Aludnew @MichaelBaleanu @PapaPicknick @_MIAeV_ @katarinabarley @BMFSFJ @vamv_hessen @MarcusWeinberg @hubertus_heil @Mamastreikt Ich frage mich, inwieweit ein derartiger Verein \u00fcberhaupt noch gemeinn\u00fctzig sein kann, wenn er Menschen so diskreditiert und derartige Hetze betreibt.\n\nDer Bundesvorstand des VafK e.V. Markus Witt hat ja auch schon sein \"Bestes\" gegeben. Hier werden Opfer erneut zu Opfern. https://t.co/1WIOk3AWxh",
+    "refers_to": "1113323633567510528"
+  },
+  {
+    "type": "reply",
+    "id": "1113326670017191936",
+    "user": "852581197893029888",
+    "created_at": "2019-04-03T06:25:37+00:00",
+    "recorded_at": "2019-04-03T06:25:42.529495+00:00",
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [],
+    "urls": [],
+    "mentions": [
+      "WeberBeate1"
+    ],
+    "mentioned_ids": [
+      "1064130079826079745"
+    ],
+    "text": "@WeberBeate1 Dankesch\u00f6n Beate \ud83d\udc4d\ud83c\udffb",
+    "refers_to": "1113323056955559936"
+  },
+  {
+    "type": "reply",
+    "id": "1113326670474305536",
+    "user": "4591901057",
+    "created_at": "2019-04-03T06:25:37+00:00",
+    "recorded_at": "2019-04-03T06:25:42.645239+00:00",
+    "source": "<a href=\"http://twitter.com/download/android\" rel=\"nofollow\">Twitter for Android</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [],
+    "urls": [],
+    "mentions": [
+      "SVBTobi"
+    ],
+    "mentioned_ids": [
+      "885545034749292546"
+    ],
+    "text": "@SVBTobi Dankesch\u00f6n \ud83d\ude0a",
+    "refers_to": "1113218977294094336"
+  },
+  {
+    "type": "reply",
+    "id": "1113326672072400896",
+    "user": "1300664731",
+    "created_at": "2019-04-03T06:25:37+00:00",
+    "recorded_at": "2019-04-03T06:25:43.036079+00:00",
+    "source": "<a href=\"https://mobile.twitter.com\" rel=\"nofollow\">Twitter Web App</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [],
+    "urls": [],
+    "mentions": [
+      "rotersiggi"
+    ],
+    "mentioned_ids": [
+      "4764575175"
+    ],
+    "text": "@rotersiggi Ja, eigentlich nur....sch\u00f6n, dass sie so aufgeweckt sind und es gleich gemerkt haben.",
+    "refers_to": "1113320493053022208"
+  },
+  {
+    "type": "quote",
+    "id": "1113322458076127232",
+    "user": "858996259218219008",
+    "created_at": "2019-04-03T06:08:53+00:00",
+    "recorded_at": "2019-04-03T06:25:42.659705+00:00",
+    "source": "<a href=\"http://twitter.com\" rel=\"nofollow\">Twitter Web Client</a>",
+    "retweets": 10,
+    "favourites": 25,
+    "lang": "de",
+    "hashtags": [
+      "BTS"
+    ],
+    "urls": [
+      "https://t.co/YIJXRxDdlU"
+    ],
+    "mentions": [
+      "BTS_twt"
+    ],
+    "mentioned_ids": [
+      "335141638"
+    ],
+    "text": "[GER] 190304 BigHit\n\n#BTS, beeindruckender Rekord mit der 31ten Woche in den US Billboard Main Charts, kurz vor ihrem Comeback...\n\n@BTS_twt https://t.co/YIJXRxDdlU",
+    "refers_to": "1113244212965781504"
+  },
+  {
+    "type": "quote",
+    "id": "1113326674186260481",
+    "user": "3454130417",
+    "created_at": "2019-04-03T06:25:38+00:00",
+    "recorded_at": "2019-04-03T06:25:43.567445+00:00",
+    "source": "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>",
+    "retweets": 0,
+    "favourites": 0,
+    "lang": "de",
+    "hashtags": [],
+    "urls": [],
+    "mentions": [],
+    "mentioned_ids": [],
+    "text": "Ein zwei Jahre dauerndes \u201eEilverfahren\u201c...",
+    "refers_to": "1113324464073256962"
+  }
+]
