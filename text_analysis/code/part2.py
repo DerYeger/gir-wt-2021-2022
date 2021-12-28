@@ -35,7 +35,7 @@ def prepare_text(text: str, include_stop_words: bool) -> List[str]:
     return list(filter(lambda word: model.has_index_for(word), tokens))
 
 
-def vector_space_predictions(dataset: List[Tuple[float, List[str], List[str]]]) -> List[float]:
+def tf_idf_vectorizer_predictions(dataset: List[Tuple[float, List[str], List[str]]]) -> List[float]:
     results = []
     for (ground_truth, text1, text2) in dataset:
         vectors = TfidfVectorizer().fit_transform([' '.join(text1), ' '.join(text2)])
@@ -44,7 +44,7 @@ def vector_space_predictions(dataset: List[Tuple[float, List[str], List[str]]]) 
     return results
 
 
-def mean_short_text_vector_predictions(dataset: List[Tuple[float, List[str], List[str]]]) -> List[float]:
+def mean_average_vector_predictions(dataset: List[Tuple[float, List[str], List[str]]]) -> List[float]:
     results = []
     for (ground_truth, text1, text2) in dataset:
         first_vector = mean_average_vector(text1)
@@ -63,7 +63,7 @@ def mean_average_vector(text: List[str]):
     return result
 
 
-def idf_short_text_vector_predictions(dataset: List[Tuple[float, List[str], List[str]]]) -> List[float]:
+def idf_weighted_average_vector_predictions(dataset: List[Tuple[float, List[str], List[str]]]) -> List[float]:
     results = []
     for (ground_truth, text1, text2) in dataset:
         vectorizer = TfidfVectorizer(use_idf=True)
@@ -95,9 +95,9 @@ def evaluate(name: str, dataset: List[Tuple[float, List[str], List[str]]], predi
 
 def evaluate_processing(include_stop_words: bool):
     dataset = load_dataset(include_stop_words)
-    evaluate('Vector space', dataset, vector_space_predictions(dataset))
-    evaluate('Short text vector with mean average', dataset, mean_short_text_vector_predictions(dataset))
-    evaluate('Short text vector with weighted average using IDF', dataset, idf_short_text_vector_predictions(dataset))
+    evaluate('tf.idf vectorizer   ', dataset, tf_idf_vectorizer_predictions(dataset))
+    evaluate('Mean average        ', dataset, mean_average_vector_predictions(dataset))
+    evaluate('IDF weighted average', dataset, idf_weighted_average_vector_predictions(dataset))
 
 
 def main():
