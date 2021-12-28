@@ -12,6 +12,12 @@ Austria         & dog             & 0.2197847068309784         \\ \hline
 \end{tabular}
 \end{table}
 
+The calculated cosine similarities are sound.
+A high similarity was calculated for \enquote{Vienna} and \enquote{Austria}, since the former is the capital of the latter.
+On the same note, the cosine similarity of \enquote{cat} and \enquote{dog} is high, as both are common pets.
+In contrast, \enquote{cat} and \enquote{Vienna} as well as \enquote{Austria} and \enquote{dog} have much lower cosine similarities.
+This matches expectations, as the words of both pairs are semantically very different.
+
 \begin{table}[hb]
 \center
 \begin{tabular}{|l|l|l|l|}
@@ -23,4 +29,16 @@ cat           & cats           & housecat       & -cat           \\ \hline
 \end{tabular}
 \end{table}
 
-% TODO Analyze results
+The top three most similar words for \enquote{Vienna}, \enquote{Austria} and \enquote{cat} are reasonable results.
+
+\paragraph{Vienna}
+The connection to \enquote{Salzburg} and \enquote{Austria} are trivial. Both Salzburg and Vienna are large cities (and states) in Austria.
+\enquote{Prague} being similar to Vienna is also reasonable, as it is the capital of the Czech Republic and located geographically close.
+
+\paragraph{Austria}
+\enquote{Austria-} and \enquote{German-Austria} being in the top three most similar words is understandable, as both contain the word \enquote{Austria} and are probably used in similar contexts.
+Vienna is the capital of Austria, hence the relation is sound.
+
+\paragraph{cat}
+The explanation of the results is once again trivial.
+All three words contain \enquote{cat} and are highly related from a semantic point of view.
