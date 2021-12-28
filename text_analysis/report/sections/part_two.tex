@@ -5,13 +5,22 @@
 \begin{tabular}{|l|l|l|}
 \hline
 \textbf{Method}                           & \textbf{Preprocessing} & \textbf{Pearson Correlation} \\ \hline
-Vector Space Model (from sklearn library) & Lowercasing+Stopword   &                              \\ \hline
-Average Word Embedding                    & Lowercasing+Stopword   &                              \\ \hline
-IDF Weighted Agg. Word Embedding          & Lowercasing+Stopword   &                              \\ \hline
-Vector Space Model (from sklearn library) & Lowercasing            &                              \\ \hline
-Average Word Embedding                    & Lowercasing            &                              \\ \hline
-IDF Weighted Agg. Word Embedding          & Lowercasing            &                              \\ \hline
+Vector Space Model (from sklearn library) & Lowercasing+Stopword   & 0.6652374095423907           \\ \hline
+Average Word Embedding                    & Lowercasing+Stopword   & 0.6949459160579216           \\ \hline
+IDF Weighted Agg. Word Embedding          & Lowercasing+Stopword   & 0.6899231439155696           \\ \hline
+Vector Space Model (from sklearn library) & Lowercasing            & 0.6592174853600629           \\ \hline
+Average Word Embedding                    & Lowercasing            & 0.6904079245231173           \\ \hline
+IDF Weighted Agg. Word Embedding          & Lowercasing            & 0.6783696231885207           \\ \hline
 \end{tabular}
 \end{table}
 
-% TODO Analyze results
+Removing stop words results in better scores for all three methods.
+This is expected, as stop words do not contribute much to a sentence's meaning while affecting the similarity negatively when sentences with the same meaning use different stop words.
+
+When comparing the three methods, the vector space model does the worst.
+This matches expectations, as it is the most simple approach of the three.
+It only has two short sentences to work with, while the other two methods use a large language model in addition.
+
+Interestingly, the average word embedding has higher Pearson correlations than the IDF weighted aggregated word embedding.
+Theoretically, the latter should have higher correlations, in particular for preprocessing without stop word removal, because the IDF weighting increases the impact of vectors of words that occur less often.
+This means it should have a similar effect as stop word removal, which should cause an increase in the correlation score as described above.
