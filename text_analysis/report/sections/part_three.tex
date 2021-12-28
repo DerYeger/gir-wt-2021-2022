@@ -4,7 +4,10 @@
 For version control compatibility, it was split into multiple parts using the Linux command \verb|split -l 100000| \verb|--additional-suffix=.txt| \verb|$FileName dataset.txt|.
 Before tokenization, the dataset measures a size of 0.32GB.
 This falls in the suggested range mentioned in the assignment.
-The tab-separated number at the start of each line is removed by the processing. 
+
+The tab-separated number at the start of each line is removed by the processing.
+To match the model, queried words were processed with the same tokenization as the dataset.
+It should be noted that the results can vary, because the untrained model is initialized with random weights.
 
 \begin{table}[hb]
 \center
@@ -17,4 +20,19 @@ kanzler       & bundeskanzler      & sozialdemokrat & parteichef         \\ \hli
 \end{tabular}
 \end{table}
 
-% TODO Analyze results
+The results indicate that the model training was successful.
+For all three words, the top three most similar words are semantically related.
+
+\paragraph{deutschland}
+The connections to \enquote{österreich} and \enquote{frankreich} are trivial, as both are neighbouring countries that share a long history with Germany.
+Since Germany is located in central Europe, it also makes sense to see \enquote{europa} in the top three most similar words.
+The order of the words is also reasonable, as Austria is much more similar to Germany than France in many aspects like language and culture.
+
+\paragraph{politik}
+All three words contain the word \enquote{politik} itself and are semantically related to it.
+They are commonly the subjects of newspaper articles.
+
+\paragraph{kanzler}
+Since \enquote{kanzler} is the short form of \enquote{bundeskanzler}, it makes sense to see the latter as the most similar word.
+\enquote{sozialdemokrat} being the second most similar word is sound, as the last male chancellor was a social democrat and the social democrat had the chancellorship multiple times.
+Lastly, \enquote{parteichef} is related by the CDU party having the tradition of its party leader also being their candidate for chancellorship.
