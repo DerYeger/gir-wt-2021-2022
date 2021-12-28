@@ -8,4 +8,7 @@
 
 Dataset from https://www.kaggle.com/rtatman/3-million-german-sentences/version/1?select=deu_news_2015_3M-sentences.txt.
 
+D. Goldhahn, T. Eckart & U. Quasthoff: Building Large Monolingual Dictionaries at the Leipzig Corpora Collection: From 100 to 200 Languages.
+In: Proceedings of the 8th International Language Resources and Evaluation (LREC'12), 2012
+
 Actual results can vary because of random weight initialization of the training algorithm.

@@ -1,15 +1,20 @@
 \section{Training new language models}
 
+\autocite{dataset} For training a German language model, a dataset of three million sentences from newspapers by the Leipzig Corpora Collection is used\footnote{Obtained from \url{https://www.kaggle.com/rtatman/3-million-german-sentences/version/1?select=deu_news_2015_3M-sentences.txt} on 27th December 2021.}.
+For version control compatibility, it was split into multiple parts using the Linux command \verb|split -l 100000| \verb|--additional-suffix=.txt| \verb|$FileName dataset.txt|.
+Before tokenization, the dataset measures a size of 0.32GB.
+This falls in the suggested range mentioned in the assignment.
+The tab-separated number at the start of each line is removed by the processing. 
+
 \begin{table}[hb]
 \center
 \begin{tabular}{|l|l|l|l|}
 \hline
-\textbf{Word} & \textbf{Top-1} & \textbf{Top-2} & \textbf{Top-3} \\ \hline
-              &                &                &                \\ \hline
-              &                &                &                \\ \hline
-              &                &                &                \\ \hline
+\textbf{Word} & \textbf{Top-1}     & \textbf{Top-2} & \textbf{Top-3}     \\ \hline
+deutschland   & österreich         & europa         & frankreich         \\ \hline
+politik       & wirtschaftspolitik & außenpolitik   & flüchtlingspolitik \\ \hline
+kanzler       & bundeskanzler      & sozialdemokrat & parteichef         \\ \hline
 \end{tabular}
 \end{table}
 
 % TODO Analyze results
-% TODO Describe data used for training

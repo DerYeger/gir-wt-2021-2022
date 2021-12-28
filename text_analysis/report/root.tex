@@ -9,6 +9,9 @@
 \usepackage{hyperref}
 \usepackage{cleveref}
 
+\usepackage[style=alphabetic, isbn=false, url=true, backend=biber, block=space]{biblatex}
+\bibliography{sources}
+
 \begin{document}
 
 \title{Report Group 11}
@@ -30,5 +33,8 @@
 \clearpage
 
 \input{sections/other}
+\clearpage
+
+\printbibliography
 
 \end{document}
