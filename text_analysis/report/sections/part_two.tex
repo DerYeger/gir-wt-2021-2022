@@ -24,3 +24,4 @@ It only has two short sentences to work with, while the other two methods use a 
 Interestingly, the average word embedding has higher Pearson correlations than the IDF weighted aggregated word embedding.
 Theoretically, the latter should have higher correlations, in particular for preprocessing without stop word removal, because the IDF weighting increases the impact of vectors of words that occur less often.
 This means it should have a similar effect as stop word removal, which should cause an increase in the correlation score as described above.
+Most likely, this discrepancy between expectation and result is caused by the idf scores being based on a very small dataset of two sentences.
